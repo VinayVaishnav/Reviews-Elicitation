@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+l.
+{% block content %}
+<div class="container">
+    <div class="section">
+        <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
+        <p>MailID: {{ user_profile.user.email }}</p>
+        <p>Contact: {{ user_profile.contact }}</p>
+        {% if request.user.username == user_profile.user.username %}
+            <button><a href="/edit">Edit Profile</a></button>
+        {% endif %}
+    </div>
+    <div class="section">
+        <h2>List 1</h2>
+        <ul>
+            {% for item in review_list %}
+                <li>{{ item.content }}
+                    <div>
+                        <!-- <button class="like-button" data-item-id="{{ item.id }}">Like</button> -->
+                        <a href="{% url 'like' item.id %}">Like</a>
+                        <span class="like-count">{{ item.likes.count }}</span>
+                    </div>
+                    <div>
+                        <a href="{% url 'dislike' item.id %}">DisLike</a>
+                        <span class="dislike-count">{{ item.dislikes.count }}</span>
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="section">
+        <h2>List 2</h2>
+        <ul> 
+            {% for item in ur_review_list %}
+            <li>{{ item.content }}
+                <div>
+                    <!-- <button class="like-button" data-item-id="{{ item.id }}">Like</button> -->
+                    <a href="{% url 'like' item.id %}">Like</a>
+                    <span class="like-count">{{ item.likes.count }}</span>
+                </div>
+                <div>
+                    <a href="{% url 'dislike' item.id %}">DisLike</a>
+                    <span class="dislike-count">{{ item.dislikes.count }}</span>
+
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% if request.user.username != user_profile.user.username %}
+<div class="review-form">
+    <form action="/review" method="POST">
+        {% csrf_token %}
+        <input type="text" name="rev" placeholder="Give Your Review" class="review-input">
+        <input type="hidden" name="from_" value="{{ request.user.email }}">
+        <input type="hidden" name="to_" value="{{ user_profile.user.email }}">
+        <input type="submit" value="Submit" class="review-submit">
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}
