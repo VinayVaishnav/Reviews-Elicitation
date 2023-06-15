@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import cache_control
@@ -149,6 +150,25 @@ def update_view(request):
         form = forms.ProfileForm(instance=profile)
 
     return render(request, 'main/update.html', { 'form':form, })
+
+@login_required
+def updateDetails_view(request):
+    try:
+        profile = request.user.userprofile
+    except ObjectDoesNotExist:
+        profile = models.UserProfile(user=request.user)
+
+    if request.method == 'POST':
+        form = forms.ProfileDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(request.user)
+            return redirect('main:home')
+        else:
+            print(form.errors)
+    else:
+        form = forms.ProfileDetailsForm()
+
+    return render(request, 'main/updateDetails.html', { 'form':form, })
     
 
 @login_required
@@ -211,7 +231,23 @@ def user_view(request, username):
 @login_required
 def search_view(request):
     query = request.GET.get('q')
-    users = User.objects.filter(username__icontains=query).exclude(username=request.user.username).exclude(is_superuser=True)
+    
+    if not query:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if len(query.split()) > 1:
+        first = query.split()[0]
+        second = query.split()[1]
+        users = User.objects.filter(
+            first_name__icontains=first,
+            last_name__icontains=second
+        ).exclude(username=request.user.username).exclude(is_superuser=True)
+    else:
+        first = query.split()[0]
+        users = User.objects.filter(
+            Q(first_name__icontains=first) | Q(last_name__icontains=first)
+        ).exclude(username=request.user.username).exclude(is_superuser=True)
+
     return render(request, 'main/search.html', { 'users': users, 'query': query, })
 
 

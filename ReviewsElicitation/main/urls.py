@@ -12,6 +12,7 @@ urlpatterns = [
     path('verify/', views.verify_view, name='verify'),
     path('logout/', views.logout_view, name='logout'),
     path('update/', views.update_view, name='update'),
+    path('updateDetails/', views.updateDetails_view, name='updateDetails'),
     path('search/', views.search_view, name='search'),
     path('user/<str:username>/', views.user_view, name='user'),
     path('edit/<int:review_id>/', views.edit_view, name='edit'),

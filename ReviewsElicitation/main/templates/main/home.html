@@ -7,8 +7,10 @@
     {% else %}
         <img src="{% static 'profile_images/default.png' %}" alt="Default Image" style="width:128px;height:128px;">
     {% endif %}
-
+    <h1>Welcome, {{user.first_name}} {{user.last_name}}</h1>
+    <h2>Contact: {{user.userprofile.contact_number}}</h2>
     <a href="{% url 'main:update' %}"><button>Update profile image</button></a>
+    <a href="{% url 'main:updateDetails' %}"><button>Update profile details</button></a>
 
     <h3>Reviews Received:-</h3>
     <ul>

@@ -93,6 +93,29 @@ class ProfileForm(forms.ModelForm):
         model = models.UserProfile
         fields = ['profile_image']
 
+class ProfileDetailsForm(forms.Form):
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    contact_number = forms.CharField(max_length=10)
+
+    def clean_contact_number(self):
+        contact_number = self.cleaned_data['contact_number']
+        if len(contact_number) != 10:
+            raise forms.ValidationError("Contact number should be a 10-digit number.")
+        if models.UserProfile.objects.filter(contact_number=contact_number).exists():
+            raise forms.ValidationError("This contact number is already taken.")
+        return contact_number
+    
+    def save(self, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+
+        profile = models.UserProfile.objects.get(user=user)
+
+        profile.contact_number = self.cleaned_data['contact_number']
+        profile.save()
+
 
 class ReviewForm(forms.ModelForm):
     class Meta:

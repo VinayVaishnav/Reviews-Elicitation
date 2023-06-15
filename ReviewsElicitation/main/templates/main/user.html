@@ -7,7 +7,9 @@
     {% else %}
         <img src="{% static 'profile_images/default.png' %}" alt="Default Image" style="width:128px;height:128px;">
     {% endif %}
-
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <h2>Contact: {{user.userprofile.contact_number}}</h2>
+    
     <h3>Reviews Received:-</h3>
     <ul>
         {% for review in rec_reviews %}
