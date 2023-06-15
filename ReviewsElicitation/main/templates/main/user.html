@@ -42,6 +42,10 @@
         </li>
         <br/>
         {% endfor %}
+
+        {% if not rec_reviews %}
+        <li>No reviews received yet.</li>
+        {% endif %}
     </ul>
 
     <h3>Reviews Given:-</h3>
@@ -63,6 +67,10 @@
         </li>
         <br/>
         {% endfor %}
+        
+        {% if not giv_reviews %}
+        <li>No reviews given yet.</li>
+        {% endif %}
     </ul>
 
     {% if not existing_review %}

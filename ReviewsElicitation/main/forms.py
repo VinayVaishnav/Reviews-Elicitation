@@ -94,9 +94,15 @@ class ProfileForm(forms.ModelForm):
         fields = ['profile_image']
 
 class ProfileDetailsForm(forms.Form):
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    contact_number = forms.CharField(max_length=10)
+    first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
+    contact_number = forms.CharField(min_length=10, max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].label = ''
+        self.fields['last_name'].label = ''
+        self.fields['contact_number'].label = ''
 
     def clean_contact_number(self):
         contact_number = self.cleaned_data['contact_number']
