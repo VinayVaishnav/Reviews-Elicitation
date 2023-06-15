@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import cache_control
@@ -10,6 +11,7 @@ from . import models
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_view(request):
+
     if request.user.is_authenticated:
         return redirect('main:home')
     
@@ -38,7 +40,6 @@ def signup_view(request):
         form = forms.CustomUserCreationForm(request.POST)
         if form.is_valid():
             user_data = {
-                'username': form.cleaned_data['username'],
                 'first_name': form.cleaned_data['first_name'],
                 'last_name': form.cleaned_data['last_name'],
                 'email': form.cleaned_data['email'],
@@ -71,6 +72,7 @@ def verify_view(request):
                 contact_number = user_data['contact_number']
 
                 user_data['password'] = user_data['password1']
+                user_data['username']=str(user_data['first_name']+'-'+user_data['last_name']+'-'+timezone.now().strftime('%Y%m%d%H%M%S')).lower()
                 del user_data['password1']
                 del user_data['password2']
                 del user_data['contact_number']

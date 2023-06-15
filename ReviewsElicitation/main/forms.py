@@ -14,11 +14,10 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'contact_number', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'contact_number', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].label = ''
         self.fields['first_name'].label = ''
         self.fields['last_name'].label = ''
         self.fields['email'].label = ''
@@ -26,7 +25,6 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''
 
-        self.fields['username'].help_text = ''
         self.fields['password1'].help_text = ''
         self.fields['password2'].help_text = ''
 
@@ -46,7 +44,7 @@ class CustomUserCreationForm(UserCreationForm):
             fail_silently=False,
         )
 
-        # print(otp)
+        print(otp)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
