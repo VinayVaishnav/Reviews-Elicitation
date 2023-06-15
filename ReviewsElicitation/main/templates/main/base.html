@@ -7,10 +7,22 @@
     <title>Talent Hunt</title>
 </head>
 <body>
-    <main>
-        {% block content %}
+    <header>
+        <form action="{% url 'main:search' %}" method="GET">
+            <input type="text" name="q" placeholder="Talent Hunt">
+            <button type="submit">Search</button>
+        </form>
+        
+            <a href="{% url 'main:home' %}"><button>Home</button></a>
+            <button>About Us</button>
 
-        {% endblock %}
-    </main>
+        <form action="{% url 'main:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </header>
+
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

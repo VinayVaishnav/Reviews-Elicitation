@@ -6,6 +6,13 @@
     <title>Talent Hunt</title>
 </head>
 <body>
-    
+    <h1>Create Account</h1>
+    <form action="{% url 'main:signup' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Create Account</button>
+    </form>
+
+    <h3>Already have an account? <a href="{% url 'main:login' %}">Login</a></h3>
 </body>
 </html>

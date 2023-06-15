@@ -7,10 +7,12 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form action="login" method="post">
-        {% csrf_token%}
-
-        <input type="submit" value="submit">
+    <form action="{% url 'main:login' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Login</button>
     </form>
+
+    <h3>Don't have an account? <a href="{% url 'main:signup' %}">Create Account</a></h3>
 </body>
 </html>

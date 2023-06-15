@@ -6,6 +6,13 @@
     <title>Talent Hunt</title>
 </head>
 <body>
-    
+    <h2>Edit Review</h2>
+
+    <form method="post" action="{% url 'main:edit' review_id %}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" name="edit-review">Save</button>
+        <button type="submit" name="cancel-edit">Cancel</button>
+    </form>
 </body>
 </html>

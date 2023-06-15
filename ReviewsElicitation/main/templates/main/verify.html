@@ -6,6 +6,12 @@
     <title>Talent Hunt</title>
 </head>
 <body>
-    
+    <h2>Verify OTP</h2>
+    <p>Please enter the OTP sent to the entered mail address.</p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Verify</button>
+    </form>
 </body>
 </html>

@@ -8,22 +8,10 @@
 
 </head>
 <body>
-    <form action="editform" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        <div class="form-group">
-          <label for="contact">Contact:</label>
-          <input type="text" id="contact" name="contact" value="{{ user_profile.contact }}" placeholder="{{ user_profile.contact }}">
-        </div>
-        
-        <div class="form-group">
-          <label for="profile_picture">Upload picture:</label>
-          <input type="file" name="pic" onchange="readURL(this)" accept="Image/*" >
-        </div>
-        
-        <div class="form-group">
-          <input type="submit" value="Save Changes">
-        </div>
-      </form>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">Save</button>
+    </form>
 </body>
 </html>

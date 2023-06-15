@@ -1,0 +1,66 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.userprofile.profile_image %}
+        <img src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" style="width:128px;height:128px;">
+    {% else %}
+        <img src="{% static 'profile_images/default.png' %}" alt="Default Image" style="width:128px;height:128px;">
+    {% endif %}
+
+    <a href="{% url 'main:update' %}"><button>Update profile image</button></a>
+
+    <h3>Reviews Received:-</h3>
+    <ul>
+        {% for review in rec_reviews %}
+        <li>
+            {{ review }}
+            <br/>
+            Upvotes: {{ review.get_upvotes_count }}
+            <br/>
+            Downvotes: {{ review.get_downvotes_count }}
+            <form method="post" action="{% url 'main:home' %}">
+                {% csrf_token %}
+                <input type="hidden" name="review_id" value="{{ review.id }}">
+                <button type="submit" name="action" value="upvote">Upvote</button>
+                <button type="submit" name="action" value="downvote">Downvote</button>
+            </form>
+        </li>
+        <br/>
+        {% endfor %}
+    </ul>
+
+    <h3>Reviews Given:-</h3>
+    <ul>
+        {% for review in giv_reviews %}
+            <li>
+                {{ review }}
+                <br/>
+                Upvotes: {{ review.get_upvotes_count }}
+                <br/>
+                Downvotes: {{ review.get_downvotes_count }}
+
+                {% if review.from_user == request.user.username %}
+                    <form method="post" action="{% url 'main:edit' review.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="review_id" value="{{ review.id }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form method="post" action="{% url 'main:delete' review.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="review_id" value="{{ review.id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                {% endif %}
+
+                <form method="post" action="{% url 'main:home' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="review_id" value="{{ review.id }}">
+                    <button type="submit" name="action" value="upvote">Upvote</button>
+                    <button type="submit" name="action" value="downvote">Downvote</button>
+                </form>
+            </li>
+            <br/>
+        {% endfor %}
+    </ul>
+{% endblock %}
