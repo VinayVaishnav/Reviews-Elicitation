@@ -133,7 +133,7 @@ def logout_view(request):
     
 
 @login_required
-def update_view(request):
+def update_image_view(request):
     try:
         profile = request.user.userprofile
     except ObjectDoesNotExist:
@@ -149,27 +149,47 @@ def update_view(request):
     else:
         form = forms.ProfileForm(instance=profile)
 
-    return render(request, 'main/update.html', { 'form':form, })
+    return render(request, 'main/update_image.html', { 'form':form, })
+
 
 @login_required
-def updateDetails_view(request):
+def update_details_view(request):
     try:
         profile = request.user.userprofile
     except ObjectDoesNotExist:
         profile = models.UserProfile(user=request.user)
 
     if request.method == 'POST':
-        form = forms.ProfileDetailsForm(request.POST, request.FILES)
+        form = forms.ProfileDetailsForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             form.save(request.user)
             return redirect('main:home')
         else:
             print(form.errors)
     else:
-        form = forms.ProfileDetailsForm()
+        form = forms.ProfileDetailsForm(user=request.user)
 
-    return render(request, 'main/updateDetails.html', { 'form':form, })
+    return render(request, 'main/update_details.html', { 'form':form, })
     
+
+@login_required
+def update_bio_view(request):
+    try:
+        profile = request.user.userprofile
+    except ObjectDoesNotExist:
+        profile = models.UserProfile(user=request.user)
+
+    if request.method == 'POST':
+        form = forms.BioForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            form.save(request.user)
+            return redirect('main:home')
+        else:
+            print(form.errors)
+    else:
+        form = forms.BioForm(user=request.user)
+
+    return render(request, 'main/update_bio.html', { 'form':form, })
 
 @login_required
 def user_view(request, username):
@@ -270,15 +290,13 @@ def edit_view(request, review_id):
                         updated_review.anonymous_from = request.user.username
                     updated_review.save()
                     return redirect('main:user', username=str(review.to_user))
-            elif 'cancel-edit' in request.POST:
-                return redirect('main:user', username=str(review.to_user))
             else:
                 form = forms.ReviewForm(instance=review)
-                return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, })
+                return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, })
             
         else:
             form = forms.ReviewForm(instance=review)
-            return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, })
+            return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, })
         
     return redirect('main:user', username=str(review.to_user))
 

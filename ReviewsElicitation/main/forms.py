@@ -87,28 +87,56 @@ class CustomAuthenticationForm(forms.Form):
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(min_length=6, max_length=6, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter OTP'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['otp'].label = ''
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.UserProfile
         fields = ['profile_image']
 
+
 class ProfileDetailsForm(forms.Form):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+        ('N', 'Not specified'),
+    )
+
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
     contact_number = forms.CharField(min_length=10, max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
+    gender = forms.ChoiceField(choices=GENDER_CHOICES)
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        self.user = user
+
         super().__init__(*args, **kwargs)
-        self.fields['first_name'].label = ''
-        self.fields['last_name'].label = ''
-        self.fields['contact_number'].label = ''
+        self.fields['first_name'].label = 'First Name'
+        self.fields['last_name'].label = 'Last Name'
+        self.fields['contact_number'].label = 'Contact Number'
+        self.fields['gender'].label = 'Gender'
+
+        if user:
+            self.fields['first_name'].initial = user.first_name
+            self.fields['last_name'].initial = user.last_name
+
+            profile = models.UserProfile.objects.get(user=user)
+            self.fields['contact_number'].initial = profile.contact_number
+            self.fields['gender'].initial = profile.gender
 
     def clean_contact_number(self):
         contact_number = self.cleaned_data['contact_number']
         if len(contact_number) != 10:
             raise forms.ValidationError("Contact number should be a 10-digit number.")
-        if models.UserProfile.objects.filter(contact_number=contact_number).exists():
+        
+        user = self.user
+
+        if models.UserProfile.objects.exclude(user=user).filter(contact_number=contact_number).exists():
             raise forms.ValidationError("This contact number is already taken.")
         return contact_number
     
@@ -120,20 +148,41 @@ class ProfileDetailsForm(forms.Form):
         profile = models.UserProfile.objects.get(user=user)
 
         profile.contact_number = self.cleaned_data['contact_number']
+        profile.gender = self.cleaned_data['gender']
+        profile.save()
+
+
+class BioForm(forms.Form):
+    bio = forms.CharField(required=False, max_length=500, widget=forms.Textarea(attrs={'placeholder': 'Write something about yourself...'}))
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+
+        self.fields['bio'].label = ''
+        self.fields['bio'].initial = user.userprofile.bio
+
+    def save(self, user):
+        profile = models.UserProfile.objects.get(user=user)
+        profile.bio = self.cleaned_data['bio']
         profile.save()
 
 
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = models.Review
-        fields = ['review', 'is_anonymous']
+        fields = ['review', 'review_rating', 'is_anonymous']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['review'].label = ''
         self.fields['is_anonymous'].label = 'Anonymous Review'
+        self.fields['review_rating'].label = ''
 
         self.fields['review'].widget.attrs['placeholder'] = 'Write your review here...'
+        self.fields['review_rating'].widget = forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '10', 'step': '1'})
+        self.fields['review_rating'].widget.attrs['id'] = 'review-rating'
+
 
     def clean(self):
         cleaned_data = super().clean()

@@ -14,7 +14,7 @@
     <ul>
         {% for review in rec_reviews %}
         <li>
-            {{ review }}
+            {{ review.review_content }}
             <br/>
             Upvotes: {{ review.get_upvotes_count }}
             <br/>
@@ -52,7 +52,7 @@
     <ul>
         {% for review in giv_reviews %}
         <li>
-            {{ review }}
+            {{ review.review_content }}
             <br/>
             Upvotes: {{ review.get_upvotes_count }}
             <br/>
@@ -67,7 +67,7 @@
         </li>
         <br/>
         {% endfor %}
-        
+
         {% if not giv_reviews %}
         <li>No reviews given yet.</li>
         {% endif %}
@@ -80,6 +80,16 @@
         {{ reviewform }}
         <button type="submit" name="review-form">Submit Review</button>
     </form>
+    <p id="rating-value">Rating: 1</p> 
     {% endif %}
+
+    <script>
+        const slider = document.getElementById("review-rating");
+        var output = document.getElementById("rating-value");
+
+        slider.oninput = function() {
+            output.innerHTML = `Rating: ${this.value}`;
+        }
+    </script>
 
 {% endblock %}

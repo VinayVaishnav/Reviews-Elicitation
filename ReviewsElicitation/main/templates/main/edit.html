@@ -12,7 +12,17 @@
         {% csrf_token %}
         {{ form }}
         <button type="submit" name="edit-review">Save</button>
-        <button type="submit" name="cancel-edit">Cancel</button>
     </form>
+    <a href="{% url 'main:home' %}"><button>Cancel</button></a>
+
+    <p id="rating-value">Rating: {{ review.review_rating }}</p>
+    <script>
+        const slider = document.getElementById("review-rating");
+        var output = document.getElementById("rating-value");
+
+        slider.oninput = function() {
+            output.innerHTML = `Rating: ${this.value}`;
+        }
+    </script>
 </body>
 </html>

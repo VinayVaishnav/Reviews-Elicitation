@@ -3,9 +3,18 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+        ('N', 'Not specified'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True)
     contact_number = models.CharField(max_length=10)
+    bio = models.TextField(blank=True, null=True)
+    gender = models.CharField(max_length=1, default='N', choices=GENDER_CHOICES)
 
     def __str__(self):
         return f'{self.user.username}'
@@ -14,7 +23,11 @@ class UserProfile(models.Model):
 class Review(models.Model):
     to_user = models.CharField(max_length=100)
     from_user = models.CharField(max_length=100)
+
+    # review questions
     review = models.TextField()
+    review_rating = models.IntegerField(default=1)
+    
     is_anonymous = models.BooleanField(default=False)
     anonymous_from = models.CharField(max_length=100)
 
@@ -46,6 +59,13 @@ class Review(models.Model):
 
     def get_downvotes_count(self):
         return self.downvotes.count()
+    
+    def review_content(self):
+        if self.anonymous_from == 'Anonymous':
+            return f'Anonymous: {self.review} (Rating : {self.review_rating})'
+        else:
+            FromUser = User.objects.get(username=self.from_user)
+            return f'{FromUser.first_name} {FromUser.last_name} : {self.review} (Rating : {self.review_rating})'
     
     def __str__(self):
         return f'{self.from_user} => {self.to_user} : {self.review}'
