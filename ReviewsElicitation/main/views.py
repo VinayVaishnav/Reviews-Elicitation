@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponsePermanentRedirect, HttpResponseRedirect
-from django.contrib.auth import authenticate, login as login, logout
+from django.contrib.auth import update_session_auth_hash, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.db.models import Q
@@ -12,7 +12,6 @@ from . import models
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_view(request):
-
     if request.user.is_authenticated:
         return redirect('main:home')
     
@@ -292,11 +291,11 @@ def edit_view(request, review_id):
                     return redirect('main:user', username=str(review.to_user))
             else:
                 form = forms.ReviewForm(instance=review)
-                return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, })
+                return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, })
             
         else:
             form = forms.ReviewForm(instance=review)
-            return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, })
+            return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, })
         
     return redirect('main:user', username=str(review.to_user))
 
@@ -310,14 +309,28 @@ def delete_view(request, review_id):
             if 'delete-review' in request.POST:
                 review.delete()
                 return redirect('main:user', username=str(review.to_user))
-            elif 'cancel-delete' in request.POST:
-                return redirect('main:user', username=str(review.to_user))
             else:
-                return render(request, 'main/delete.html', { 'review_id':review_id, })
+                return render(request, 'main/delete.html', { 'review_id':review_id, 'username':review.to_user, })
 
         else:
-            return render(request, 'main/delete.html', { 'review_id':review_id, })
+            return render(request, 'main/delete.html', { 'review_id':review_id, 'username':review.to_user, })
     
     return redirect('main:user', username=str(review.to_user))
+
+
+@login_required
+def password_change_view(request):
+    if request.method == 'POST':
+        form = forms.CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('main:home')
+        else:
+            print(form.errors)
+    else:
+        form = forms.CustomPasswordChangeForm(request.user)
+
+    return render(request, 'main/password_change.html', { 'form':form, })
 
 

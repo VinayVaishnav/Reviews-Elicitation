@@ -13,7 +13,7 @@
         {{ form }}
         <button type="submit" name="edit-review">Save</button>
     </form>
-    <a href="{% url 'main:home' %}"><button>Cancel</button></a>
+    <a href="{% url 'main:user' username=username%}"><button>Cancel</button></a>
 
     <p id="rating-value">Rating: {{ review.review_rating }}</p>
     <script>

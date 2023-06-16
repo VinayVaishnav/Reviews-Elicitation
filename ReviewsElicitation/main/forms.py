@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from . import models
@@ -74,6 +74,17 @@ class CustomAuthenticationForm(forms.Form):
 
         self.fields['email'].help_text = ''
         self.fields['password'].help_text = ''
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise forms.ValidationError("This email id is not registered.")
+        if not user.check_password(password):
+            raise forms.ValidationError("The password entered is either incorrect or invalid.")
+        return self.cleaned_data
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -197,3 +208,17 @@ class ReviewForm(forms.ModelForm):
         return cleaned_data
 
         
+class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Old Password'}))
+    new_password1 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'New Password'}))
+    new_password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Confirm New Password'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].label = ''
+        self.fields['new_password1'].label = ''
+        self.fields['new_password2'].label = ''
+
+        self.fields['old_password'].help_text = ''
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password2'].help_text = ''

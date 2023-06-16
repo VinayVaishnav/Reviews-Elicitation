@@ -1,0 +1,9 @@
+{% block content %}
+    <h2>Forgotten password? Reset it here.</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Reset Password</button>
+    </form>
+    <a href="{% url 'main:home' %}"><button>Cancel</button></a>
+{% endblock %}

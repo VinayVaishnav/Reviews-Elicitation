@@ -12,6 +12,7 @@
         {{ form }}
         <button type="submit">Login</button>
     </form>
+    <p><a href="{% url 'password_reset:request' %}">Forgot password?</a></p>
     <h3>Don't have an account? <a href="{% url 'main:signup' %}">Create Account</a></h3>
 </body>
 </html>

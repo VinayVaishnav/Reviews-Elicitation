@@ -61,11 +61,12 @@ class Review(models.Model):
         return self.downvotes.count()
     
     def review_content(self):
+        ToUser = User.objects.get(username=self.to_user)
         if self.anonymous_from == 'Anonymous':
-            return f'Anonymous: {self.review} (Rating : {self.review_rating})'
+            return f'Anonymous => {ToUser.first_name} {ToUser.last_name}: {self.review} (Rating : {self.review_rating})'
         else:
             FromUser = User.objects.get(username=self.from_user)
-            return f'{FromUser.first_name} {FromUser.last_name} : {self.review} (Rating : {self.review_rating})'
+            return f'{FromUser.first_name} {FromUser.last_name} => {ToUser.first_name} {ToUser.last_name}: {self.review} (Rating : {self.review_rating})'
     
     def __str__(self):
         return f'{self.from_user} => {self.to_user} : {self.review}'
