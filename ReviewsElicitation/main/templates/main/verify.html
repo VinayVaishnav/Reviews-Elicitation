@@ -1,13 +1,18 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/verify.css' %}">
+
 </head>
 <body>
     <h2>Verify OTP</h2>
     <p>Please enter the OTP sent to the entered mail address.</p>
+    <p>Please check in the spam folder.</p>
     <form method="POST">
         {% csrf_token %}
         {{ form }}

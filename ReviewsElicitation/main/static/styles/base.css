@@ -1,0 +1,94 @@
+/* styles/base.css */
+
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0; /* Remove margin */
+  }
+  
+  form {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    flex: 1; /* Allow the form to take up remaining space */
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  button[type="submit"] {
+    background-color: rgb(1, 181, 190);
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 15px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .button-container button {
+    padding: 12px 24px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .button-container button:hover {
+    background-color: #555;
+    font-size: 14px;
+  }
+  
+  .button-container .about-us-button {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  
+  .button-container .logout-button {
+    padding: 12px 24px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .button-container .logout-button:hover {
+    background-color: #555;
+    font-size: 14px;
+  }
+  

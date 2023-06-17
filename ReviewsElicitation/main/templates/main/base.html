@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,22 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
+
 </head>
 <body>
     <header>
         <form action="{% url 'main:search' %}" method="GET">
-            <input type="text" name="q" placeholder="Talent Hunt">
-            <button type="submit">Search</button>
+          <input type="text" name="q" placeholder="Talent Hunt">
+          <button type="submit">Search</button>
         </form>
-        
-            <a href="{% url 'main:home' %}"><button>Home</button></a>
-            <button>About Us</button>
-
-        <form action="{% url 'main:logout' %}" method="post">
+        <div class="button-container">
+          <a href="{% url 'main:home' %}"><button>Home</button></a>
+          <button class="about-us-button">About Us</button>
+          <form action="{% url 'main:logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </header>
+            <button type="submit" class="logout-button">Logout</button>
+          </form>
+        </div>
+      </header>
+
+
 
     {% block content %}
     {% endblock %}
