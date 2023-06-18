@@ -296,12 +296,18 @@
 <div class="container">
     <div class="profile-section">
         <div class="imagesection">
-          {% if user.userprofile.profile_image %}
-          <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
-          {% else %}
-          <img class="profile-image" src="{% static 'profile_images/default.png' %}" alt="Default Image">
-          {% endif %}
-          <a href="{% url 'main:update_image' %}" class="profile-button">Update profile image</a>
+            {% if user.userprofile.profile_image %}
+                <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" >
+            {% else %}
+                {% if user.userprofile.gender == 'M' %}
+                    <img class="profile-image" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image" >
+                {% elif user.userprofile.gender == 'F' %}
+                    <img class="profile-image" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image" >
+                {% else %}
+                    <img class="profile-image" src="{% static 'profile_images/default.jpg' %}" alt="Default Image" >
+                {% endif %}
+            {% endif %}
+            <a href="{% url 'main:update_image' %}" class="profile-button">Update profile image</a>
         </div>
         <div class="profile-details">
           <h1 class="profile-name">Welcome, {{user.first_name}} {{user.last_name}}</h1>
@@ -329,7 +335,8 @@
         <ul>
             {% for review in rec_reviews %}
             <li>
-                <p class="content">{{ review.review_content }}</p>
+                <p class="content">{{ review.review_giver }}</p>
+                <p class="content">{{ review.review }}</p>
                 <br/>
                 <div class="votes">
                     <p>Upvotes: {{ review.get_upvotes_count }}</p>
@@ -357,7 +364,8 @@
         <ul>
             {% for review in giv_reviews %}
                 <li>
-                    <p class="content">{{ review.review_content }}</p>
+                    <p class="content">{{ review.review_receiver }}</p>
+                    <p class="content">{{ review.review }}</p>
                     <br/>
                     <div class="votes">
                         <p>Upvotes: {{ review.get_upvotes_count }}</p>

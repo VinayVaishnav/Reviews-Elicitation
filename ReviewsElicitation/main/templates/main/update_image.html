@@ -14,6 +14,9 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
+    {% if form.instance.profile_image %}
+      Current Profile Image: <img src="{{ form.instance.profile_image.url }}" alt="Profile Image">
+      {% endif %}
     <button type="submit">Save</button>
   </form>
   <a href="{% url 'main:home' %}">Cancel</a>

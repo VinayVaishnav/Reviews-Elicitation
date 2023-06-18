@@ -13,8 +13,12 @@
                     <a href="{% url 'main:user' username=user.username %}">
                         {% if user.userprofile.profile_image %}
                             <img class="profile-image" style="height: 100px; width: 100px; margin-right: 150px;" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
+                        {% elif user.userprofile.gender == 'M' %}
+                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 150px;" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image">
+                        {% elif user.userprofile.gender == 'F' %}
+                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 150px;" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image">
                         {% else %}
-                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 150px;" src="{% static 'profile_images/default.png' %}" alt="Default Image">
+                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 150px;" src="{% static 'profile_images/default.jpg' %}" alt="Default Image">
                         {% endif %}
                     </a>
                     <div class="namebio">

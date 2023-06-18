@@ -86,14 +86,6 @@ class CustomAuthenticationForm(forms.Form):
             raise forms.ValidationError("The password entered is either incorrect or invalid.")
         return self.cleaned_data
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            raise forms.ValidationError("This email id is not registered.")
-        return email
-
 
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(min_length=6, max_length=6, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter OTP'}))
@@ -104,9 +96,31 @@ class OTPVerificationForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
+    profile_image = forms.ImageField(required=False, widget=forms.FileInput)
+    # remove_photo = forms.BooleanField(required=False)
+
     class Meta:
         model = models.UserProfile
         fields = ['profile_image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = kwargs.get('instance')
+        if instance and instance.profile_image:
+            self.fields['remove_photo'] = forms.BooleanField(required=False)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if self.cleaned_data.get('remove_photo'):
+            instance.profile_image.delete()
+            instance.profile_image = None
+
+        if commit:
+            instance.save()
+
+        return instance
+
 
 
 class ProfileDetailsForm(forms.Form):

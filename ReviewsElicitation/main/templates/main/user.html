@@ -332,7 +332,13 @@
             {% if user.userprofile.profile_image %}
                 <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" >
             {% else %}
-                <img class="profile-image" src="{% static 'profile_images/default.png' %}" alt="Default Image" >
+                {% if user.userprofile.gender == 'M' %}
+                    <img class="profile-image" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image" >
+                {% elif user.userprofile.gender == 'F' %}
+                    <img class="profile-image" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image" >
+                {% else %}
+                    <img class="profile-image" src="{% static 'profile_images/default.jpg' %}" alt="Default Image" >
+                {% endif %}
             {% endif %}
         </div>
         <div class="profile-details">
@@ -357,7 +363,8 @@
         <ul>
             {% for review in rec_reviews %}
             <li>
-                <p class="content">{{ review.review_content }}</p>
+                <p class="content">{{ review.review_giver }}</p>
+                <p class="content">{{ review.review }}</p>
                 <br/>
                 <div class="votes">
                     <p>Upvotes: {{ review.get_upvotes_count }}</p>
@@ -404,13 +411,14 @@
         <ul>
             {% for review in giv_reviews %}
             <li>
-                <p class="content">{{ review.review_content }}</p>
-                        <br/>
-                        <div class="votes">
-                            <p>Upvotes: {{ review.get_upvotes_count }}</p>
-                            <br/>
-                            <p>Downvotes: {{ review.get_downvotes_count }}</p>
-                        </div>
+                <p class="content">{{ review.review_receiver }}</p>
+                <p class="content">{{ review.review }}</p>
+                <br/>
+                <div class="votes">
+                    <p>Upvotes: {{ review.get_upvotes_count }}</p>
+                    <br/>
+                    <p>Downvotes: {{ review.get_downvotes_count }}</p>
+                </div>
                 {{ review.review_content }}
                 
                 <form method="post" action="{% url 'main:user' username=user.username %}">
