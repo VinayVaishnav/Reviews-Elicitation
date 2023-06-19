@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
-
+    
 </head>
 <body>
-    <header>
+    <header style="width: 100%;">
         <form action="{% url 'main:search' %}" method="GET">
           <input type="text" name="q" placeholder="Talent Hunt">
           <button type="submit">Search</button>
         </form>
-        <div class="button-container">
+        <div class="button-container" style="padding-right: 35px;">
           <a href="{% url 'main:home' %}"><button>Home</button></a>
           <button class="about-us-button">About Us</button>
           <form action="{% url 'main:logout' %}" method="post">

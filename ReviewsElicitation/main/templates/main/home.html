@@ -6,21 +6,23 @@
     body{
         margin: 0;
         padding: 0;
+        
     }
     .container {
         display: flex;
         flex-direction: column;
         padding: 10px;
         width: 100%;
-        margin-right: 0px;
-
+        padding-right: 10px;
         height: 100%;
         background-color: #a5d1ff;
     }
     .profile-section {
         padding: 30px;
-        display: flex;
         margin: 10px;
+        margin-right: 80px;
+        margin-left: 20px;
+        display: flex;
         padding-left: 40px;
         border-radius: 30px;
         background-color: #f0f0f0;
@@ -55,7 +57,7 @@
     }
 
     .profile-name {
-        font-size: 70px;
+        font-size: 60px;
         font-weight: bold;
         margin-bottom: 30px;
         padding-bottom: 5px;
@@ -99,14 +101,13 @@
     }
 
     @media only screen and (max-width: 768px) {
-    .container {
-        padding: 5px;
-    }
+    
 
     .profile-section {
         flex-direction: column;
         padding: 20px;
         height: auto;
+        margin-right: 30px;
     }
 
     .imagesection {
@@ -153,6 +154,8 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
+        margin-right: 80px;
+        margin-left: 20px;
     }
 
     .reviews-section h3 {
@@ -246,6 +249,10 @@
     .no-reviews {
         color: #999;
         font-style: italic;
+        font-size: 30px;
+        padding: 20px;
+        margin-bottom: 10px;
+        text-align: center;
     }
 
     /* Media Queries */
@@ -256,6 +263,8 @@
     max-height: none;
     padding: 15px;
     padding-top: 0px;
+    margin-right: 30px;
+    margin-left: 30px;
   }
 
   .reviews-section h3 {
@@ -354,8 +363,9 @@
             <br/>
             {% endfor %}
             {% if rec_reviews.count == 0 %}
-                <li class="no-reviews">No reviews received yet.</li>
+                <p class="no-reviews">No reviews received yet.</p>
             {% endif %}
+
         </ul>
     </div>
     
@@ -399,7 +409,7 @@
                 <br/>
             {% endfor %}
             {% if giv_reviews.count == 0 %}
-                <li class="no-reviews">No reviews given yet.</li>
+                <p class="no-reviews">No reviews given yet.</p>
             {% endif %}
         </ul>
     </div>
