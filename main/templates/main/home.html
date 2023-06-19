@@ -20,15 +20,14 @@
     .profile-section {
         padding: 30px;
         margin: 10px;
-        margin-right: 80px;
-        margin-left: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
         display: flex;
         padding-left: 40px;
         border-radius: 30px;
         background-color: #f0f0f0;
         height: 470px;
-        /* align-items: center; */
-        justify-content: space-between;
+        align-items: center;
     }
 
     .imagesection{
@@ -94,12 +93,40 @@
         margin: 10px;
         margin-top: 12px;
     }
-
+    
     .profile-button:hover {
         background-color: #0056b3;
         font-weight: bold;
     }
-
+    
+    @media only screen and (max-width:1320px){
+        .imagesection{
+            margin-right: 40px;
+        }
+        .profile-name{
+            font-size: 45px;
+        }
+        .contact{
+            font-size: 35px;
+        }
+        .profile-bio{
+            font-size: 40px;
+        }
+    }
+    @media only screen and (max-width: 900px){
+        .imagesection{
+            margin-right: 40px;
+        }
+        .profile-name{
+            font-size: 35px;
+        }
+        .contact{
+            font-size: 30px;
+        }
+        .profile-bio{
+            font-size: 25px;
+        }
+    }
     @media only screen and (max-width: 768px) {
     
 
@@ -107,7 +134,8 @@
         flex-direction: column;
         padding: 20px;
         height: auto;
-        margin-right: 30px;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 
     .imagesection {
@@ -149,13 +177,10 @@
         max-height: 600px;
         background-color: #f0f0f0;
         padding: 20px;
-        padding-top: 0px;
         border-radius: 30px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
-        margin-right: 80px;
-        margin-left: 20px;
     }
 
     .reviews-section h3 {
@@ -165,7 +190,7 @@
     }
 
     .reviews-section ul {
-        list-style: circle;
+        list-style: none;
         height: 400px;
         max-height: 450px;
         overflow:scroll;
@@ -223,7 +248,7 @@
         /* border: solid black; */
         width: fit-content;
         /* width: 2px; */
-        margin-right: 5px; /* Adjust the margin as per your preference */
+        margin-right: 5px; 
         
     }
     .reviews-section button {
@@ -255,16 +280,13 @@
         text-align: center;
     }
 
-    /* Media Queries */
 @media only screen and (max-width: 768px) {
   .reviews-section {
-    margin: 5px;
     height: auto;
     max-height: none;
     padding: 15px;
-    padding-top: 0px;
-    margin-right: 30px;
-    margin-left: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
   }
 
   .reviews-section h3 {
@@ -299,10 +321,28 @@
     font-size: 12px;
   }
 }
+@media only screen and (max-width: 480px){
+    .reviews-section button {
+    width: 62px;
+    padding: 2px;
+    font-size: 12px;
+  }
+  .reviews-section .editdelete{
+    gap: 0px;
+  }
+  .reviews-section .editdelete button{
+    width: 47px;
+    margin-bottom: 5px;
+  }
+  .reviews-section li{
+    padding-left: 3px;
+  }
+}
+
 
 </style>
 
-<div class="container">
+<div class="container" style="padding: 0px;">
     <div class="profile-section">
         <div class="imagesection">
             {% if user.userprofile.profile_image %}

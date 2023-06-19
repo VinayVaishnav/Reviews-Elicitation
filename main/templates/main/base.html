@@ -11,12 +11,12 @@
     
 </head>
 <body>
-    <header style="width: 100%;">
+    <header style="padding: 0px; padding-top: 5px; padding-bottom: 5px;">
         <form action="{% url 'main:search' %}" method="GET">
           <input type="text" name="q" placeholder="Talent Hunt">
           <button type="submit">Search</button>
         </form>
-        <div class="button-container" style="padding-right: 35px;">
+        <div class="button-container">
           <a href="{% url 'main:home' %}"><button>Home</button></a>
           <button class="about-us-button">About Us</button>
           <form action="{% url 'main:logout' %}" method="post">

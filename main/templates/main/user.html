@@ -11,15 +11,13 @@
     .container {
         display: flex;
         flex-direction: column;
-        padding: 10px;
         width: 100%;
-        margin-right: 0px;
         height: 100%;
         background-color: #a5d1ff;
     }
 
     .profile-section {
-        padding: 20px;
+        padding: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -27,8 +25,7 @@
         background-color: #f0f0f0;
         border-radius: 30px;
         gap: 150px;
-        margin-right: 30px;
-        margin-left: 20px;
+        margin: 10px;
     }
 
     .imagesection {
@@ -39,11 +36,11 @@
     }
 
     .profile-image {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
+        width: 400px;
+        height: 400px;
         border-radius: 50%;
         background-color: aqua;
+        margin-bottom: 20px;
     }
 
     .profile-details {
@@ -93,68 +90,98 @@
     }
 
     /* Responsive adjustments */
-    @media screen and (max-width: 768px) {
+
+    @media only screen and (max-width:1320px){
+        .imagesection{
+            margin-right: 40px;
+        }
+        .profile-name{
+            font-size: 45px;
+        }
+        .contact{
+            font-size: 35px;
+        }
+        .profile-bio{
+            font-size: 40px;
+        }
+    }
+    @media only screen and (max-width: 1200px){
+        .profile-section{
+            gap: 75px;
+        }
+    }
+    @media only screen and (max-width: 1000px){
+        .imagesection{
+            margin-right: 40px;
+        }
+        .profile-name{
+            font-size: 35px;
+        }
+        .contact{
+            font-size: 25px;
+        }
+        .profile-bio{
+            font-size: 30px;
+        }
+        .profile-section{
+            gap: 50px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
         .profile-section {
-            flex-direction: column;
             align-items: center;
-            gap: 20px;
             justify-content: center;
-            margin-right: 30px;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .imagesection {
-            margin-bottom: 10px;
+            margin: 0px;
         }
 
-        .profile-image {
-            justify-content: center;
-            align-items: center;
+        .profile-details {
+            margin-left: 0;
+        }
+
+        .profile-name {
+            margin: 0px;
+            font-size: 50px;
+        }
+
+        .profile-bio {
+            font-size: 40px;
+            margin-bottom: 10px;
+            margin-top: 18px;
+            margin-left: 0px;
+        }
+        .contact{
+            font-size: 35px;
+        }
+
+        .profile-button {
+            width: 120px;
+            margin-bottom: 10px;
+            }
+    }
+    @media only screen and (max-width: 470px) {
+
+        .profile-image{
             height: 300px;
             width: 300px;
         }
 
         .profile-name {
-            margin-left: 50px;
+            margin: 0px;
             font-size: 40px;
         }
 
         .profile-bio {
-            font-size: 25px;
-            margin-left: 50px;
-
+            font-size: 30px;
         }
+        
         .contact{
-            font-size: 20px;
-            margin-left: 50px;
-
-        }
-
-        .profile-button {
-            width: 120px;
-        }
-    }
-
-    @media screen and (max-width: 480px) {
-        .profile-section {
-            padding: 10px;
-        }
-
-        .profile-image {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-        }
-
-        .profile-name {
             font-size: 25px;
-        }
-
-        .profile-bio {
-            font-size: 18px;
-        }
-
-        .profile-button {
-            width: 100px;
         }
     }
 
@@ -163,13 +190,11 @@
     height: 320px;
     max-height: 400px;
     background-color: #f0f0f0;
-    padding: 20px;
+    padding: 10px;
     border-radius: 30px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    margin-right: 30px;
-    margin-left: 20px;
     }
 
     .reviews-section h3 {
@@ -179,7 +204,7 @@
     }
 
     .reviews-section ul {
-    list-style: circle;
+    list-style: none;
     max-height: 250px;
     overflow: scroll;
     padding: 8px;
@@ -260,43 +285,63 @@
         margin-bottom: 10px;
         text-align: center;
     }
-    @media screen and (max-width: 768px) {
-        .reviews-section {
-            height: auto;
-            max-height: none;
-            padding: 10px;
-        }
-
-        .reviews-section h3 {
-            font-size: 25px;
-            margin-bottom: 15px;
-        }
-
-        .reviews-section ul {
-            max-height: none;
-        }
-
-        .reviews-section li {
-            margin-bottom: 5px;
-        }
-
-        .reviews-section .content {
-            font-size: 18px;
-        }
-
-        .reviews-section .editdelete {
-            align-items: center;
-        }
-
-        .reviews-section button {
-            font-size: 12px;
-        }
-
-        .no-reviews {
-            font-size: 20px;
-            padding: 10px;
-        }
+    @media only screen and (max-width: 768px) {
+    .reviews-section {
+        height: auto;
+        max-height: none;
+        padding: 15px;
     }
+
+    .reviews-section h3 {
+        font-size: 24px;
+    }
+
+    .reviews-section ul {
+        height: auto;
+        max-height: none;
+    }
+
+    .reviews-section li {
+        margin-bottom: 5px;
+    }
+
+    .votes {
+        margin-top: 0px;
+        margin-bottom: 2px;
+    }
+
+    .votes p {
+        margin-right: 10px;
+    }
+
+    .reviews-section .editdelete {
+        gap: 1px;
+    }
+
+    .reviews-section button {
+        padding: 3px;
+        margin: 3px;
+        font-size: 12px;
+    }
+    }
+    @media only screen and (max-width: 480px){
+        .reviews-section button {
+        width: 62px;
+        padding: 2px;
+        font-size: 12px;
+    }
+    .reviews-section .editdelete{
+        gap: 0px;
+    }
+    .reviews-section .editdelete button{
+        width: 47px;
+        margin-bottom: 5px;
+    }
+    .reviews-section li{
+        padding-left: 3px;
+    }
+    }
+
 
     .AddReview {
         margin: 10px;
