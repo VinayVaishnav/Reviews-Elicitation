@@ -199,7 +199,7 @@ def user_view(request, username):
         user = User.objects.get(username=username)
         reviews = models.Review.objects.all()
         rec_reviews = reviews.filter(to_user=username)
-        giv_reviews = reviews.filter(from_user=username)
+        giv_reviews = reviews.filter(anonymous_from=username)
 
         existing_review = reviews.filter(to_user=username, from_user=request.user.username).first()
 

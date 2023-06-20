@@ -24,6 +24,8 @@ form {
 }
 
 input[type="text"] {
+  font-family: 'Raleway';
+  font-size: large;
   padding: 10px;
   width: 80%;
   border: none;
@@ -32,14 +34,21 @@ input[type="text"] {
 }
 
 button[type="submit"] {
-  background-color: rgb(0, 212, 240);
-  color: #333;
+  background-color: #56B4BE;
+  color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   cursor: pointer;
   margin-left: 10px;
-  font-size: 15px;
+  /* font-size: 15px; */
+  font-size: large;
+  font-family: 'Raleway';
+  font-weight: bold;
+}
+
+.search-button:hover {
+  background-color: #4ecdc4;
 }
 
 a {
@@ -73,7 +82,7 @@ a:hover {
 
 .button-container button:hover {
   background-color: #555;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .button-container .about-us-button {
@@ -93,7 +102,7 @@ a:hover {
 
 .button-container .logout-button:hover {
   background-color: #555;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 /* Set max width to screen size */

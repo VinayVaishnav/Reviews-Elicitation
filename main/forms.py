@@ -198,15 +198,16 @@ class ReviewForm(forms.ModelForm):
         model = models.Review
         fields = ['review', 'review_rating', 'is_anonymous']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['review'].label = ''
-        self.fields['is_anonymous'].label = 'Anonymous Review'
-        self.fields['review_rating'].label = ''
-
-        self.fields['review'].widget.attrs['placeholder'] = 'Write your review here...'
-        self.fields['review_rating'].widget = forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '10', 'step': '1'})
-        self.fields['review_rating'].widget.attrs['id'] = 'review-rating'
+        widgets = {
+            'review': forms.Textarea(attrs={'class': 'review-textarea', 'placeholder': 'Write your review here...'}),
+            'review_rating': forms.NumberInput(attrs={'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '10', 'step': '1'}),
+            'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
+        }
+        labels = {
+            'review': '',
+            'review_rating': '',
+            'is_anonymous': 'Anonymous Review',
+        }
 
 
     def clean(self):

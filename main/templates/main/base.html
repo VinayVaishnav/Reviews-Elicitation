@@ -3,31 +3,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talent Hunt</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
-    
-</head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talent Hunt</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Albert Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Gantari' rel='stylesheet'>
 <body>
     <header style="padding: 0px; padding-top: 5px; padding-bottom: 5px;">
         <form action="{% url 'main:search' %}" method="GET">
-          <input type="text" name="q" placeholder="Talent Hunt">
-          <button type="submit">Search</button>
+          <input type="text" name="q" placeholder="Talent Hunt" value="{{ query }}">
+          <button type="submit" class="search-button">HUNT</button>
         </form>
         <div class="button-container">
-          <a href="{% url 'main:home' %}"><button>Home</button></a>
-          <button class="about-us-button">About Us</button>
+          <a href="{% url 'main:home' %}"><button>HOME</button></a>
+          <button class="about-us-button">ABOUT US</button>
           <form action="{% url 'main:logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="logout-button">Logout</button>
+            <button type="submit" class="logout-button">LOGOUT</button>
           </form>
         </div>
-      </header>
-
-
-
+    </header>
     {% block content %}
     {% endblock %}
 </body>
