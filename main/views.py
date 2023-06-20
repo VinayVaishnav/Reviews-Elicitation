@@ -226,7 +226,7 @@ def user_view(request, username):
                     if reviewform.cleaned_data['is_anonymous']:
                         review.anonymous_from = 'Anonymous'
                     else:
-                        review.anonymous = request.user.username
+                        review.anonymous_from = request.user.username
                     review.from_user = request.user.username
                     review.save()
                     return redirect('main:user', username=username)
