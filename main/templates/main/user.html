@@ -470,7 +470,7 @@
     }
 
     .review-rating-input {
-        width: 100%;
+        width: 100px;
     }
 
     .is-anonymous-checkbox {
@@ -527,14 +527,7 @@
                 {% else %}
                 <p class="heading">{{ review.review_giver }}</p>
                 {% endif %}
-                <!-- <p class="heading">{{ review.review_giver }}</p> -->
-                <p class="content">{{ review.review }}</p>
                 <br/>
-                <!-- <div class="votes"> -->
-                    <!-- <p>Upvotes: {{ review.get_upvotes_count }}</p> -->
-                    <!-- <br/> -->
-                    <!-- <p>Downvotes: {{ review.get_downvotes_count }}</p> -->
-                <!-- </div> -->
 
                 <form method="post" action="{% url 'main:user' username=user.username %}">
                     {% csrf_token %}
@@ -564,14 +557,6 @@
                         </form>
                     </div>
                 {% endif %}
-    
-                <!-- <form method="post" action="{% url 'main:user' username=user.username %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="review_id" value="{{ review.id }}">
-                    <button type="submit" name="action" class="button-container" value="upvote">Upvote</button>
-                    <button type="submit" name="action" class="button-container" value="downvote">Downvote</button>
-                </form> -->
-
             </li>
             <br/>
             {% endfor %}
@@ -590,24 +575,11 @@
             {% for review in giv_reviews %}
             <li>
                 {% if review.anonymous_from != 'Anonymous' %}
-                <a href="{% url 'main:user' username=review.to_user} %"><p class="heading">{{ review.review_receiver }}</p></a>
+                <a href="{% url 'main:user' username=review.to_user %} %"><p class="heading">{{ review.review_receiver }}</p></a>
                 {%  else %}
                 <p class="heading">{{ review.review_receiver }}</p>
                 {% endif %}
-                <p class="content">{{ review.review }}</p>
                 <br/>
-                <!-- <div class="votes">
-                    <p>Upvotes: {{ review.get_upvotes_count }}</p>
-                    <br/>
-                    <p>Downvotes: {{ review.get_downvotes_count }}</p>
-                </div>
-                
-                <form method="post" action="{% url 'main:user' username=user.username %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="review_id" value="{{ review.id }}">
-                    <button type="submit" name="action" class="button-container" value="upvote">Upvote</button>
-                    <button type="submit" name="action" class="button-container" value="downvote">Downvote</button>
-                </form> -->
                 <form method="post" action="{% url 'main:user' username=user.username %}">
                     {% csrf_token %}
                     <input type="hidden" name="review_id" value="{{ review.id }}">
@@ -636,16 +608,27 @@
         <h2 class="add">Add Review</h2>
         <form method="post" enctype="multipart/form-data" class="add-form">
             {% csrf_token %}
-            <div>
-                {{ reviewform.review }}
-                {{ reviewform.review.errors }}
-            </div>
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <label style="margin-right: 10px;">Rating</label>
-                {{ reviewform.review_rating }}
-                {{ reviewform.review_rating.errors }}
-                <p id="rating-value" style="margin-left: 10px;">1</p> 
+                {{ reviewform.review_rating_1 }}
+                {{ reviewform.review_rating_1.errors }}
+                <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p> 
             </div>
+
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label style="margin-right: 10px;">Rating</label>
+                {{ reviewform.review_rating_2 }}
+                {{ reviewform.review_rating_2.errors }}
+                <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p> 
+            </div>
+
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label style="margin-right: 10px;">Rating</label>
+                {{ reviewform.review_rating_3 }}
+                {{ reviewform.review_rating_3.errors }}
+                <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p> 
+            </div>
+
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <label syle="margin-right: 10px;">Anonymous Review</label>
                 {{ reviewform.is_anonymous }}
@@ -656,13 +639,51 @@
         {% endif %}
 
         <script>
-            const slider = document.getElementById("id_review_rating");
-            var output = document.getElementById("rating-value");
+            const slider1 = document.getElementById("review-rating-1");
+            const slider2 = document.getElementById("review-rating-2");
+            const slider3 = document.getElementById("review-rating-3");
 
-            slider.oninput = function() {
-                output.innerHTML = `${this.value}`;
+            let output1 = document.getElementById("rating-value-1");
+            let output2 = document.getElementById("rating-value-2");
+            let output3 = document.getElementById("rating-value-3");
+
+            const problemSolvingDict = {
+                {% for key, value in problem_solving.items %}
+                    {{ key }}: {
+                        'name': '{{ value.name }}',
+                        'description': '{{ value.description }}',
+                    },
+                {% endfor %}
+            };
+        
+            const communicationDict = {
+                {% for key, value in communication.items %}
+                    {{ key }}: {
+                        'name': '{{ value.name }}',
+                        'description': '{{ value.description }}',
+                    },
+                {% endfor %}
+            };
+        
+            const sociabilityDict = {
+                {% for key, value in sociability.items %}
+                    {{ key }}: {
+                        'name': '{{ value.name }}',
+                        'description': '{{ value.description }}',
+                    },
+                {% endfor %}
+            };
+        
+            slider1.oninput = function() {
+                output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
+            }
+            slider2.oninput = function() {
+                output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
+            }
+            slider3.oninput = function() {
+                output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
             }
         </script>
     </div>
 
-{% endblock %}
+{% endblock %}{{ space }}

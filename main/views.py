@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_control
 
 from . import forms
 from . import models
+from . import review_criteria
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_view(request):
@@ -243,6 +244,11 @@ def user_view(request, username):
                 'rec_reviews':rec_reviews,
                 'giv_reviews':giv_reviews,
                 'existing_review':existing_review,
+
+                'problem_solving': review_criteria.problem_solving,
+                'communication': review_criteria.communicaton,
+                'sociability': review_criteria.sociablity,
+                'space': ' ',
             }
         )
 

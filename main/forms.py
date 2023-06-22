@@ -6,6 +6,8 @@ from . import models
 from ReviewsElicitation.settings import EMAIL_HOST_USER
 import random
 
+from . import review_criteria
+
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
@@ -196,16 +198,19 @@ class BioForm(forms.Form):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = models.Review
-        fields = ['review', 'review_rating', 'is_anonymous']
+        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3', 'is_anonymous']
 
         widgets = {
-            'review': forms.Textarea(attrs={'class': 'review-textarea', 'placeholder': 'Write your review here...'}),
-            'review_rating': forms.NumberInput(attrs={'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '10', 'step': '1'}),
+            # 'review': forms.Textarea(attrs={'class': 'review-textarea', 'placeholder': 'Write your review here...'}),
+            'review_rating_1': forms.NumberInput(attrs={'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_2': forms.NumberInput(attrs={'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_3': forms.NumberInput(attrs={'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
         }
         labels = {
-            'review': '',
-            'review_rating': '',
+            'review_rating_1': '',
+            'review_rating_2': '',
+            'review_rating_3': '',
             'is_anonymous': 'Anonymous Review',
         }
 

@@ -370,11 +370,13 @@
 
 .vote-btn {
     font-size: larger !important;
-    background-color: #4ecdc4 !important;
+    /* background-color: #4ecdc4 !important; */
+    background-color: #999 !important;
 }
 
 .vote-btn:hover{
-    background-color: #1a535c !important;
+    /* background-color: #1a535c !important; */
+    background-color: black !important;
 }
 
 .vote-count {
@@ -467,13 +469,7 @@
                 {% else %}
                 <p class="heading">{{ review.review_giver }}</p>
                 {% endif %}
-                <p class="content">{{ review.review }}</p>
                 <br/>
-                <!-- <div class="votes">
-                    <p class="vote-count">Upvotes: {{ review.get_upvotes_count }}</p>
-                    <br/>
-                    <p class="vote-count">Downvotes: {{ review.get_downvotes_count }}</p>
-                </div> -->
                 
                 <form method="post" action="{% url 'main:home' %}">
                     {% csrf_token %}
@@ -487,9 +483,6 @@
                         <p class="vote-count">{{ review.get_downvotes_count }}</p>
                         <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
                     </div>
-
-                    <!-- <button type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
-                    <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button> -->
                 </form>
             </li>
             <br/>
@@ -507,20 +500,7 @@
             {% for review in giv_reviews %}
                 <li>
                     <a href="{% url 'main:user' username=review.to_user %}"><p class="heading">{{ review.review_receiver }}</p></a>
-                    <p class="content">{{ review.review }}</p>
                     <br/>
-                    <!-- <div class="votes">
-                        <p class="vote-count">Upvotes: {{ review.get_upvotes_count }}</p>
-                        <br/>
-                        <p class="vote-count">Downvotes: {{ review.get_downvotes_count }}</p>
-                    </div>
-                    
-                    <form method="post" action="{% url 'main:home' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="review_id" value="{{ review.id }}">
-                        <button type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
-                        <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
-                    </form> -->
 
                     <form method="post" action="{% url 'main:home' %}">
                         {% csrf_token %}
