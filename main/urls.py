@@ -20,5 +20,7 @@ urlpatterns = [
     path('delete/<int:review_id>/', views.delete_view, name='delete'),
     path('password_change/', views.password_change_view, name='password_change'),
 
+    path('vote/', views.vote_view, name='vote'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

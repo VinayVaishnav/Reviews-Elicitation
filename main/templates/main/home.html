@@ -388,6 +388,15 @@
     background-color: black !important;
 }
 
+.used-vote-btn {
+    font-size: larger !important;
+    background-color: #4ecdc4 !important;
+}
+
+.used-vote-btn:hover{
+    background-color: #1a535c !important;
+}
+
 .vote-count {
     font-family: 'Gantari';
     font-weight: bolder;
@@ -469,52 +478,74 @@
     <div class="reviews-section">
         <h3>Reviews Received:</h3>
         <ul>
-            {% for review in rec_reviews %}
+            {% if rec_reviews.count == 0 %}
+                <p class="no-reviews">No reviews received yet.</p>
+            {% else %}
+            {% for review in processed_rec_reviews %}
             <li>
-                {% if review.anonymous_from != 'Anonymous' %}
-                <a href="{% url 'main:user' username=review.from_user %}">
-                    <p class="heading">{{ review.review_giver }}</p>
+                {% if review.review.anonymous_from != 'Anonymous' %}
+                <a href="{% url 'main:user' username=review.review.from_user %}">
+                    <p class="heading">{{ review.review.review_giver }}</p>
                 </a>
                 {% else %}
-                <p class="heading">{{ review.review_giver }}</p>
+                <p class="heading">{{ review.review.review_giver }}</p>
                 {% endif %}
                 <br/>
                 <div class="content">
                     <p class="skill_header">Problem Solving skills:</p>
                     <div class="content_section">
-                        <p>Rated: {{ review.review_rating_1 }}</p>
-                        <p>Description: {{ review.problem_sol }}</p>
+                        <p>Rated: {{ review.review.review_rating_1 }}</p>
+                        <p>Description: {{ review.review.problem_sol }}</p>
                     </div>
                     <button id="publicButton{{ forloop.counter }}" class="public_private">Public</button>
                 </div>
                 <div class="content">
                     <p class="skill_header">Communication skills:</p>
                     <div class="content_section">
-                        <p>Rated: {{ review.review_rating_2 }}</p>
-                        <p>Description: {{ review.communication }}</p>
+                        <p>Rated: {{ review.review.review_rating_2 }}</p>
+                        <p>Description: {{ review.review.communication }}</p>
                     </div>
                     <button id="publicButton2{{ forloop.counter }}" class="public_private">Public</button>
                 </div>
                 <div class="content">
                     <p class="skill_header">Sociability:</p>
                     <div class="content_section">
-                        <p>Rated: {{ review.review_rating_3 }}</p>
-                        <p>Description: {{ review.sociability }}</p>
+                        <p>Rated: {{ review.review.review_rating_3 }}</p>
+                        <p>Description: {{ review.review.sociability }}</p>
                     </div>
                     <button id="publicButton3{{ forloop.counter }}" class="public_private">Public</button>
                 </div>
+                
                 <form method="post" action="{% url 'main:home' %}">
                     {% csrf_token %}
-                    <input type="hidden" name="review_id" value="{{ review.id }}">
+                    <input type="hidden" name="review_id" value="{{review.review.id }}">
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <p class="vote-count">{{ review.get_upvotes_count }}</p>
-                        <button type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
+                        <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
+                        {% if review.has_upvoted %}
+                            <button
+                                id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
+                        {% else %}
+                            <button
+                                id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
+                        {% endif %}
                     </div>
+
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <p class="vote-count">{{ review.get_downvotes_count }}</p>
-                        <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                        <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
+                        {% if review.has_downvoted %}
+                            <button
+                                id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
+                        {% else %}
+                            <button
+                                id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                        {% endif %}
                     </div>
                 </form>
+
             </li>
             <br/>
             <script>
@@ -524,82 +555,105 @@
                     var publicButton3 = document.getElementById('publicButton3{{ forloop.counter }}');
                     publicButton.addEventListener('click', function() {
                         // Toggle the value of review.problem_bool
-                        review.problem_bool = !review.problem_bool;
+                        review.review.problem_bool = !review.review.problem_bool;
                     });
                     publicButton2.addEventListener('click', function() {
                         // Toggle the value of review.communication_bool
-                        review.communication_bool = !review.communication_bool;
+                        review.review.communication_bool = !review.review.communication_bool;
                     });
                     publicButton3.addEventListener('click', function() {
                         // Toggle the value of review.sociability_bool
-                        review.sociability_bool = !review.sociability_bool;
+                        review.review.sociability_bool = !review.review.sociability_bool;
                     });
                 });
             </script>
-    
             {% endfor %}
-            {% if rec_reviews.count == 0 %}
-                <p class="no-reviews">No reviews received yet.</p>
             {% endif %}
-
         </ul>
     </div>
     
     <div class="reviews-section">
         <h3>Reviews Given:</h3>
         <ul>
-            {% for review in giv_reviews %}
+            {% if giv_reviews.count == 0 %}
+            <p class="no-reviews">No reviews given yet.</p>
+            {% else %}
+            {% for review in processed_giv_reviews %}
                 <li>
-                    <a href="{% url 'main:user' username=review.to_user %}"><p class="heading">{{ review.review_receiver }}</p></a>
+                    {% if review.review.anonymous_from != 'Anonymous' %}
+                    <a href="{% url 'main:user' username=review.review.from_user %}"><p class="heading">{{ review.review.review_giver }}</p></a>
+                    {% else %}
+                    <p class="heading">{{ review.review.review_giver }}</p>
+                    {% endif %}
                     <br/>
                     <div class="content" >
                         <p class="skill_header">Problem Solving skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{review.review_rating_1}}</p>
-                            <p>Description: {{review.problem_sol}} </p>
+                            <p>Rated: {{review.review.review_rating_1}}</p>
+                            <p>Description: {{review.review.problem_sol}} </p>
                             
                         </div>
                     </div>
                     <div class="content" >
                         <p class="skill_header">Communication skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{review.review_rating_2}}</p>
-                            <p>Description: {{review.communication}} </p>
+                            <p>Rated: {{review.review.review_rating_2}}</p>
+                            <p>Description: {{review.review.communication}} </p>
                             
                         </div>
                     </div>
                     <div class="content" >
                         <p class="skill_header">Sociability:</p>
                         <div class="content_section">
-                            <p>Rated: {{review.review_rating_3}}</p>
-                            <p>Description: {{review.sociability}} </p>
+                            <p>Rated: {{review.review.review_rating_3}}</p>
+                            <p>Description: {{review.review.sociability}} </p>
                             
                         </div>
                     </div>
                     <form method="post" action="{% url 'main:home' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="review_id" value="{{ review.id }}">
+                        <input type="hidden" name="review_id" value="{{review.review.id }}">
                         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <p class="vote-count">{{ review.get_upvotes_count }}</p>
-                            <button type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
+                            <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
+                            {% if review.has_upvoted %}
+                                <button
+                                    id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                    type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">
+                                    &#8679;
+                                </button>
+                            {% else %}
+                                <button
+                                    id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                    type="submit" name="action" value="upvote" class="vote-btn">
+                                    &#8679;
+                                </button>
+                            {% endif %}
                         </div>
     
                         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <p class="vote-count">{{ review.get_downvotes_count }}</p>
-                            <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                            <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
+                            {% if review.has_downvoted %}
+                                <button
+                                    id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                    type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
+                            {% else %}
+                                <button
+                                    id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                    type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                            {% endif %}
                         </div>
                     </form>
 
                     {% if review.from_user == request.user.username %}
                         <div class="editdelete">
-                            <form method="post" action="{% url 'main:edit' review.id %}">
+                            <form method="post" action="{% url 'main:edit' review.review.id %}">
                                 {% csrf_token %}
-                                <input type="hidden" name="review_id" value="{{ review.id }}">
+                                <input type="hidden" name="review_id" value="{{ review.review.id }}">
                                 <button type="submit" style="background: none;" class="button-container">Edit</button>
                             </form>
-                            <form method="post" action="{% url 'main:delete' review.id %}">
+                            <form method="post" action="{% url 'main:delete' review.review.id %}">
                                 {% csrf_token %}
-                                <input type="hidden" name="review_id" value="{{ review.id }}">
+                                <input type="hidden" name="review_id" value="{{ review.review.id }}">
                                 <button type="submit" style="background: none;" class="button-container">Delete</button>
                             </form>
 
@@ -609,11 +663,57 @@
                 </li>
                 <br/>
             {% endfor %}
-            {% if giv_reviews.count == 0 %}
-                <p class="no-reviews">No reviews given yet.</p>
             {% endif %}
         </ul>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.vote-btn').click(
+            function(e) {
+                e.preventDefault();
+                var reviewId = $(this).data('review-id');
+                var action = $(this).data('action');
+                var button = $(this);
+
+                $.ajax({
+                    url: '{% url "main:vote" %}',
+                    type: 'POST',
+                    data: {
+                        'review_id': reviewId,
+                        'action': action,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        // console.log(response)
+
+                        var upvoteCountElement = $('#upvote-count-' + response.review_id);
+                        upvoteCountElement.text(response.upvotes_count);
+                        var downvoteCountElement = $('#downvote-count-' + response.review_id);
+                        downvoteCountElement.text(response.downvotes_count);
+
+                        var upvoteButtonElement = $('#upvote-btn-' + response.review_id);
+                        var downvoteButtonElement = $('#downvote-btn-' + response.review_id);
+
+                        if (response.has_upvoted){
+                            upvoteButtonElement.addClass('used-vote-btn');
+                            downvoteButtonElement.removeClass('used-vote-btn');
+                        } else if (response.has_downvoted){
+                            downvoteButtonElement.addClass('used-vote-btn');
+                            upvoteButtonElement.removeClass('used-vote-btn');
+                        } else {
+                            upvoteButtonElement.removeClass('used-vote-btn');
+                            downvoteButtonElement.removeClass('used-vote-btn');
+                        }
+
+                    },
+                    error: function(response) {
+                        console.log(responseText)
+                    }
+                });
+            });
+    });
+</script>
 
 {% endblock %}
