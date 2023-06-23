@@ -644,7 +644,7 @@
                         </div>
                     </form>
 
-                    {% if review.from_user == request.user.username %}
+                    {% if review.review.from_user == request.user.username %}
                         <div class="editdelete">
                             <form method="post" action="{% url 'main:edit' review.review.id %}">
                                 {% csrf_token %}
