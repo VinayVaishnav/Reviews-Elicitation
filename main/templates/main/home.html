@@ -580,11 +580,7 @@
             {% else %}
             {% for review in processed_giv_reviews %}
                 <li>
-                    {% if review.review.anonymous_from != 'Anonymous' %}
-                    <a href="{% url 'main:user' username=review.review.from_user %}"><p class="heading">{{ review.review.review_giver }}</p></a>
-                    {% else %}
-                    <p class="heading">{{ review.review.review_giver }}</p>
-                    {% endif %}
+                    <a href="{% url 'main:user' username=review.review.to_user %}"><p class="heading">{{ review.review.review_receiver }}</p></a>
                     <br/>
                     <div class="content" >
                         <p class="skill_header">Problem Solving skills:</p>
