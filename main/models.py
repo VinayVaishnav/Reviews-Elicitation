@@ -30,6 +30,14 @@ class Review(models.Model):
     review_rating_2 = models.IntegerField(default=3)
     review_rating_3 = models.IntegerField(default=3)
 
+    problem_sol=models.TextField(max_length=400,default='')
+    sociability=models.TextField(max_length=400,default='')
+    communication=models.TextField(max_length=400,default='')
+    
+    problem_bool = models.BooleanField(default=False)
+    sociability_bool = models.BooleanField(default=False)
+    communication_bool = models.BooleanField(default=False)
+
     is_anonymous = models.BooleanField(default=False)
     anonymous_from = models.CharField(max_length=100)
 

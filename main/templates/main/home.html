@@ -177,9 +177,8 @@
 
     .reviews-section {
         margin: 10px;
-
-        height: 300px;
-        max-height: 600px;
+        height: auto;
+        max-height: 800px;
         background-color: #f0f0f0;
         padding: 20px;
         border-radius: 30px;
@@ -198,9 +197,9 @@
 
     .reviews-section ul {
         list-style: none;
-        height: 400px;
-        max-height: 450px;
-        overflow:scroll;
+        height: auto;
+        max-height: 700px;
+        overflow:auto;
         padding: 8px;
         padding-top: 10px;
         padding-left: 12px;
@@ -232,16 +231,31 @@
         color: rgb(97, 97, 97);
     }
 
-    .reviews-section .content {
-        font-family: 'Noto Sans';
-        font-size: x-large;
-        /* font-size: 20px; */
-        font-weight: lighter;
-        height: fit-content;
-        /* border: solid black; */
-        margin-bottom: 0px; 
-        margin-top: 0px;
+    .reviews-section .content{
+        align-items: center;
+        justify-content: flex-start;
+        margin: 5px;
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        border: solid black;
+
+        .skill_header{
+            font-weight: bold;
+            font-size: 20px;
+            flex-basis: 35%;
+        }
+
+        .content_section{
+            align-items: flex-start;
+            padding: 4px;
+            flex-basis: 65%;
+        }
+        .public_private{
+            flex-basis: 10%;
+        }
     }
+
 
     .votes {
     /* border: solid black; */
@@ -260,15 +274,10 @@
     }
 
     .reviews-section .editdelete {
-        /* position: absolute;
-        bottom: 0;
-        right: 0;
         display: flex;
-        gap: 2px; */
-    display: flex;
-    width: fit-content;
-    flex-direction: row;
-    align-items: start;
+        width: fit-content;
+        flex-direction: row;
+        align-items: start;
     }
 
     .reviews-section .editdelete form {
@@ -415,32 +424,31 @@
 }
 
 </style>
-
 <div class="container" style="padding: 0px;">
     <div class="profile-section">
         <div class="imagesection">
             {% if user.userprofile.profile_image %}
-                <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" >
+            <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" >
             {% else %}
-                {% if user.userprofile.gender == 'M' %}
-                    <img class="profile-image" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image" >
-                {% elif user.userprofile.gender == 'F' %}
-                    <img class="profile-image" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image" >
-                {% else %}
-                    <img class="profile-image" src="{% static 'profile_images/default.jpg' %}" alt="Default Image" >
-                {% endif %}
+            {% if user.userprofile.gender == 'M' %}
+            <img class="profile-image" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image" >
+            {% elif user.userprofile.gender == 'F' %}
+            <img class="profile-image" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image" >
+            {% else %}
+            <img class="profile-image" src="{% static 'profile_images/default.jpg' %}" alt="Default Image" >
+            {% endif %}
             {% endif %}
             <a href="{% url 'main:update_image' %}"><button class="profile-button">Update Profile Image</button></a>
-        </div>
-        <div class="profile-details">
-          <h1 class="profile-name">Welcome, {{user.first_name}} {{user.last_name}}</h1>
-          {% if user.userprofile.bio %}
-          <div class="bio-section">
+            </div>
+            <div class="profile-details">
+                <h1 class="profile-name">Welcome, {{user.first_name}} {{user.last_name}}</h1>
+                {% if user.userprofile.bio %}
+                <div class="bio-section">
             <div>
                 <h3 class="profile-bio">Bio:</h3>
                 <p class="bio-description">{{ user.userprofile.bio }}</p>
-            </div>
-            <a href="{% url 'main:update_bio' %}"><button class="profile-button">Add/Edit Bio</button></a>
+                </div>
+                <a href="{% url 'main:update_bio' %}"><button class="profile-button">Add/Edit Bio</button></a>
           </div>
           {% else %}
           <div class="bio-section">
@@ -459,18 +467,42 @@
       
     
     <div class="reviews-section">
-
         <h3>Reviews Received:</h3>
         <ul>
             {% for review in rec_reviews %}
             <li>
                 {% if review.anonymous_from != 'Anonymous' %}
-                <a href="{% url 'main:user' username=review.from_user %}"><p class="heading">{{ review.review_giver }}</p></a>
+                <a href="{% url 'main:user' username=review.from_user %}">
+                    <p class="heading">{{ review.review_giver }}</p>
+                </a>
                 {% else %}
                 <p class="heading">{{ review.review_giver }}</p>
                 {% endif %}
                 <br/>
-                
+                <div class="content">
+                    <p class="skill_header">Problem Solving skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{ review.review_rating_1 }}</p>
+                        <p>Description: {{ review.problem_sol }}</p>
+                    </div>
+                    <button id="publicButton{{ forloop.counter }}" class="public_private">Public</button>
+                </div>
+                <div class="content">
+                    <p class="skill_header">Communication skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{ review.review_rating_2 }}</p>
+                        <p>Description: {{ review.communication }}</p>
+                    </div>
+                    <button id="publicButton2{{ forloop.counter }}" class="public_private">Public</button>
+                </div>
+                <div class="content">
+                    <p class="skill_header">Sociability:</p>
+                    <div class="content_section">
+                        <p>Rated: {{ review.review_rating_3 }}</p>
+                        <p>Description: {{ review.sociability }}</p>
+                    </div>
+                    <button id="publicButton3{{ forloop.counter }}" class="public_private">Public</button>
+                </div>
                 <form method="post" action="{% url 'main:home' %}">
                     {% csrf_token %}
                     <input type="hidden" name="review_id" value="{{ review.id }}">
@@ -478,7 +510,6 @@
                         <p class="vote-count">{{ review.get_upvotes_count }}</p>
                         <button type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
                     </div>
-
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <p class="vote-count">{{ review.get_downvotes_count }}</p>
                         <button type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
@@ -486,6 +517,26 @@
                 </form>
             </li>
             <br/>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var publicButton = document.getElementById('publicButton{{ forloop.counter }}');
+                    var publicButton2 = document.getElementById('publicButton2{{ forloop.counter }}');
+                    var publicButton3 = document.getElementById('publicButton3{{ forloop.counter }}');
+                    publicButton.addEventListener('click', function() {
+                        // Toggle the value of review.problem_bool
+                        review.problem_bool = !review.problem_bool;
+                    });
+                    publicButton2.addEventListener('click', function() {
+                        // Toggle the value of review.communication_bool
+                        review.communication_bool = !review.communication_bool;
+                    });
+                    publicButton3.addEventListener('click', function() {
+                        // Toggle the value of review.sociability_bool
+                        review.sociability_bool = !review.sociability_bool;
+                    });
+                });
+            </script>
+    
             {% endfor %}
             {% if rec_reviews.count == 0 %}
                 <p class="no-reviews">No reviews received yet.</p>
@@ -501,7 +552,30 @@
                 <li>
                     <a href="{% url 'main:user' username=review.to_user %}"><p class="heading">{{ review.review_receiver }}</p></a>
                     <br/>
-
+                    <div class="content" >
+                        <p class="skill_header">Problem Solving skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{review.review_rating_1}}</p>
+                            <p>Description: {{review.problem_sol}} </p>
+                            
+                        </div>
+                    </div>
+                    <div class="content" >
+                        <p class="skill_header">Communication skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{review.review_rating_2}}</p>
+                            <p>Description: {{review.communication}} </p>
+                            
+                        </div>
+                    </div>
+                    <div class="content" >
+                        <p class="skill_header">Sociability:</p>
+                        <div class="content_section">
+                            <p>Rated: {{review.review_rating_3}}</p>
+                            <p>Description: {{review.sociability}} </p>
+                            
+                        </div>
+                    </div>
                     <form method="post" action="{% url 'main:home' %}">
                         {% csrf_token %}
                         <input type="hidden" name="review_id" value="{{ review.id }}">

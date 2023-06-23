@@ -189,15 +189,15 @@
     }
 
     .reviews-section {
-    margin: 10px;
-    height: 320px;
-    max-height: 400px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 30px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
+        margin: 10px;
+        height: auto;
+        max-height: 800px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 30px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
     }
 
     .reviews-section h3 {
@@ -209,24 +209,25 @@
     }
 
     .reviews-section ul {
-    list-style: none;
-    max-height: 250px;
-    overflow: scroll;
-    padding: 8px;
-    padding-top: 10px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 15px;
-    background-color: #faf9f9;
+        list-style: none;
+        height: auto;
+        max-height: 600px;
+        overflow: auto;
+        padding: 8px;
+        padding-top: 10px;
+        padding-left: 12px;
+        padding-right: 12px;
+        border-radius: 15px;
+        background-color: #faf9f9;
     }
 
     .reviews-section li {
-    border: black solid;
-    border-radius: 20px;
-    margin-bottom: 7px;
-    margin-left: 5px;
-    padding-left: 20px;
-    padding-bottom: 2px;
+        border: black solid;
+        border-radius: 20px;
+        margin-bottom: 7px;
+        margin-left: 5px;
+        padding-left: 20px;
+        padding-bottom: 2px;
     }
 
     .reviews-section .heading {
@@ -242,61 +243,75 @@
         color: rgb(97, 97, 97);
     }
 
-    .reviews-section .content {
-        font-family: 'Noto Sans';
-        font-size: x-large;
-        /* font-size: 20px; */
-        font-weight: lighter;
-        height: fit-content;
-        /* border: solid black; */
-        margin-bottom: 0px; 
-        margin-top: 0px;
+    .reviews-section .content{
+        align-items: center;
+        justify-content: flex-start;
+        margin: 5px;
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        border: solid black;
+
+        .skill_header{
+            font-weight: bold;
+            flex-basis: 35%;
+            font-size: 20px;
+        }
+
+        .content_section{
+            align-items: flex-start;
+            padding: 4px;
+            flex-basis: 65%;
+        }
+        .public_private{
+            flex-basis: 10%;
+        }
     }
 
     .votes {
-    display: flex;
-    height: 10px;
-    margin-top: 0px;
-    margin-left: 4px;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 4px;
+        display: flex;
+        height: 10px;
+        margin-top: 0px;
+        margin-left: 4px;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 4px;
     }
 
     .votes p {
-    margin-right: 20px;
+        margin-right: 20px;
     }
 
     .reviews-section .editdelete {
-    display: flex;
-    width: fit-content;
-    flex-direction: row;
-    align-items: start;
-    gap: 2px;
+        display: flex;
+        width: fit-content;
+        flex-direction: row;
+        align-items: start;
+        gap: 2px;
     }
 
     .reviews-section .editdelete form {
-    width: fit-content;
-    margin-right: 5px;
-    margin-right: 0px;
-    }
+        width: fit-content;
+        margin-right: 5px;
+        margin-right: 0px;
+        }
 
     .reviews-section button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 4px;
-    border-radius: 12px;
-    justify-content: center;
-    width: 80px;
-    margin: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+        background-color: #007bff;
+        color: #fff;
+        padding: 4px;
+        border-radius: 12px;
+        justify-content: center;
+        width: 80px;
+        margin: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
     .reviews-section button:hover {
-    background-color: #0056b3;
+        background-color: #0056b3;
     }
 
     .no-reviews {
@@ -312,8 +327,9 @@
     @media only screen and (max-width: 768px) {
     .reviews-section {
         height: auto;
-        max-height: none;
+        max-height: 800px;
         padding: 15px;
+        overflow: scroll;
     }
 
     .reviews-section h3 {
@@ -349,10 +365,16 @@
     }
     }
     @media only screen and (max-width: 480px){
-        .reviews-section button {
+    .reviews-section button {
         width: 62px;
         padding: 2px;
         font-size: 12px;
+        height: auto;
+        max-height: 800px;
+    }
+    .reviews-section ul{
+        height: auto;
+        max-height: 700px;
     }
     .reviews-section .editdelete{
         gap: 0px;
@@ -366,125 +388,159 @@
     }
     }
 
-
-    .AddReview {
-        font-family: 'Albert Sans';
-        margin: 10px;
-        height:max-content ;
-        max-height: 400px;
-        background-color: #f0f0f0;
-        padding: 20px;
-        border-radius: 30px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
-        margin-right: 30px;
-        margin-left: 20px;
-    }
-
-    .AddReview .add{
-        font-size: 35px;
-        font-weight: bold;
-    }
-
-    .AddReview .add-form {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     #id_review::placeholder {
         font-family: 'Albert Sans';
         font-size: large;
     }
+    .vote-btn {
+        font-size: larger !important;
+        background-color: #4ecdc4 !important;
+    }
 
-    /* .AddReview .button-container{
-        border: solid black;
-        background-color: #007bff;
-        color: #fff;
+    .vote-btn:hover{
+        background-color: #1a535c !important;
+    }
+
+    .vote-count {
+        font-family: 'Gantari';
+        font-weight: bolder;
+        margin-top: auto;
+        margin-bottom: 0px; 
+    }
+
+    .bio-description {
+        font-size: x-large;
+        font-weight: bolder;
+        font-family: 'Gantari';
+        color: grey;
+    }
+
+    .editdelete .button-container {
+        width: 80px !important;
+        font-family: 'Gantari';
+        font-size: larger;
+        color: #08c6ab;
+        border: 2px solid #08c6ab;
         padding: 4px;
         margin: 5px;
-        font-size: 14px;
-        border-radius: 4px;
-        font-weight: bold;
+        border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-    } */
- 
-.vote-btn {
-    font-size: larger !important;
-    background-color: #4ecdc4 !important;
-}
+    }
 
-.vote-btn:hover{
-    background-color: #1a535c !important;
-}
+    .editdelete .button-container:hover {
+        background-color: #08c6ab !important;
+        color: white;
+    }
 
-.vote-count {
-    font-family: 'Gantari';
-    font-weight: bolder;
-    margin-top: auto;
-    margin-bottom: 0px;
-    /* background-color: #57f6e7; */
-    /* padding: 5px; */
-    /* border-radius: 5px; */
-}
-
-.bio-description {
-    font-size: x-large;
-    font-weight: bolder;
-    font-family: 'Gantari';
-    color: grey;
-}
-
-.editdelete .button-container {
-    width: 80px !important;
-    font-family: 'Gantari';
-    font-size: larger;
-    color: #08c6ab;
-    border: 2px solid #08c6ab;
-    padding: 4px;
-    margin: 5px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.editdelete .button-container:hover {
-    background-color: #08c6ab !important;
-    color: white;
-}
-
-
-
-    .review-textarea {
-        min-height: 40px;
-        width: 90%;
+    .AddReview {
+        margin-top: 20px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 30px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+    }
+    .problem_sol-textarea {
+  /* CSS styles for problem_sol textarea */
+        width: 60%;
         height: 150px;
         padding: 10px;
         border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: vertical;
-        /* margin: 40px; */
+        border-radius: 4px;
+        font-size: 16px;
     }
 
-    .review-rating-input {
-        width: 100px;
+    .communication-textarea {
+    /* CSS styles for communication textarea */
+        width: 60%;
+        height: 150px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
     }
 
-    .is-anonymous-checkbox {
-        display: inline-block;
-        /* margin-top: 10px; */
+    .sociability-textarea {
+    /* CSS styles for sociability textarea */
+        width: 60%;
+        height: 150px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .review-rating-1{
+        width: 90%;
+        justify-content: space-between;
+    }
+    .add {
+        text-align: center;
+        font-size: 58px;
+        margin-bottom: 10px;
+    }
+
+    .add-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-form > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: solid 1px black;
+        border-radius: 30px;
+        padding: 12px;
+        margin-bottom: 10px;
+        width: 80%;
+        margin: 10px;
+
+    }
+
+    .add-form label {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 38px;
+
+    }
+
+    .add-form > div > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .add-form > div > div > p {
+
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 22px;
+    }
+
+    #rating-value-1,
+    #rating-value-2,
+    #rating-value-3 {
+        margin-left: 10px;
+        margin-bottom: 5px;
+        font-size: 20px;
     }
 
     .submit-review {
-        font-size: medium !important;
+        align-items: center;
+        justify-content: center;
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        cursor: pointer;
     }
 
-    .submit-review:hover{
-        background-color: rgba(0, 0, 0, 0.678) !important;
-    }
 
 </style>
 
@@ -528,7 +584,27 @@
                 <p class="heading">{{ review.review_giver }}</p>
                 {% endif %}
                 <br/>
-
+                <div class="content" >
+                    <p class="skill_header">Problem Solving skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_1}}</p>
+                        <p>Description: {{review.problem_sol}} </p>
+                    </div>
+                </div>
+                <div class="content" >
+                    <p class="skill_header">Communication skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_2}}</p>
+                        <p>Description: {{review.communication}} </p>
+                    </div>
+                </div>
+                <div class="content" >
+                    <p class="skill_header">Sociability:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_3}}</p>
+                        <p>Description: {{review.sociability}} </p>
+                    </div>
+                </div>
                 <form method="post" action="{% url 'main:user' username=user.username %}">
                     {% csrf_token %}
                     <input type="hidden" name="review_id" value="{{ review.id }}">
@@ -580,6 +656,33 @@
                 <p class="heading">{{ review.review_receiver }}</p>
                 {% endif %}
                 <br/>
+                <div class="content" >
+                    <p class="skill_header">Problem Solving skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_1}}</p>
+                        {% if review.problem_bool %}
+                            <p>Description: {{review.problem_sol}} </p>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="content" >
+                    <p class="skill_header">Communication skills:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_2}}</p>
+                        {% if review.communication_bool %}
+                            <p>Description: {{review.communication}} </p>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="content" >
+                    <p class="skill_header">Sociability:</p>
+                    <div class="content_section">
+                        <p>Rated: {{review.review_rating_3}}</p>
+                        {% if review.sociability_bool %}
+                            <p>Description: {{review.sociability}} </p>
+                    {% endif %}
+                    </div>
+                </div>
                 <form method="post" action="{% url 'main:user' username=user.username %}">
                     {% csrf_token %}
                     <input type="hidden" name="review_id" value="{{ review.id }}">
@@ -604,35 +707,50 @@
     </div>
 
     {% if not existing_review %}
-    <div class="AddReview">
+    <div class="AddReview" >
         <h2 class="add">Add Review</h2>
         <form method="post" enctype="multipart/form-data" class="add-form">
             {% csrf_token %}
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <label style="margin-right: 10px;">Rating</label>
-                {{ reviewform.review_rating_1 }}
-                {{ reviewform.review_rating_1.errors }}
-                <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p> 
+            <div>
+                <label >Problem Solving</label>
+                <div >
+                    <p>Thinker</p>{{ reviewform.review_rating_1 }} 
+                    {{ reviewform.review_rating_1.errors }}<p>Doer</p>
+                </div>
+                    <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p>
+                    {{reviewform.problem_sol}}
+                    {{reviewform.problem_sol.errors}}
+                
             </div>
 
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <label style="margin-right: 10px;">Rating</label>
-                {{ reviewform.review_rating_2 }}
-                {{ reviewform.review_rating_2.errors }}
-                <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p> 
+            <div >
+                <label >Communications</label>
+                <div >
+                    <p>Talker</p>{{ reviewform.review_rating_2 }} 
+                    {{ reviewform.review_rating_2.errors }}<p>Listner</p>
+                </div>
+                    <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p>
+                    {{reviewform.communication}}
+                    {{reviewform.communication.errors}} 
+                
             </div>
 
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <label style="margin-right: 10px;">Rating</label>
-                {{ reviewform.review_rating_3 }}
-                {{ reviewform.review_rating_3.errors }}
-                <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p> 
+            <div>
+                <label >Sociability</label>
+                <div >
+                    <p>Taker</p>{{ reviewform.review_rating_3 }} 
+                    {{ reviewform.review_rating_3.errors }}<p>Giver</p>
+                </div>
+                    <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p>
+                    {{reviewform.sociability}}
+                    {{reviewform.sociability.errors}} 
             </div>
 
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <label syle="margin-right: 10px;">Anonymous Review</label>
-                {{ reviewform.is_anonymous }}
-                {{ reviewform.is_anonymous.errors }}
+            <div>
+                <label style="font-size: 20px; width: auto; margin-left: 30px; margin-bottom: 20px;" >Anonymous Review
+                    {{ reviewform.is_anonymous }}
+                    {{ reviewform.is_anonymous.errors }}
+                </label>
                 <button type="submit" style="background-color: #333; margin-left: 20px;" class="submit-review" name="review-form">Submit Review</button>
             </div>
         </form>
@@ -650,29 +768,30 @@
             const problemSolvingDict = {
                 {% for key, value in problem_solving.items %}
                     {{ key }}: {
-                        'name': '{{ value.name }}',
-                        'description': '{{ value.description }}',
+                    'name': '{{ value.name }}',
+                    'description': '{{ value.description }}'
                     },
                 {% endfor %}
             };
-        
+
             const communicationDict = {
                 {% for key, value in communication.items %}
                     {{ key }}: {
-                        'name': '{{ value.name }}',
-                        'description': '{{ value.description }}',
+                    'name': '{{ value.name }}',
+                    'description': '{{ value.description }}'
                     },
                 {% endfor %}
             };
-        
+
             const sociabilityDict = {
                 {% for key, value in sociability.items %}
                     {{ key }}: {
-                        'name': '{{ value.name }}',
-                        'description': '{{ value.description }}',
+                    'name': '{{ value.name }}',
+                    'description': '{{ value.description }}'
                     },
                 {% endfor %}
             };
+
         
             slider1.oninput = function() {
                 output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;

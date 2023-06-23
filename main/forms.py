@@ -198,16 +198,22 @@ class BioForm(forms.Form):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = models.Review
-        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3', 'is_anonymous']
+        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3','problem_sol','communication','sociability', 'is_anonymous']
 
         widgets = {
-            # 'review': forms.Textarea(attrs={'class': 'review-textarea', 'placeholder': 'Write your review here...'}),
+            'problem_sol': forms.Textarea(attrs={'class': 'problem_sol-textarea', 'placeholder': 'Write about problem solving skills here...'}),
+            'communication': forms.Textarea(attrs={'class': 'communication-textarea', 'placeholder': 'Write about communicational skills here...'}),
+            'sociability': forms.Textarea(attrs={'class': 'sociability-textarea', 'placeholder': 'Write about sociability here...'}),
+
             'review_rating_1': forms.NumberInput(attrs={'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'review_rating_2': forms.NumberInput(attrs={'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'review_rating_3': forms.NumberInput(attrs={'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
         }
         labels = {
+            'problem_sol':'',
+            'communication':'',
+            'sociability':'',
             'review_rating_1': '',
             'review_rating_2': '',
             'review_rating_3': '',
