@@ -598,8 +598,8 @@
                 <div class="content" >
                     <p class="skill_header">Problem Solving skills:</p>
                     <div class="content_section">
-                        <p>Rated: {{review.review.review.review_rating_1}}</p>
-                        <p>Description: {{review.review.review.problem_sol}} </p>
+                        <p>Rated: {{review.review.review_rating_1}}</p>
+                        <p>Description: {{review.review.problem_sol}} </p>
                     </div>
                 </div>
                 <div class="content" >
@@ -647,7 +647,7 @@
                     </div>
                 </form>
                 
-                {% if review.from_user == request.user.username %}
+                {% if review.review.from_user == request.user.username %}
                     <div class="editdelete">
                         <form method="post" action="{% url 'main:edit' review.review.id %}">
                             {% csrf_token %}
