@@ -14,12 +14,52 @@
 
     <form method="post" action="{% url 'main:edit' review_id %}">
         {% csrf_token %}
-        {{ form }}
+        {% csrf_token %}
+        <div >
+            <label >Problem Solving</label>
+            <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 4px;" >
+                <p>Thinker</p>{{ form.review_rating_1 }} 
+                {{ form.review_rating_1.errors }}<p>Doer</p>
+            </div>
+                <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p>
+                {{form.problem_sol}}
+                {{form.problem_sol.errors}}
+            
+        </div>
+
+        <div >
+            <label >Communications</label>
+            <div style="display: flex; flex-direction: row;  justify-content: center; margin-bottom: 4px;">
+                <p>Talker</p>{{ form.review_rating_2 }} 
+                {{ form.review_rating_2.errors }}<p>Listner</p>
+            </div>
+                <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p>
+                {{form.communication}}
+                {{form.communication.errors}} 
+            
+        </div>
+
+        <div>
+            <label >Sociability</label>
+            <div style="display: flex; flex-direction: row;  justify-content: center; margin-bottom: 4px;">
+                <p>Taker</p>{{ form.review_rating_3 }} 
+                {{ form.review_rating_3.errors }}<p>Giver</p>
+            </div>
+                <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p>
+                {{form.sociability}}
+                {{form.sociability.errors}} 
+        </div>
+
+        <div>
+            <label style="font-size: 20px; width: auto; margin-left: 30px; margin-bottom: 5px;" >Anonymous Review
+                {{ form.is_anonymous }}
+                {{ form.is_anonymous.errors }}
+            </label>
+        </div>
         <button type="submit" name="edit-review">Save</button>
     </form>
     <a href="{% url 'main:user' username=username%}" class="cancel-link">Cancel</a>
-
-    <p id="rating-value">Rating: {{ review.review_rating }}</p>
+    
     <script>
         const slider = document.getElementById("review-rating");
         var output = document.getElementById("rating-value");

@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     margin: 0;
     padding: 0;
 }
@@ -21,27 +21,25 @@ form {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    max-width: 400px;
-    width: 100%;
+    border-radius: 30px;
+    width: 60%;
     text-align: center;
-    margin-bottom: 20px;
+    justify-content: center;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
 }
 
+form div{
+    margin-bottom: 30px;
+}
 form label {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
     color: #555;
-}
-
-form input[type="text"],
-form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    font-size: 16px;
 }
 
 form button[type="submit"],
@@ -69,15 +67,19 @@ a.cancel-link {
     color: #888;
     font-size: 16px;
     transition: color 0.3s ease;
+    margin: 20px;
 }
 
 a.cancel-link:hover {
     color: #f44336;
 }
 
-#rating-value {
-    text-align: center;
-    margin-top: 20px;
-    color: #555;
-    font-weight: bold;
+.problem_sol-textarea, .communication-textarea, .sociability-textarea {
+
+    width: 60%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }

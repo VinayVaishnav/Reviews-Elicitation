@@ -33,7 +33,6 @@ form label {
 form input[type="text"],
 form input[type="number"],
 form input[type="file"] {
-    width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -43,7 +42,7 @@ form input[type="file"] {
 
 form button[type="submit"],
 form button[type="button"] {
-    padding: 20px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     font-weight: bold;

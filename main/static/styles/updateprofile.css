@@ -39,7 +39,6 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="file"] {
-    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -47,7 +46,6 @@ form input[type="file"] {
     margin-bottom: 20px;
 }
 form select {
-    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -98,14 +96,12 @@ form button[type="submit"]:hover {
   
 
 a.cancel-link {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
     text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
     color: #333;
     font-weight: bold;
     transition: color 0.3s ease;
-    font-size: 25px;
 }
 
 a.cancel-link:hover {

@@ -205,7 +205,7 @@ class ReviewForm(forms.ModelForm):
             'communication': forms.Textarea(attrs={'class': 'communication-textarea', 'placeholder': 'Write about communicational skills here...'}),
             'sociability': forms.Textarea(attrs={'class': 'sociability-textarea', 'placeholder': 'Write about sociability here...'}),
 
-            'review_rating_1': forms.NumberInput(attrs={'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_1': forms.NumberInput( attrs={'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'review_rating_2': forms.NumberInput(attrs={'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'review_rating_3': forms.NumberInput(attrs={'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
@@ -235,9 +235,9 @@ class ReviewForm(forms.ModelForm):
 
         
 class CustomPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Old Password'}))
-    new_password1 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'New Password'}))
-    new_password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Confirm New Password'}))
+    old_password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Old Password', 'class':'pass'}))
+    new_password1 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'New Password', 'class':'pass'}))
+    new_password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': 'Confirm New Password', 'class':'pass'}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

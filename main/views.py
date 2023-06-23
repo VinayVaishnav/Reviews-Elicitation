@@ -369,8 +369,10 @@ def edit_view(request, review_id):
     
     if str(request.user.username) == str(review.from_user):
         if request.method == 'POST':
+            
             if 'edit-review' in request.POST:
                 form = forms.ReviewForm(request.POST, instance=review)
+                
                 if form.is_valid():
                     updated_review = form.save(commit=False)
                     if form.cleaned_data['is_anonymous']:
@@ -379,6 +381,7 @@ def edit_view(request, review_id):
                         updated_review.anonymous_from = request.user.username
                     updated_review.save()
                     return redirect('main:user', username=str(review.to_user))
+            
             else:
                 form = forms.ReviewForm(instance=review)
                 return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, })

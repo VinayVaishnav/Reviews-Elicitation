@@ -1,4 +1,34 @@
 {% block content %}
-    <h2>Password Reset Successful</h2>
-    <p>Your password has been successfully reset. You can now <a href="{% url 'main:login' %}">login</a> with your new password.</p>
+<style>
+    body {
+        background-color: #f2f2f2;
+        font-family: 'Montserrat';
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 0px;
+    }
+
+    div{
+        width: 80%;
+        padding: 5px;
+        margin: auto;
+    }
+    h2{
+        font-size: 35px;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+    }
+    p{
+        font-size: 28px;
+    }
+
+</style>
+    <div>
+        <h2>Password Reset Successful</h2>
+        <p>Your password has been successfully reset. You can now <a href="{% url 'main:login' %}">login</a> with your new password.</p>
+    </div>
 {% endblock %}
