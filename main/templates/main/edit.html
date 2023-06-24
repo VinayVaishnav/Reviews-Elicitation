@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,45 +8,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/edit.css' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Albert Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Gantari' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
     <h2>Edit Review</h2>
 
     <form method="post" action="{% url 'main:edit' review_id %}">
         {% csrf_token %}
-        {% csrf_token %}
         <div >
-            <label >Problem Solving</label>
+            <label>Problem Solving</label>
             <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 4px;" >
                 <p>Thinker</p>{{ form.review_rating_1 }} 
                 {{ form.review_rating_1.errors }}<p>Doer</p>
             </div>
-                <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p>
-                {{form.problem_sol}}
-                {{form.problem_sol.errors}}
+            {% if review.review_rating_1 %}
+                <p id="rating-value-1" style="margin-left: 10px;">
+                    {{ problem_solving|dict_lookup:review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review_rating_1|dict_lookup:'description' }}
+                </p>
+            {% endif %}
+            {{form.problem_solving}}
+            {{form.problem_solving.errors}}
         </div>
 
         <div >
-            <label >Communications</label>
+            <label>Communications</label>
             <div style="display: flex; flex-direction: row;  justify-content: center; margin-bottom: 4px;">
                 <p>Talker</p>{{ form.review_rating_2 }} 
                 {{ form.review_rating_2.errors }}<p>Listner</p>
             </div>
-                <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p>
-                {{form.communication}}
-                {{form.communication.errors}} 
+            {% if review.review_rating_2 %}
+                <p id="rating-value-2" style="margin-left: 10px;">
+                    {{ communication|dict_lookup:review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review_rating_2|dict_lookup:'description' }}
+                </p>
+            {% endif %}
+            {{form.communication}}
+            {{form.communication.errors}} 
         </div>
 
         <div>
-            <label >Sociability</label>
+            <label>Sociability</label>
             <div style="display: flex; flex-direction: row;  justify-content: center; margin-bottom: 4px;">
                 <p>Taker</p>{{ form.review_rating_3 }} 
                 {{ form.review_rating_3.errors }}<p>Giver</p>
             </div>
-                <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p>
-                {{form.sociability}}
-                {{form.sociability.errors}} 
-        </div>
+            {% if review.review_rating_3 %}
+                <p id="rating-value-3" style="margin-left: 10px;">
+                    {{ sociability|dict_lookup:review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review_rating_3|dict_lookup:'description' }}
+                </p>
+            {% endif %}
+            {{form.sociability}}
+            {{form.sociability.errors}} 
+    </div>
 
         <div>
             <label style="font-size: 20px; width: auto; margin-left: 30px; margin-bottom: 5px;" >Anonymous Review
@@ -53,17 +72,84 @@
                 {{ form.is_anonymous.errors }}
             </label>
         </div>
-        <button type="submit" name="edit-review">Save</button>
+        <button type="submit" name="edit-review" onclick="validateRating()">Save</button>
     </form>
     
     <a href="{% url 'main:user' username=username%}" class="cancel-link">Cancel</a>
     
     <script>
-        const slider = document.getElementById("review-rating");
-        var output = document.getElementById("rating-value");
+        const slider1 = document.getElementById("review-rating-1");
+        const slider2 = document.getElementById("review-rating-2");
+        const slider3 = document.getElementById("review-rating-3");
 
-        slider.oninput = function() {
-            output.innerHTML = `Rating: ${this.value}`;
+        let output1 = document.getElementById("rating-value-1");
+        let output2 = document.getElementById("rating-value-2");
+        let output3 = document.getElementById("rating-value-3");
+
+        const problemSolvingDict = {
+            {% for key, value in problem_solving.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
+        const communicationDict = {
+            {% for key, value in communication.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
+        const sociabilityDict = {
+            {% for key, value in sociability.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
+    
+        slider1.oninput = function() {
+            if(this.value == 0) {
+                output1.innerHTML = ''
+            }
+            else {
+                output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
+            }
+        }
+        slider2.oninput = function() {
+            if(this.value == 0) {
+                output2.innerHTML = ''
+            }
+            else {
+                output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
+            }
+        }
+        slider3.oninput = function() {
+            if(this.value == 0) {
+                output3.innerHTML = ''
+            }
+            else {
+                output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
+            }
+        }
+    </script>
+
+    <script>
+        const validateRating = () => {
+            var slider1 = document.getElementById("review-rating-1");
+            var slider2 = document.getElementById("review-rating-2");
+            var slider3 = document.getElementById("review-rating-3");
+
+            if (slider1.value == 0 || slider2.value == 0 || slider3.value == 0) {
+                alert("Please rate all the three categories. Move the sliders to choose the best description for each category.")
+                event.preventDefault(); 
+            }
         }
     </script>
 </body>

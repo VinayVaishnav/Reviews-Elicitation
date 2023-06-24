@@ -126,6 +126,10 @@ def home_view(request):
             'giv_reviews': giv_reviews,
             'processed_rec_reviews':processed_rec_reviews,
             'processed_giv_reviews':processed_giv_reviews,
+
+            'problem_solving': review_criteria.problem_solving,
+            'communication': review_criteria.communication,
+            'sociability': review_criteria.sociability,
         }
     )
 
@@ -305,8 +309,8 @@ def user_view(request, username):
                 'existing_review':existing_review,
 
                 'problem_solving': review_criteria.problem_solving,
-                'communication': review_criteria.communicaton,
-                'sociability': review_criteria.sociablity,
+                'communication': review_criteria.communication,
+                'sociability': review_criteria.sociability,
             }
         )
 
@@ -358,11 +362,25 @@ def edit_view(request, review_id):
             
             else:
                 form = forms.ReviewForm(instance=review)
-                return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, })
+                return render(request, 'main/edit.html',
+                    {
+                        'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, 
+                        'problem_solving': review_criteria.problem_solving,
+                        'communication': review_criteria.communication,
+                        'sociability': review_criteria.sociability,
+                    }
+                )
             
         else:
             form = forms.ReviewForm(instance=review)
-            return render(request, 'main/edit.html', { 'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, })
+            return render(request, 'main/edit.html', 
+                {
+                    'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, 
+                    'problem_solving': review_criteria.problem_solving,
+                    'communication': review_criteria.communication,
+                    'sociability': review_criteria.sociability,
+                }
+            )
         
     return redirect('main:user', username=str(review.to_user))
 

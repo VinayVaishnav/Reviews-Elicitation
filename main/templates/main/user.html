@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
 <style>
@@ -532,6 +533,7 @@
         font-size: 18px;
         cursor: pointer;
     }
+
 </style>
 
 <div class="container">
@@ -580,9 +582,9 @@
                     <div class="content" >
                         <p class="skill_header">Problem Solving skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_1 }}</p>
+                            <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
                             {% if review.review.problem_solving_bool %}
-                                <p>Description: {{ review.review.problem_solving }}</p>
+                                <p>{{ review.review.problem_solving }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -590,9 +592,9 @@
                     <div class="content" >
                         <p class="skill_header">Communication skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_2 }}</p>
+                            <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
                             {% if review.review.communication_bool %}
-                                <p>Description: {{ review.review.communication }}</p>
+                                <p>{{ review.review.communication }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -600,9 +602,9 @@
                     <div class="content" >
                         <p class="skill_header">Sociability:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_3 }}</p>
+                            <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
                             {% if review.review.sociability_bool %}
-                                <p>Description: {{ review.review.sociability }}</p>
+                                <p>{{ review.review.sociability }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -677,19 +679,19 @@
                     <div class="content" >
                         <p class="skill_header">Problem Solving skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_1 }}</p>
+                            <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
                             {% if review.review.problem_solving_bool %}
-                                <p>Description: {{ review.review.problem_solving }}</p>
-                        {% endif %}
+                                <p>{{ review.review.problem_solving }}</p>
+                            {% endif %}
                         </div>
                     </div>
  
                     <div class="content" >
                         <p class="skill_header">Communication skills:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_2 }}</p>
+                            <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
                             {% if review.review.communication_bool %}
-                                <p>Description: {{ review.review.communication }}</p>
+                                <p>{{ review.review.communication }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -697,9 +699,9 @@
                     <div class="content" >
                         <p class="skill_header">Sociability:</p>
                         <div class="content_section">
-                            <p>Rated: {{ review.review.review_rating_3 }}</p>
+                            <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
                             {% if review.review.sociability_bool %}
-                                <p>Description: {{ review.review.sociability }}</p>
+                                <p>{{ review.review.sociability }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -750,7 +752,7 @@
             {% csrf_token %}
             <div>
                 <label >Problem Solving</label>
-                <div >
+                <div class="slider">
                     <p>Thinker</p>{{ reviewform.review_rating_1 }} 
                     {{ reviewform.review_rating_1.errors }}<p>Doer</p>
                 </div>
@@ -762,7 +764,7 @@
 
             <div >
                 <label >Communications</label>
-                <div >
+                <div class="slider">
                     <p>Talker</p>{{ reviewform.review_rating_2 }} 
                     {{ reviewform.review_rating_2.errors }}<p>Listner</p>
                 </div>
@@ -774,7 +776,7 @@
 
             <div>
                 <label >Sociability</label>
-                <div >
+                <div class="slider">
                     <p>Taker</p>{{ reviewform.review_rating_3 }} 
                     {{ reviewform.review_rating_3.errors }}<p>Giver</p>
                 </div>
@@ -788,7 +790,7 @@
                     {{ reviewform.is_anonymous }}
                     {{ reviewform.is_anonymous.errors }}
                 </label>
-                <button type="submit" style="background-color: #333; margin-left: 20px;" class="submit-review" name="review-form">Submit Review</button>
+                <button type="submit" style="background-color: #333; margin-left: 20px;" class="submit-review" name="review-form" onclick="validateRating()">Submit Review</button>
             </div>
         </form>
     {% endif %}
@@ -831,13 +833,41 @@
 
     
         slider1.oninput = function() {
-            output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
+            if(this.value == 0) {
+                output1.innerHTML = ''
+            }
+            else {
+                output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
+            }
         }
         slider2.oninput = function() {
-            output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
+            if(this.value == 0) {
+                output2.innerHTML = ''
+            }
+            else {
+                output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
+            }
         }
         slider3.oninput = function() {
-            output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
+            if(this.value == 0) {
+                output3.innerHTML = ''
+            }
+            else {
+                output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
+            }
+        }
+    </script>
+
+    <script>
+        const validateRating = () => {
+            var slider1 = document.getElementById("review-rating-1");
+            var slider2 = document.getElementById("review-rating-2");
+            var slider3 = document.getElementById("review-rating-3");
+
+            if (slider1.value == 0 || slider2.value == 0 || slider3.value == 0) {
+                alert("Please rate all the three categories. Move the sliders to choose the best description for each category.")
+                event.preventDefault(); 
+            }
         }
     </script>
 

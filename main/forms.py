@@ -203,9 +203,9 @@ class ReviewForm(forms.ModelForm):
         fields = ['review_rating_1', 'review_rating_2', 'review_rating_3','problem_solving','communication','sociability', 'is_anonymous']
 
         widgets = {
-            'review_rating_1': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
-            'review_rating_2': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
-            'review_rating_3': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_1': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
+            'review_rating_2': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
+            'review_rating_3': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
         }
         labels = {

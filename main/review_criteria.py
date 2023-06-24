@@ -26,7 +26,7 @@ problem_solving = {
 }
 
 
-communicaton = {
+communication = {
     1: {
         'name': 'Talker',
         'description': 'Expresses thoughts and opinions confidently but may dominate conversations.',
@@ -54,7 +54,7 @@ communicaton = {
 }
 
 
-sociablity = {
+sociability = {
     1: {
         'name': 'Taker',
         'description': 'Focuses more on personal needs and receiving attention, may contribute less in social interactions.',

@@ -24,9 +24,9 @@ class Review(models.Model):
     to_user = models.CharField(max_length=100)
     from_user = models.CharField(max_length=100)
 
-    review_rating_1 = models.IntegerField(default=3)
-    review_rating_2 = models.IntegerField(default=3)
-    review_rating_3 = models.IntegerField(default=3)
+    review_rating_1 = models.IntegerField(default=0)
+    review_rating_2 = models.IntegerField(default=0)
+    review_rating_3 = models.IntegerField(default=0)
 
     problem_solving = models.TextField(max_length=1000, default='')
     communication = models.TextField(max_length=1000, default='')
