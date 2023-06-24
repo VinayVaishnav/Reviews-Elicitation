@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat';
     background-color: #f2f2f2;
     margin: 0;
     padding: 20px;
@@ -19,6 +19,7 @@ h1 {
 }
 
 form {
+    font-family: 'Montserrat';
     font-size: 17px;
     background-color: #fff;
     border-radius: 8px;
@@ -31,6 +32,7 @@ form {
 }
 
 form label {
+    font-family: 'Montserrat';
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
@@ -39,6 +41,7 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="file"] {
+    font-family: 'Montserrat';
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -46,6 +49,7 @@ form input[type="file"] {
     margin-bottom: 20px;
 }
 form select {
+    font-family: 'Montserrat';
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -55,19 +59,21 @@ form select {
 
 form button[type="submit"],
 form button[type="button"] {
+    font-family: 'Montserrat';
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
     font-size: 17px;
-    background-color: #4caf50;
+    background-color: #4ecdc4;
     color: #fff;
     margin-right: 10px;
     margin: 20px;
 }
 
 form button[type="button"] {
+    font-family: 'Montserrat';
     background-color: #ccc;
     color: #333;
     font-size: 17px;
@@ -77,15 +83,18 @@ form button[type="button"] {
 }
 
 form button[type="button"]:hover {
+    font-family: 'Montserrat';
     background-color: #999;
 }
 
 form button[type="submit"]:hover {
-    opacity: 0.8;
-    font-size: 18px;
+    font-family: 'Montserrat';
+    background-color: #56B4BE;
+    /* font-size: 18px; */
 }
 
 .custom-select {
+    font-family: 'Montserrat';
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -96,14 +105,16 @@ form button[type="submit"]:hover {
   
 
 a.cancel-link {
+    font-size: x-large;
     text-decoration: none;
     display: inline-block;
     margin-top: 20px;
     color: #333;
     font-weight: bold;
     transition: color 0.3s ease;
+    margin-bottom: 100px;
 }
 
 a.cancel-link:hover {
-    color: #f44336;
+    color: #ff4f61;
 }

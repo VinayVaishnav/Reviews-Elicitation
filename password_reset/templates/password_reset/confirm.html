@@ -10,6 +10,7 @@
         height: 100%;
         margin: 0px;
     }
+
     form {
         max-width: 500px;
     }
@@ -61,5 +62,5 @@
         {{ form }}
         <button type="submit">Set New Password</button>
     </form>
-    <a href="{% url 'main:home' %}"><button>Cancel</button></a>
+    <a href="{% url 'main:home' %}" style="text-decoration: none !important;"><button>Cancel</button></a>
 {% endblock %}

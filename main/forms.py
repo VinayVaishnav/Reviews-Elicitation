@@ -105,6 +105,7 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['profile_image'].label = ''
         instance = kwargs.get('instance')
         if instance and instance.profile_image:
             self.fields['remove_photo'] = forms.BooleanField(required=False)
@@ -186,6 +187,7 @@ class BioForm(forms.Form):
 
         self.fields['bio'].label = ''
         self.fields['bio'].initial = user.userprofile.bio
+        self.fields['bio'].widget.attrs['class'] = 'bio-textarea'
 
     def save(self, user):
         profile = models.UserProfile.objects.get(user=user)

@@ -10,6 +10,7 @@
         height: 100%;
         margin: 0px;
     }
+
     form {
         max-width: 500px;
     }
@@ -43,7 +44,6 @@
         font-size: 16px;
     }
 
-
     /* Optional: Additional styles for hover and focus states */
     button[type="submit"]:hover,
     a button:hover {
@@ -63,8 +63,7 @@
             {% csrf_token %}
             {{ form }}
             <button type="submit">Reset Password</button>
-            <a href="{% url 'main:home' %}"><button>Cancel</button></a>
         </form>
-
+        <a href="{% url 'main:home' %}"><button>Cancel</button></a>
     </div>
 {% endblock %}

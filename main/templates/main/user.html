@@ -237,23 +237,32 @@
     }
 
     .reviews-section .content{
+        background-color: #dddddd82;
         align-items: center;
         justify-content: flex-start;
         margin: 5px;
         display: flex;
         flex-direction: row;
         padding: 5px;
-        border: solid black;
+        /* border: solid black; */
+        border: none;
+        border-radius: 10px;
+        /* margin-right: 25px; */
 
         .skill_header{
+            margin-left: 10px;
+            font-family: 'Albert Sans';
             font-weight: bold;
             flex-basis: 35%;
             font-size: 20px;
         }
         .content_section{
+            font-family: 'Gantari';
+            font-size: 18px;
             align-items: flex-start;
             padding: 4px;
             flex-basis: 65%;
+            margin-right: 40px;
         }
         .public_private{
             flex-basis: 10%;
@@ -416,8 +425,8 @@
         font-size: larger;
         color: #08c6ab;
         border: 2px solid #08c6ab;
-        padding: 4px;
-        margin: 5px;
+        /* padding: 4px; */
+        /* margin: 5px; */
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
@@ -580,7 +589,7 @@
                     <br/>
 
                     <div class="content" >
-                        <p class="skill_header">Problem Solving skills:</p>
+                        <p class="skill_header">PROBLEM SOLVING</p>
                         <div class="content_section">
                             <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
                             {% if review.review.problem_solving_bool %}
@@ -590,7 +599,7 @@
                     </div>
 
                     <div class="content" >
-                        <p class="skill_header">Communication skills:</p>
+                        <p class="skill_header">COMMUNICATION</p>
                         <div class="content_section">
                             <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
                             {% if review.review.communication_bool %}
@@ -600,7 +609,7 @@
                     </div>
 
                     <div class="content" >
-                        <p class="skill_header">Sociability:</p>
+                        <p class="skill_header">SOCIABILITY</p>
                         <div class="content_section">
                             <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
                             {% if review.review.sociability_bool %}
@@ -677,7 +686,7 @@
                     <br/>
                 
                     <div class="content" >
-                        <p class="skill_header">Problem Solving skills:</p>
+                        <p class="skill_header">PROBLEM SOLVING</p>
                         <div class="content_section">
                             <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
                             {% if review.review.problem_solving_bool %}
@@ -687,7 +696,7 @@
                     </div>
  
                     <div class="content" >
-                        <p class="skill_header">Communication skills:</p>
+                        <p class="skill_header">COMMUNICATION</p>
                         <div class="content_section">
                             <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
                             {% if review.review.communication_bool %}
@@ -697,7 +706,7 @@
                     </div>
                     
                     <div class="content" >
-                        <p class="skill_header">Sociability:</p>
+                        <p class="skill_header">SOCIABILITY</p>
                         <div class="content_section">
                             <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
                             {% if review.review.sociability_bool %}

@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat';
     background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
@@ -7,10 +7,11 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 form {
+    font-family: 'Montserrat';
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -21,11 +22,13 @@ form {
 }
 
 form h2 {
+    font-family: 'Montserrat';
     color: #333;
     margin-bottom: 20px;
 }
 
 form label {
+    font-family: 'Montserrat';
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
@@ -35,6 +38,7 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="file"] {
+    font-family: 'Montserrat';
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -45,12 +49,13 @@ form input[type="file"] {
 
 form button[type="submit"],
 form button[type="button"] {
+    font-family: 'Montserrat';
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #4caf50;
+    background-color: #4ecdc4;
     color: #fff;
     margin-right: 10px;
     font-size: 16px;
@@ -59,19 +64,32 @@ form button[type="button"] {
 
 form button[type="submit"]:hover,
 form button[type="button"]:hover {
-    background-color: #45a049;
+    font-family: 'Montserrat';
+    background-color: #56B4BE;
 }
 
 a.cancel-link {
-    display: inline-block;
+    font-family: 'Montserrat';
+    font-size: larger;
     text-decoration: none;
+    display: inline-block;
     margin-top: 20px;
-    color: #888;
+    color: #333;
     font-weight: bold;
-    font-size: 20px;
     transition: color 0.3s ease;
+    margin-bottom: 100px;
 }
 
 a.cancel-link:hover {
-    color: #f44336;
+    color: #ff4f61;
+}
+
+.bio-textarea {
+    font-family: 'Montserrat';
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
