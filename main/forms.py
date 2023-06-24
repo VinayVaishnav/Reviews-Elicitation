@@ -6,8 +6,6 @@ from . import models
 from ReviewsElicitation.settings import EMAIL_HOST_USER
 import random
 
-from . import review_criteria
-
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
@@ -196,22 +194,22 @@ class BioForm(forms.Form):
 
 
 class ReviewForm(forms.ModelForm):
+    problem_solving = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'problem_solving-textarea', 'placeholder': 'Write about problem solving skills here...'}))
+    communication = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'communication-textarea', 'placeholder': 'Write about communicational skills here...'}))
+    sociability = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'sociability-textarea', 'placeholder': 'Write about sociability here...'}))
+
     class Meta:
         model = models.Review
-        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3','problem_sol','communication','sociability', 'is_anonymous']
+        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3','problem_solving','communication','sociability', 'is_anonymous']
 
         widgets = {
-            'problem_sol': forms.Textarea(attrs={'class': 'problem_sol-textarea', 'placeholder': 'Write about problem solving skills here...'}),
-            'communication': forms.Textarea(attrs={'class': 'communication-textarea', 'placeholder': 'Write about communicational skills here...'}),
-            'sociability': forms.Textarea(attrs={'class': 'sociability-textarea', 'placeholder': 'Write about sociability here...'}),
-
-            'review_rating_1': forms.NumberInput( attrs={'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
-            'review_rating_2': forms.NumberInput(attrs={'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
-            'review_rating_3': forms.NumberInput(attrs={'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_1': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_2': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+            'review_rating_3': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
         }
         labels = {
-            'problem_sol':'',
+            'problem_solving':'',
             'communication':'',
             'sociability':'',
             'review_rating_1': '',
@@ -219,7 +217,6 @@ class ReviewForm(forms.ModelForm):
             'review_rating_3': '',
             'is_anonymous': 'Anonymous Review',
         }
-
 
     def clean(self):
         cleaned_data = super().clean()

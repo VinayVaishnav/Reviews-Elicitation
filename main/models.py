@@ -24,19 +24,17 @@ class Review(models.Model):
     to_user = models.CharField(max_length=100)
     from_user = models.CharField(max_length=100)
 
-    # review questions
-    # review = models.TextField()
     review_rating_1 = models.IntegerField(default=3)
     review_rating_2 = models.IntegerField(default=3)
     review_rating_3 = models.IntegerField(default=3)
 
-    problem_sol=models.TextField(max_length=400,default='')
-    sociability=models.TextField(max_length=400,default='')
-    communication=models.TextField(max_length=400,default='')
+    problem_solving = models.TextField(max_length=1000, default='')
+    communication = models.TextField(max_length=1000, default='')
+    sociability = models.TextField(max_length=1000, default='')
     
-    problem_bool = models.BooleanField(default=False)
-    sociability_bool = models.BooleanField(default=False)
+    problem_solving_bool = models.BooleanField(default=False)
     communication_bool = models.BooleanField(default=False)
+    sociability_bool = models.BooleanField(default=False)
 
     is_anonymous = models.BooleanField(default=False)
     anonymous_from = models.CharField(max_length=100)

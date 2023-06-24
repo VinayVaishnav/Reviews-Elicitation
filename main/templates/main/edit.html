@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/edit.css' %}">
-
 </head>
 <body>
     <h2>Edit Review</h2>
@@ -24,7 +23,6 @@
                 <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p>
                 {{form.problem_sol}}
                 {{form.problem_sol.errors}}
-            
         </div>
 
         <div >
@@ -36,7 +34,6 @@
                 <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p>
                 {{form.communication}}
                 {{form.communication.errors}} 
-            
         </div>
 
         <div>
@@ -58,6 +55,7 @@
         </div>
         <button type="submit" name="edit-review">Save</button>
     </form>
+    
     <a href="{% url 'main:user' username=username%}" class="cancel-link">Cancel</a>
     
     <script>

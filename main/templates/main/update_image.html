@@ -8,17 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/updateimage.css' %}">
-
 </head>
 <body>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    {% if form.instance.profile_image %}
-      Current Profile Image: <img src="{{ form.instance.profile_image.url }}" alt="Profile Image">
-      {% endif %}
-    <button type="submit">Save</button>
-  </form>
-  <a href="{% url 'main:home' %}">Cancel</a>
+	<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form }}
+	{% if form.instance.profile_image %}
+		Current Profile Image: <img src="{{ form.instance.profile_image.url }}" alt="Profile Image">
+	{% endif %}
+	<button type="submit">Save</button>
+	</form>
+	<a href="{% url 'main:home' %}">Cancel</a>
 </body>
 </html>

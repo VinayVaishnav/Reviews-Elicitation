@@ -118,20 +118,6 @@ def home_view(request):
             'has_downvoted': review.has_downvoted(user), 
         })
 
-    # upvote-downvote
-    # if request.method == 'POST':
-    #     if 'action' in request.POST:
-    #         review_id = request.POST.get('review_id')
-    #         action = request.POST.get('action')
-    #         review = models.Review.objects.get(id=review_id)
-
-    #         if action == 'upvote':
-    #             review.upvote(user)
-    #         elif action == 'downvote':
-    #             review.downvote(user)
-    #         review.save()
-    #         return redirect('main:home')
-
     return render(request, 'main/home.html',
         {
             'user': user,
@@ -142,6 +128,7 @@ def home_view(request):
             'processed_giv_reviews':processed_giv_reviews,
         }
     )
+
 
 @login_required
 def vote_view(request):
@@ -171,6 +158,7 @@ def vote_view(request):
         return JsonResponse(response_data)
     
     return JsonResponse({'success':False, })
+
 
 @login_required
 def logout_view(request):
@@ -238,6 +226,7 @@ def update_bio_view(request):
 
     return render(request, 'main/update_bio.html', { 'form':form, })
 
+
 @login_required
 def user_view(request, username):
     if request.user.username == username:
@@ -287,21 +276,6 @@ def user_view(request, username):
         existing_review = reviews.filter(to_user=username, from_user=request.user.username).first()
 
         if request.method == 'POST':
-            # upvote-downvote
-            # if 'action' in request.POST:
-            #     review_id = request.POST.get('review_id')
-            #     action = request.POST.get('action')
-            #     review = models.Review.objects.get(id=review_id)
-
-            #     if action == 'upvote':
-            #         review.upvote(request.user)
-            #     elif action == 'downvote':
-            #         review.downvote(request.user)
-            #     review.save()
-            #     return redirect('main:user', username=username)
-
-            # review form
-            # elif 'action' not in request.POST:
             if 'action' not in request.POST:
                 reviewform = forms.ReviewForm(request.POST, instance=existing_review)
                 if reviewform.is_valid():
@@ -427,3 +401,30 @@ def password_change_view(request):
     return render(request, 'main/password_change.html', { 'form':form, })
 
 
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+@login_required
+def public_private_view(request):
+    if request.method == 'POST' and is_ajax(request):
+        review_id = request.POST.get('review_id')
+        skill = request.POST.get('skill')
+
+        bool_val = False
+
+        review = models.Review.objects.get(id=review_id)
+        if skill == 'problem_solving':
+            review.problem_solving_bool = not review.problem_solving_bool
+            bool_val = review.problem_solving_bool
+        elif skill == 'communication':
+            review.communication_bool = not review.communication_bool
+            bool_val = review.communication_bool
+        elif skill == 'sociability':
+            review.sociability_bool = not review.sociability_bool
+            bool_val = review.sociability_bool
+
+        review.save()
+        
+        return JsonResponse({ 'success':True, 'skill':skill, 'review_id':review_id, 'bool_val':bool_val, }, safe=False)
+    
+    return JsonResponse({ 'success':False, }, safe=False)

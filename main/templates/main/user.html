@@ -13,7 +13,6 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
-        /* background-color: #a5d1ff; */
         background-color: #bbeef1;
     }
 
@@ -93,8 +92,7 @@
     }
 
     /* Responsive adjustments */
-
-    @media only screen and (max-width:1320px){
+    @media only screen and (max-width:1320px) {
         .imagesection{
             margin-right: 40px;
         }
@@ -108,12 +106,14 @@
             font-size: 40px;
         }
     }
-    @media only screen and (max-width: 1200px){
+
+    @media only screen and (max-width: 1200px) {
         .profile-section{
             gap: 75px;
         }
     }
-    @media only screen and (max-width: 1000px){
+
+    @media only screen and (max-width: 1000px) {
         .imagesection{
             margin-right: 40px;
         }
@@ -138,20 +138,16 @@
             flex-direction: column;
             gap: 10px;
         }
-
         .imagesection {
             margin: 0px;
         }
-
         .profile-details {
             margin-left: 0;
         }
-
         .profile-name {
             margin: 0px;
             font-size: 50px;
         }
-
         .profile-bio {
             font-size: 40px;
             margin-bottom: 10px;
@@ -161,28 +157,24 @@
         .contact{
             font-size: 35px;
         }
-
         .profile-button {
             width: 120px;
             margin-bottom: 10px;
-            }
+        }
     }
-    @media only screen and (max-width: 470px) {
 
+    @media only screen and (max-width: 470px) {
         .profile-image{
             height: 300px;
             width: 300px;
         }
-
         .profile-name {
             margin: 0px;
             font-size: 40px;
         }
-
         .profile-bio {
             font-size: 30px;
         }
-        
         .contact{
             font-size: 25px;
         }
@@ -257,7 +249,6 @@
             flex-basis: 35%;
             font-size: 20px;
         }
-
         .content_section{
             align-items: flex-start;
             padding: 4px;
@@ -317,7 +308,6 @@
     .no-reviews {
         font-family: 'Albert Sans';
         color: #999;
-        /* font-style: italic; */
         font-size: 30px;
         padding: 20px;
         margin-bottom: 10px;
@@ -325,85 +315,78 @@
     }
 
     @media only screen and (max-width: 768px) {
-    .reviews-section {
-        height: auto;
-        max-height: 800px;
-        padding: 15px;
-        overflow: scroll;
+        .reviews-section {
+            height: auto;
+            max-height: 800px;
+            padding: 15px;
+            overflow: scroll;
+        }
+        .reviews-section h3 {
+            font-size: 24px;
+        }
+        .reviews-section ul {
+            height: auto;
+            max-height: none;
+        }
+        .reviews-section li {
+            margin-bottom: 5px;
+        }
+        .votes {
+            margin-top: 0px;
+            margin-bottom: 2px;
+        }
+        .votes p {
+            margin-right: 10px;
+        }
+        .reviews-section .editdelete {
+            gap: 1px;
+        }
+        .reviews-section button {
+            padding: 3px;
+            margin: 3px;
+            font-size: 12px;
+        }
     }
 
-    .reviews-section h3 {
-        font-size: 24px;
-    }
-
-    .reviews-section ul {
-        height: auto;
-        max-height: none;
-    }
-
-    .reviews-section li {
-        margin-bottom: 5px;
-    }
-
-    .votes {
-        margin-top: 0px;
-        margin-bottom: 2px;
-    }
-
-    .votes p {
-        margin-right: 10px;
-    }
-
-    .reviews-section .editdelete {
-        gap: 1px;
-    }
-
-    .reviews-section button {
-        padding: 3px;
-        margin: 3px;
-        font-size: 12px;
-    }
-    }
-    @media only screen and (max-width: 480px){
-    .reviews-section button {
-        width: 62px;
-        padding: 2px;
-        font-size: 12px;
-        height: auto;
-        max-height: 800px;
-    }
-    .reviews-section ul{
-        height: auto;
-        max-height: 700px;
-    }
-    .reviews-section .editdelete{
-        gap: 0px;
-    }
-    .reviews-section .editdelete button{
-        width: 47px;
-        margin-bottom: 5px;
-    }
-    .reviews-section li{
-        padding-left: 3px;
-    }
+    @media only screen and (max-width: 480px) {
+        .reviews-section button {
+            width: 62px;
+            padding: 2px;
+            font-size: 12px;
+            height: auto;
+            max-height: 800px;
+        }
+        .reviews-section ul{
+            height: auto;
+            max-height: 700px;
+        }
+        .reviews-section .editdelete{
+            gap: 0px;
+        }
+        .reviews-section .editdelete button{
+            width: 47px;
+            margin-bottom: 5px;
+        }
+        .reviews-section li{
+            padding-left: 3px;
+        }
     }
 
     #id_review::placeholder {
         font-family: 'Albert Sans';
         font-size: large;
     }
+
     .vote-btn {
         font-size: larger !important;
-        /* background-color: #4ecdc4 !important; */
         background-color: #999 !important;
     }
 
     .vote-btn:hover{
-        /* background-color: #1a535c !important; */
         background-color: black !important;
     }
 
-        .used-vote-btn {
+    .used-vote-btn {
         font-size: larger !important;
         background-color: #4ecdc4 !important;
     }
@@ -452,8 +435,8 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         margin: 10px;
     }
-    .problem_sol-textarea {
-  /* CSS styles for problem_sol textarea */
+
+    .problem_solving-textarea {
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -463,7 +446,6 @@
     }
 
     .communication-textarea {
-    /* CSS styles for communication textarea */
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -473,7 +455,6 @@
     }
 
     .sociability-textarea {
-    /* CSS styles for sociability textarea */
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -486,6 +467,7 @@
         width: 90%;
         justify-content: space-between;
     }
+
     .add {
         text-align: center;
         font-size: 58px;
@@ -526,7 +508,6 @@
     }
 
     .add-form > div > div > p {
-
         margin-left: 20px;
         margin-right: 20px;
         font-size: 22px;
@@ -551,8 +532,6 @@
         font-size: 18px;
         cursor: pointer;
     }
-
-
 </style>
 
 <div class="container">
@@ -570,16 +549,17 @@
                 {% endif %}
             {% endif %}
         </div>
+
         <div class="profile-details">
             <h1 class="profile-name">{{user.first_name}} {{user.last_name}}</h1>
             {% if user.userprofile.bio %}
-          <div class="bio-section">
-            <div>
-                <h3 class="profile-bio">Bio:</h3>
-                <p class="bio-description">{{ user.userprofile.bio }}</p>
-            </div>
-          </div>
-          {% endif %}
+                <div class="bio-section">
+                    <div>
+                        <h3 class="profile-bio">Bio:</h3>
+                        <p class="bio-description">{{ user.userprofile.bio }}</p>
+                    </div>
+                </div>
+            {% endif %}
             <h1 class="contact">Contact: {{user.userprofile.contact_number}}</h1>
         </div>
     </div>
@@ -588,81 +568,93 @@
         <h3>Reviews Received</h3>
         <ul>
             {% for review in processed_rec_reviews %}
-            <li>
-                {% if review.review.anonymous_from != 'Anonymous' and review.review.anonymous_from != request.user.username %}
-                <a href="{% url 'main:user' username=review.review.from_user %}"><p class="heading">{{ review.review.review_giver }}</p></a>
-                {% else %}
-                <p class="heading">{{ review.review.review_giver }}</p>
-                {% endif %}
-                <br/>
-                <div class="content" >
-                    <p class="skill_header">Problem Solving skills:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_1}}</p>
-                        <p>Description: {{review.review.problem_sol}} </p>
-                    </div>
-                </div>
-                <div class="content" >
-                    <p class="skill_header">Communication skills:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_2}}</p>
-                        <p>Description: {{review.review.communication}} </p>
-                    </div>
-                </div>
-                <div class="content" >
-                    <p class="skill_header">Sociability:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_3}}</p>
-                        <p>Description: {{review.review.sociability}} </p>
-                    </div>
-                </div>
-                
-                <form method="post" action="{% url 'main:user' username=user.username %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="review_id" value="{{review.review.id }}">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
-                        {% if review.has_upvoted %}
-                            <button
-                                id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
-                        {% else %}
-                            <button
-                                id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
-                        {% endif %}
+                <li>
+                    {% if review.review.anonymous_from != 'Anonymous' and review.review.anonymous_from != request.user.username %}
+                        <a href="{% url 'main:user' username=review.review.from_user %}"><p class="heading">{{ review.review.review_giver }}</p></a>
+                    {% else %}
+                        <p class="heading">{{ review.review.review_giver }}</p>
+                    {% endif %}
+                        
+                    <br/>
+
+                    <div class="content" >
+                        <p class="skill_header">Problem Solving skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_1 }}</p>
+                            {% if review.review.problem_solving_bool %}
+                                <p>Description: {{ review.review.problem_solving }}</p>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
-                        {% if review.has_downvoted %}
-                            <button
-                                id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
-                        {% else %}
-                            <button
-                                id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
-                        {% endif %}
+                    <div class="content" >
+                        <p class="skill_header">Communication skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_2 }}</p>
+                            {% if review.review.communication_bool %}
+                                <p>Description: {{ review.review.communication }}</p>
+                            {% endif %}
+                        </div>
                     </div>
-                </form>
+
+                    <div class="content" >
+                        <p class="skill_header">Sociability:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_3 }}</p>
+                            {% if review.review.sociability_bool %}
+                                <p>Description: {{ review.review.sociability }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 
-                {% if review.review.from_user == request.user.username %}
-                    <div class="editdelete">
-                        <form method="post" action="{% url 'main:edit' review.review.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="review_id" value="{{ review.review.id }}">
-                            <button type="submit" style="background: none;" class="button-container">Edit</button>
-                        </form>
-                        <form method="post" action="{% url 'main:delete' review.review.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="review_id" value="{{ review.review.id }}">
-                            <button type="submit" style="background: none;" class="button-container">Delete</button>
-                        </form>
-                    </div>
-                {% endif %}
-            </li>
-            <br/>
+                    <form method="post" action="{% url 'main:user' username=user.username %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="review_id" value="{{review.review.id }}">
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
+                            {% if review.has_upvoted %}
+                                <button
+                                    id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                    type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
+                            {% else %}
+                                <button
+                                    id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                    type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
+                            {% endif %}
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
+                            {% if review.has_downvoted %}
+                                <button
+                                    id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                    type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
+                            {% else %}
+                                <button
+                                    id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                    type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                            {% endif %}
+                        </div>
+                    </form>
+                
+                    {% if review.review.from_user == request.user.username %}
+                        <div class="editdelete">
+                            <form method="post" action="{% url 'main:edit' review.review.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ review.review.id }}">
+                                <button type="submit" style="background: none;" class="button-container">Edit</button>
+                            </form>
+                            <form method="post" action="{% url 'main:delete' review.review.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{ review.review.id }}">
+                                <button type="submit" style="background: none;" class="button-container">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </li>
+            
+                <br/>
+
             {% empty %}
                 <p class="no-reviews">No reviews given yet.</p>
             {% endfor %}
@@ -670,62 +662,61 @@
     </div>
 
     <div class="reviews-section">
-
         <h3>Reviews Given</h3>
         <ul>
             {% for review in processed_giv_reviews %}
-            <li>
-                {% if review.review.to_user != request.user.username %}
-                <a href="{% url 'main:user' username=review.review.to_user %} %"><p class="heading">{{ review.review.review_receiver }}</p></a>
-                {%  else %}
-                <p class="heading">{{ review.review.review_receiver }}</p>
-                {% endif %}
-                <br/>
-                <div class="content" >
-                    <p class="skill_header">Problem Solving skills:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_1}}</p>
-                        {% if review.review.problem_bool %}
-                            <p>Description: {{review.review.problem_sol}} </p>
+                <li>
+                    {% if review.review.to_user != request.user.username %}
+                        <a href="{% url 'main:user' username=review.review.to_user %} %"><p class="heading">{{ review.review.review_receiver }}</p></a>
+                    {%  else %}
+                        <p class="heading">{{ review.review.review_receiver }}</p>
                     {% endif %}
-                    </div>
-                </div>
-                <div class="content" >
-                    <p class="skill_header">Communication skills:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_2}}</p>
-                        {% if review.review.communication_bool %}
-                            <p>Description: {{review.review.communication}} </p>
-                    {% endif %}
-                    </div>
-                </div>
-                <div class="content" >
-                    <p class="skill_header">Sociability:</p>
-                    <div class="content_section">
-                        <p>Rated: {{review.review.review_rating_3}}</p>
-                        {% if review.review.sociability_bool %}
-                            <p>Description: {{review.review.sociability}} </p>
-                    {% endif %}
-                    </div>
-                </div>
+                    
+                    <br/>
                 
-                <form method="post" action="{% url 'main:user' username=user.username %}">
-                    {% csrf_token %}
+                    <div class="content" >
+                        <p class="skill_header">Problem Solving skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_1 }}</p>
+                            {% if review.review.problem_solving_bool %}
+                                <p>Description: {{ review.review.problem_solving }}</p>
+                        {% endif %}
+                        </div>
+                    </div>
+ 
+                    <div class="content" >
+                        <p class="skill_header">Communication skills:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_2 }}</p>
+                            {% if review.review.communication_bool %}
+                                <p>Description: {{ review.review.communication }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="content" >
+                        <p class="skill_header">Sociability:</p>
+                        <div class="content_section">
+                            <p>Rated: {{ review.review.review_rating_3 }}</p>
+                            {% if review.review.sociability_bool %}
+                                <p>Description: {{ review.review.sociability }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                
+                    <form method="post" action="{% url 'main:user' username=user.username %}">
+                        {% csrf_token %}
                         <input type="hidden" name="review_id" value="{{review.review.id }}">
                         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                             <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
                             {% if review.has_upvoted %}
                                 <button
                                     id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                    type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">
-                                    &#8679;
-                                </button>
+                                    type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
                             {% else %}
                                 <button
                                     id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                    type="submit" name="action" value="upvote" class="vote-btn">
-                                    &#8679;
-                                </button>
+                                    type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
                             {% endif %}
                         </div>
     
@@ -742,9 +733,10 @@
                             {% endif %}
                         </div>
                     </form>
-
-            </li>
-            <br/>
+                </li>
+            
+                <br/>
+            
             {% empty %}
                 <p class="no-reviews">No reviews given yet.</p>
             {% endfor %}
@@ -762,10 +754,10 @@
                     <p>Thinker</p>{{ reviewform.review_rating_1 }} 
                     {{ reviewform.review_rating_1.errors }}<p>Doer</p>
                 </div>
-                    <p id="rating-value-1" style="margin-left: 10px;">{{ space }}</p>
-                    {{reviewform.problem_sol}}
-                    {{reviewform.problem_sol.errors}}
-                
+
+                <p id="rating-value-1" style="margin-left: 10px;"></p>
+                {{ reviewform.problem_solving }}
+                {{ reviewform.problem_solving.errors }} 
             </div>
 
             <div >
@@ -774,10 +766,10 @@
                     <p>Talker</p>{{ reviewform.review_rating_2 }} 
                     {{ reviewform.review_rating_2.errors }}<p>Listner</p>
                 </div>
-                    <p id="rating-value-2" style="margin-left: 10px;">{{ space }}</p>
-                    {{reviewform.communication}}
-                    {{reviewform.communication.errors}} 
-                
+
+                <p id="rating-value-2" style="margin-left: 10px;"></p>
+                {{ reviewform.communication }}
+                {{ reviewform.communication.errors }} 
             </div>
 
             <div>
@@ -786,9 +778,9 @@
                     <p>Taker</p>{{ reviewform.review_rating_3 }} 
                     {{ reviewform.review_rating_3.errors }}<p>Giver</p>
                 </div>
-                    <p id="rating-value-3" style="margin-left: 10px;">{{ space }}</p>
-                    {{reviewform.sociability}}
-                    {{reviewform.sociability.errors}} 
+                <p id="rating-value-3" style="margin-left: 10px;"></p>
+                {{ reviewform.sociability }}
+                {{ reviewform.sociability.errors }} 
             </div>
 
             <div>
@@ -799,104 +791,102 @@
                 <button type="submit" style="background-color: #333; margin-left: 20px;" class="submit-review" name="review-form">Submit Review</button>
             </div>
         </form>
-        {% endif %}
-
-        <script>
-            const slider1 = document.getElementById("review-rating-1");
-            const slider2 = document.getElementById("review-rating-2");
-            const slider3 = document.getElementById("review-rating-3");
-
-            let output1 = document.getElementById("rating-value-1");
-            let output2 = document.getElementById("rating-value-2");
-            let output3 = document.getElementById("rating-value-3");
-
-            const problemSolvingDict = {
-                {% for key, value in problem_solving.items %}
-                    {{ key }}: {
-                    'name': '{{ value.name }}',
-                    'description': '{{ value.description }}'
-                    },
-                {% endfor %}
-            };
-
-            const communicationDict = {
-                {% for key, value in communication.items %}
-                    {{ key }}: {
-                    'name': '{{ value.name }}',
-                    'description': '{{ value.description }}'
-                    },
-                {% endfor %}
-            };
-
-            const sociabilityDict = {
-                {% for key, value in sociability.items %}
-                    {{ key }}: {
-                    'name': '{{ value.name }}',
-                    'description': '{{ value.description }}'
-                    },
-                {% endfor %}
-            };
-
-        
-            slider1.oninput = function() {
-                output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
-            }
-            slider2.oninput = function() {
-                output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
-            }
-            slider3.oninput = function() {
-                output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
-            }
-        </script>
-    </div>
+    {% endif %}
 
     <script>
-        $(document).ready(function() {
-            $('.vote-btn').click(
-                function(e) {
-                    e.preventDefault();
-                    var reviewId = $(this).data('review-id');
-                    var action = $(this).data('action');
-                    var button = $(this);
+        const slider1 = document.getElementById("review-rating-1");
+        const slider2 = document.getElementById("review-rating-2");
+        const slider3 = document.getElementById("review-rating-3");
+
+        let output1 = document.getElementById("rating-value-1");
+        let output2 = document.getElementById("rating-value-2");
+        let output3 = document.getElementById("rating-value-3");
+
+        const problemSolvingDict = {
+            {% for key, value in problem_solving.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
+        const communicationDict = {
+            {% for key, value in communication.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
+        const sociabilityDict = {
+            {% for key, value in sociability.items %}
+                {{ key }}: {
+                'name': '{{ value.name }}',
+                'description': '{{ value.description }}'
+                },
+            {% endfor %}
+        };
+
     
-                    $.ajax({
-                        url: '{% url "main:vote" %}',
-                        type: 'POST',
-                        data: {
-                            'review_id': reviewId,
-                            'action': action,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}'
-                        },
-                        success: function(response) {
-                            // console.log(response)
-    
-                            var upvoteCountElement = $('#upvote-count-' + response.review_id);
-                            upvoteCountElement.text(response.upvotes_count);
-                            var downvoteCountElement = $('#downvote-count-' + response.review_id);
-                            downvoteCountElement.text(response.downvotes_count);
-    
-                            var upvoteButtonElement = $('#upvote-btn-' + response.review_id);
-                            var downvoteButtonElement = $('#downvote-btn-' + response.review_id);
-    
-                            if (response.has_upvoted){
-                                upvoteButtonElement.addClass('used-vote-btn');
-                                downvoteButtonElement.removeClass('used-vote-btn');
-                            } else if (response.has_downvoted){
-                                downvoteButtonElement.addClass('used-vote-btn');
-                                upvoteButtonElement.removeClass('used-vote-btn');
-                            } else {
-                                upvoteButtonElement.removeClass('used-vote-btn');
-                                downvoteButtonElement.removeClass('used-vote-btn');
-                            }
-    
-                        },
-                        error: function(response) {
-                            console.log(responseText)
-                        }
-                    });
-                });
-        });
+        slider1.oninput = function() {
+            output1.innerHTML = `${problemSolvingDict[this.value].name} : ${problemSolvingDict[this.value].description}`;
+        }
+        slider2.oninput = function() {
+            output2.innerHTML = `${communicationDict[this.value].name} : ${communicationDict[this.value].description}`;
+        }
+        slider3.oninput = function() {
+            output3.innerHTML = `${sociabilityDict[this.value].name} : ${sociabilityDict[this.value].description}`;
+        }
     </script>
 
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.vote-btn').click(function(e) {
+            e.preventDefault();
+            var reviewId = $(this).data('review-id');
+            var action = $(this).data('action');
+            var button = $(this);
+
+            $.ajax({
+                url: '{% url "main:vote" %}',
+                type: 'POST',
+                data: {
+                    'review_id': reviewId,
+                    'action': action,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    // console.log(response)
+
+                    var upvoteCountElement = $('#upvote-count-' + response.review_id);
+                    upvoteCountElement.text(response.upvotes_count);
+                    var downvoteCountElement = $('#downvote-count-' + response.review_id);
+                    downvoteCountElement.text(response.downvotes_count);
+
+                    var upvoteButtonElement = $('#upvote-btn-' + response.review_id);
+                    var downvoteButtonElement = $('#downvote-btn-' + response.review_id);
+
+                    if (response.has_upvoted){
+                        upvoteButtonElement.addClass('used-vote-btn');
+                        downvoteButtonElement.removeClass('used-vote-btn');
+                    } else if (response.has_downvoted){
+                        downvoteButtonElement.addClass('used-vote-btn');
+                        upvoteButtonElement.removeClass('used-vote-btn');
+                    } else {
+                        upvoteButtonElement.removeClass('used-vote-btn');
+                        downvoteButtonElement.removeClass('used-vote-btn');
+                    }
+                },
+                error: function(response) {
+                    console.log(responseText)
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock %}

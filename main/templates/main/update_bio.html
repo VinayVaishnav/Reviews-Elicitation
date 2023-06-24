@@ -8,15 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talent Hunt</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/updatebio.css' %}">
-
 </head>
 <body>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <h2>Update Profile!</h2>
-    {{ form }}
-    <button type="submit">Save</button>
-  </form>
-  <a href="{% url 'main:home' %}" class="cancel-link">Cancel</a>
+    <form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<h2>Update Profile!</h2>
+		{{ form }}
+		<button type="submit">Save</button>
+    </form>
+    <a href="{% url 'main:home' %}" class="cancel-link">Cancel</a>
 </body>
 </html>

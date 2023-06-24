@@ -7,76 +7,76 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
+}
   
 h1 {
-  text-align: center;
-  color: #333;
-  /* font-size: 32px; */
-  font-size: xx-large;
-  margin-bottom: 20px;
-  padding: 10px;
+	text-align: center;
+	color: #333;
+	/* font-size: 32px; */
+	font-size: xx-large;
+	margin-bottom: 20px;
+	padding: 10px;
 }
 
 form {
-  width: 85%;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 20px;
+	width: 85%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 12px;
+	padding: 20px;
 }
 
 form input[type="email"],
 form input[type="password"] {
-  font-family: 'Montserrat';
-  font-size: medium;
-  width: 100%;
-  padding: 17px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+	font-family: 'Montserrat';
+	font-size: medium;
+	width: 100%;
+	padding: 17px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
 }
 
 form button[type="submit"] {
-  font-family: 'Montserrat';
-  font-size: large;
-  width: 100%;
-  padding: 15px;
-  background-color: #333;
-  color: #fff;
-  cursor: pointer;
-  box-sizing: border-box;
-  border: None;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+	font-family: 'Montserrat';
+	font-size: large;
+	width: 100%;
+	padding: 15px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+	box-sizing: border-box;
+	border: None;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
 }
 
 form button[type="submit"]:hover {
-  background-color: #555;
+	background-color: #555;
 }
 
 p {
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 10px;
+	padding: 10px;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 a {
-  color: #333;
-  text-decoration: none;
+	color: #333;
+	text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 h3 {
-  text-align: center;
-  color: #333;
-  font-size: larger;
+	text-align: center;
+	color: #333;
+	font-size: larger;
 }
 
 h3 a {
-  color: #ff9800;
+	color: #ff9800;
 }

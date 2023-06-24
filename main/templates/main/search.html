@@ -2,118 +2,111 @@
 {% load static %}
 
 {% block content %}
-    <!-- {% if query %}
-        <p class="search-query">Search query: {{ query }}</p>
-    {% endif %} -->
 
-    <ul class="user-list">
-        {% for user in users %}
-            <li class="user-item">
-                <div class="user-container">
-                    <a href="{% url 'main:user' username=user.username %}">
-                        {% if user.userprofile.profile_image %}
-                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
-                        {% elif user.userprofile.gender == 'M' %}
-                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image">
-                        {% elif user.userprofile.gender == 'F' %}
-                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image">
-                        {% else %}
-                            <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/default.jpg' %}" alt="Default Image">
-                        {% endif %}
-                    </a>
-                    <div class="namebio">
-                        <a href="{% url 'main:user' username=user.username %}" class="user-name" style="font-size: 30px; font-weight: bolder;">{{ user.first_name }} {{ user.last_name }}</a>
-                        {% if user.userprofile.bio %}
+<ul class="user-list">
+    {% for user in users %}
+        <li class="user-item">
+            <div class="user-container">
+                <a href="{% url 'main:user' username=user.username %}">
+                    {% if user.userprofile.profile_image %}
+                        <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
+                    {% elif user.userprofile.gender == 'M' %}
+                        <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/male_default.jpg' %}" alt="Default Image">
+                    {% elif user.userprofile.gender == 'F' %}
+                        <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/female_default.jpg' %}" alt="Default Image">
+                    {% else %}
+                        <img class="profile-image" style="height: 100px; width: 100px; margin-right: 100px" src="{% static 'profile_images/default.jpg' %}" alt="Default Image">
+                    {% endif %}
+                </a>
+                <div class="namebio">
+                    <a href="{% url 'main:user' username=user.username %}" class="user-name" style="font-size: 30px; font-weight: bolder;">{{ user.first_name }} {{ user.last_name }}</a>
+                    {% if user.userprofile.bio %}
                         <p class="user-bio" style="font-size: 20px; font-weight: bold;">{{ user.userprofile.bio }}</p>
-                        {% endif %}
-                    </div>
+                    {% endif %}
                 </div>
-            </li>
-        {% empty %}
-            <li class="no-users">No users found.</li>
-        {% endfor %}
-    </ul>
+            </div>
+        </li>
+    {% empty %}
+        <li class="no-users">No users found.</li>
+    {% endfor %}
+</ul>
 
-    <style>
-        .content-wrapper {
-            background-color: #c5c5c5;
-            padding: 20px;
-            border-radius: 8px;
-        }
-    
-        .search-query {
-            font-weight: bold;
-            margin-bottom: 30px;
-            padding: 10px;
-            font-size: 30px;
-            background-color: #f2f2f2;
-            border-radius: 8px;
-        }
-    
-        .user-list {
-            font-family: 'Gantari';
-            list-style: none;
-            padding-left: 10px;
-            margin: 5px;
-            border: 2 solid black;
-            border: 3px;
-            background-color: #fff;
-            border-radius: 8px;
-        }
-    
-        .user-item {
-            margin-bottom: 20px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 4px;
-            background-color: #f8f8f8;
-        }
-    
-        .user-container {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-    
-        .profile-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            /* margin-right: 50px; */
-            background-color: #ddd;
-        }
-    
-        .user-name {
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
-            font-size: 20px;
-            margin-right: 50px;
-            margin-bottom: 0%;
-        }
+<style>
+    .content-wrapper {
+        background-color: #c5c5c5;
+        padding: 20px;
+        border-radius: 8px;
+    }
 
-        .user-name:hover{
-            /* font-weight: bolder; */
-            text-decoration: none;
-            color: #000;
-        }
-    
-        .user-bio {
-            margin-top: 0%;
-            color: #999;
-            font-weight: lighter;
-        }
-    
-        .no-users {
-            color: #999;
-            font-family: 'Albert Sans';
-            /* font-style: italic; */
-            font-size: xx-large;
-            margin: 10px;
-        }
-    </style>
-    
-    
-    
+    .search-query {
+        font-weight: bold;
+        margin-bottom: 30px;
+        padding: 10px;
+        font-size: 30px;
+        background-color: #f2f2f2;
+        border-radius: 8px;
+    }
+
+    .user-list {
+        font-family: 'Gantari';
+        list-style: none;
+        padding-left: 10px;
+        margin: 5px;
+        border: 2 solid black;
+        border: 3px;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    .user-item {
+        margin-bottom: 20px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .user-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .profile-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        /* margin-right: 50px; */
+        background-color: #ddd;
+    }
+
+    .user-name {
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        font-size: 20px;
+        margin-right: 50px;
+        margin-bottom: 0%;
+    }
+
+    .user-name:hover{
+        text-decoration: none;
+        color: #000;
+    }
+
+    .user-bio {
+        margin-top: 0%;
+        color: #999;
+        font-weight: lighter;
+    }
+
+    .no-users {
+        color: #999;
+        font-family: 'Albert Sans';
+        font-size: xx-large;
+        margin: 10px;
+    }
+</style>
+
 {% endblock %}

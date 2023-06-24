@@ -3,18 +3,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Talent Hunt</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
-  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Albert Sans' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Gantari' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Hunt</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Albert Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Gantari' rel='stylesheet'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
     <header style="padding: 0px; padding-top: 5px; padding-bottom: 5px;">
         <form action="{% url 'main:search' %}" method="GET">
@@ -30,6 +31,7 @@
           </form>
         </div>
     </header>
+
     {% block content %}
     {% endblock %}
 </body>
