@@ -348,8 +348,28 @@
             margin: 3px;
             font-size: 12px;
         }
-    }
+        .reviews-section .content{
 
+            .skill_header{
+                font-size: 17px;
+            }
+            .content_section{
+                font-size: 15px;
+            }
+            .public_private{
+            }
+        }
+    }
+    @media only screen and (max-width: 650px){
+        .reviews-section .content{
+            display: flex;
+            flex-direction: column;
+            .content_section{
+                /* font-size: 10px; */
+                margin-right: 5px;
+            }
+        }
+    }
     @media only screen and (max-width: 480px){
         .reviews-section button {
             width: 62px;
@@ -365,6 +385,15 @@
         }
         .reviews-section li{
             padding-left: 3px;
+        }
+        .reviews-section .content{
+
+            .skill_header{
+                font-size: 16px;
+            }
+            .content_section{
+                font-size: 14px;
+            }
         }
     }
 

@@ -87,3 +87,8 @@ a.cancel-link:hover {
     border-radius: 4px;
     font-size: 16px;
 }
+@media only screen and (max-width:480px){
+    p{
+        font-size: 14px;
+    }
+}
