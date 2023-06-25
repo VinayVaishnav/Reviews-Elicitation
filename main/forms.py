@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from . import models
 from ReviewsElicitation.settings import EMAIL_HOST_USER
 import random
+from django.conf import settings
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
@@ -96,8 +97,14 @@ class OTPVerificationForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-    profile_image = forms.ImageField(required=False, widget=forms.FileInput)
-    # remove_photo = forms.BooleanField(required=False)
+    if settings.DEBUG:
+        profile_image = forms.ImageField(required=False, widget=forms.FileInput)
+
+    ### deployment changes in media file field ###
+    else:
+        from cloudinary.forms import CloudinaryFileField
+        profile_image = CloudinaryFileField(required=False, widget=forms.FileInput)
+    ### end of deployment changes ###
 
     class Meta:
         model = models.UserProfile
@@ -113,9 +120,19 @@ class ProfileForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
 
-        if self.cleaned_data.get('remove_photo'):
-            instance.profile_image.delete()
-            instance.profile_image = None
+        if settings.DEBUG:
+            if self.cleaned_data.get('remove_photo'):
+                instance.profile_image.delete()
+                instance.profile_image = None
+
+        ### deployment changes to handle media file deletion ###
+        else:
+            from cloudinary import uploader
+            if self.cleaned_data.get('remove_photo'):
+                if instance.profile_image:
+                    uploader.destroy(instance.profile_image.public_id)
+                instance.profile_image = None
+        ### end of deployment changes ###
 
         if commit:
             instance.save()

@@ -1,24 +1,16 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-tw8u3!er88#=^^a0#%t+k($$hp(9!=y_jrpna5&_5)m9!=luc3'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'main',
@@ -63,20 +55,51 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ReviewsElicitation.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
+    STATIC_URL = 'static/'
+    STATIC_FILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+##### DEPLOYMENT CHANGES #####
+else:
+    import dj_database_url
+    import cloudinary
+    import cloudinary.uploader
+    import cloudinary.api
+
+    INSTALLED_APPS.append('cloudinary')
+
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+    MIDDLEWARE.append('django.middleware.security.SecurityMiddleware')
+
+    DATABASES = {
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+    }
+    
+    STATIC_URL = 'static/'
+    MEDIA_URL = '/media/'
+
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MEDIA_ROOT = BASE_DIR / 'media'
+
+    cloudinary.config(
+        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
+        api_key = os.getenv('CLOUDINARY_API_KEY'),
+        api_secret = os.getenv('CLOUDINARY_API_SECRET')
+    )
+##### END OF DEPLOYMENT CHANGES #####
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,10 +121,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -111,25 +130,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_FILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 LOGIN_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-load_dotenv()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

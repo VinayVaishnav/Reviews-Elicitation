@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.conf import settings
 
 class UserProfile(models.Model):
     GENDER_CHOICES = (
@@ -11,7 +11,16 @@ class UserProfile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True)
+    
+    if settings.DEBUG:
+        profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True)
+    
+    ### deployment changes in media file field ###
+    else:
+        from cloudinary.models import CloudinaryField
+        profile_image = CloudinaryField('image', blank=True, null=True)
+    ### end of deployment changes ###
+
     contact_number = models.CharField(max_length=10)
     bio = models.TextField(blank=True, null=True)
     gender = models.CharField(max_length=1, default='N', choices=GENDER_CHOICES)
