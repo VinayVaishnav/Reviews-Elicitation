@@ -33,7 +33,7 @@ def password_reset_request(request):
                 current_site = get_current_site(request)
                 reset_url = f'http://{current_site.domain}{reverse_lazy("password_reset:confirm", kwargs={"uidb64": uid, "token": token})}'
 
-                email_subject = 'Password Reset'
+                email_subject = 'Password Reset - Talent Hunt'
                 email_message = render_to_string('password_reset/email.html', {
                     'user': user,
                     'reset_url': reset_url,

@@ -37,8 +37,8 @@ class CustomUserCreationForm(UserCreationForm):
         request.session['otp'] = otp
 
         send_mail(
-            'OTP Verification',
-            f'Your OTP is {otp}',
+            'OTP Verification - Talent Hunt',
+            f'Your one-time-password for registration is {otp}. Please refrain from sharing it with anyone.',
             EMAIL_HOST_USER,
             [email],
             fail_silently=False,
@@ -121,7 +121,6 @@ class ProfileForm(forms.ModelForm):
             instance.save()
 
         return instance
-
 
 
 class ProfileDetailsForm(forms.Form):

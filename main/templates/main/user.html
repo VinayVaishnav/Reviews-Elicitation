@@ -193,6 +193,10 @@
         flex-direction: column;
     }
 
+    .reviews-section a {
+        text-decoration: none;
+    }
+
     .reviews-section h3 {
         font-family: 'Gantari';
         font-size: 30px;
@@ -219,16 +223,18 @@
         border-radius: 20px;
         margin-bottom: 7px;
         margin-left: 5px;
-        padding-left: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         padding-bottom: 2px;
     }
 
     .reviews-section .heading {
         font-family: 'Oswald';
-        font-size: xx-large;
+        font-size: 30px;
         font-weight: bold;
         margin-bottom: 2px;
         margin-top: 12px;
+        margin-left: 10px;
         color: black;
     }
 
@@ -435,6 +441,7 @@
     }
     
     .AddReview {
+        font-family: 'Montserrat';
         margin-top: 20px;
         background-color: #f0f0f0;
         padding: 10px;
@@ -444,6 +451,7 @@
     }
     
     .problem_solving-textarea {
+        font-family: 'Albert Sans';
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -453,6 +461,7 @@
     }
 
     .communication-textarea {
+        font-family: 'Albert Sans';
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -462,6 +471,7 @@
     }
 
     .sociability-textarea {
+        font-family: 'Albert Sans';
         width: 60%;
         height: 150px;
         padding: 10px;
@@ -476,12 +486,14 @@
     }
 
     .add {
+        font-family: 'Montserrat';
         text-align: center;
         font-size: 58px;
         margin-bottom: 10px;
     }
 
     .add-form {
+        font-family: 'Montserrat';
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -500,6 +512,7 @@
     }
     
     .add-form label {
+        font-family: 'Montserrat';
         margin-right: 10px;
         font-weight: bold;
         font-size: 38px;
@@ -523,7 +536,7 @@
     #rating-value-2,
     #rating-value-3 {
         margin-left: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 15px;
         font-size: 20px;
     }
 
@@ -561,6 +574,7 @@
         }
         .reviews-section li{
             padding-left: 3px;
+            padding-right: 3px;
         }
         .reviews-section .content{
 
@@ -585,13 +599,23 @@
         .add-form > div > div > p{
             font-size: 19px;
         }
+        #rating-value-1,
+        #rating-value-2,
+        #rating-value-3 {
+            font-size: 19px;
+        }
     }
     @media only screen and (max-width: 400px){
         .add-form > div > div > p{
             margin: 5px;
         }
     }
-    @media only screen and (max-width: 340px){
+    @media only screen and (max-width: 415px){
+        #rating-value-1,
+        #rating-value-2,
+        #rating-value-3 {
+            font-size: 13px;
+        }
         .add-form > div > div > p{
             font-size: 13px;
         }
@@ -821,7 +845,7 @@
         <form method="post" enctype="multipart/form-data" class="add-form">
             {% csrf_token %}
             <div>
-                <label >Problem Solving</label>
+                <label>Problem Solving</label>
                 <div class="slider">
                     <p>Thinker</p>{{ reviewform.review_rating_1 }} 
                     {{ reviewform.review_rating_1.errors }}<p>Doer</p>
@@ -832,8 +856,8 @@
                 {{ reviewform.problem_solving.errors }} 
             </div>
 
-            <div >
-                <label >Communications</label>
+            <div>
+                <label>Communications</label>
                 <div class="slider">
                     <p>Talker</p>{{ reviewform.review_rating_2 }} 
                     {{ reviewform.review_rating_2.errors }}<p>Listner</p>
@@ -845,7 +869,7 @@
             </div>
 
             <div>
-                <label >Sociability</label>
+                <label>Sociability</label>
                 <div class="slider">
                     <p>Taker</p>{{ reviewform.review_rating_3 }} 
                     {{ reviewform.review_rating_3.errors }}<p>Giver</p>
