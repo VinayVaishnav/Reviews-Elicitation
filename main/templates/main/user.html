@@ -763,7 +763,7 @@
             {% for review in processed_giv_reviews %}
                 <li>
                     {% if review.review.to_user != request.user.username %}
-                        <a href="{% url 'main:user' username=review.review.to_user %} %"><p class="heading">{{ review.review.review_receiver }}</p></a>
+                        <a href="{% url 'main:user' username=review.review.to_user %}"><p class="heading">{{ review.review.review_receiver }}</p></a>
                     {%  else %}
                         <p class="heading">{{ review.review.review_receiver }}</p>
                     {% endif %}
