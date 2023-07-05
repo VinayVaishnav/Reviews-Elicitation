@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
+from multiselectfield import MultiSelectField
 
 class UserProfile(models.Model):
     GENDER_CHOICES = (
@@ -11,16 +11,7 @@ class UserProfile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
-    if settings.DEBUG:
-        profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True)
-    
-    ### deployment changes in media file field ###
-    else:
-        from cloudinary.models import CloudinaryField
-        profile_image = CloudinaryField('image', blank=True, null=True)
-    ### end of deployment changes ###
-
+    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True)
     contact_number = models.CharField(max_length=10)
     bio = models.TextField(blank=True, null=True)
     gender = models.CharField(max_length=1, default='N', choices=GENDER_CHOICES)
@@ -28,22 +19,35 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
-
 class Review(models.Model):
     to_user = models.CharField(max_length=100)
     from_user = models.CharField(max_length=100)
-
-    review_rating_1 = models.IntegerField(default=0)
-    review_rating_2 = models.IntegerField(default=0)
-    review_rating_3 = models.IntegerField(default=0)
-
-    problem_solving = models.TextField(max_length=1000, default='')
-    communication = models.TextField(max_length=1000, default='')
-    sociability = models.TextField(max_length=1000, default='')
     
-    problem_solving_bool = models.BooleanField(default=False)
-    communication_bool = models.BooleanField(default=False)
-    sociability_bool = models.BooleanField(default=False)
+    RATING_CHOICES1 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+    RATING_CHOICES2 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+    RATING_CHOICES3 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+
+    problem_solving = MultiSelectField(choices=RATING_CHOICES1, max_length=255)
+    communication = MultiSelectField(choices=RATING_CHOICES2, max_length=255)
+    sociability = MultiSelectField(choices=RATING_CHOICES3, max_length=255)
 
     is_anonymous = models.BooleanField(default=False)
     anonymous_from = models.CharField(max_length=100)

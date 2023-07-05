@@ -25,6 +25,7 @@
         </form>
         <div class="button-container">
           <a href="{% url 'main:home' %}"><button>HOME</button></a>
+          <button class="about-us-button">ABOUT US</button>
           <form action="{% url 'main:logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="logout-button">LOGOUT</button>

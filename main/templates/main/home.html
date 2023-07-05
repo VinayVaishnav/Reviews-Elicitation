@@ -180,10 +180,6 @@
         flex-direction: column;
     }
 
-    .reviews-section a {
-        text-decoration: none;
-    }
-
     .reviews-section h3 {
         font-family: 'Gantari';
         font-size: 30px;
@@ -206,47 +202,49 @@
     }
 
     .reviews-section li {
+        align-items: center;
         position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
         border: black solid;
         border-radius: 20px;
         margin-bottom: 7px;
         margin-left: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
         padding-bottom: 20px;
     }
 
     .reviews-section .heading {
         font-family: 'Oswald';
-        font-size: 30px;
+        font-size: xx-large;
         font-weight: bold;
         margin-bottom: 2px;
         margin-top: 12px;
-        margin-left: 10px;
         color: black;
-        text-decoration: none;
     }
 
     .reviews-section .heading:hover{
         color: rgb(97, 97, 97);
-        text-decoration: none;
     }
-
+    .reviews-section .slider{
+        overflow: hidden;
+        width: 100%;
+        margin-right: 20px;
+    }
     .reviews-section .content{
         background-color: #dddddd82;
         align-items: center;
-        justify-content: flex-start;
+        width:100%;
+        /* position: absolute; */
+        padding: 10px;
         margin: 5px;
         display: flex;
-        flex-direction: row;
-        padding: 5px;
-        /* border: solid black; */
+        flex-direction: column;
         border: none;
         border-radius: 10px;
-        /* margin-right: 25px; */
 
         .skill_header{
-            margin-left: 10px;
             font-family: 'Albert Sans';
             font-weight: bold;
             font-size: 20px;
@@ -258,7 +256,14 @@
             align-items: flex-start;
             padding: 4px;
             flex-basis: 65%;
-            margin-right: 40px;
+            .selected-option {
+                display: inline-block;
+                padding: 5px 10px;
+                margin: 5px;
+                background-color: #337ab7;
+                color: #fff;
+                border-radius: 5px;
+            }
         }
         .public_private{
             flex-basis: 10%;
@@ -364,14 +369,10 @@
             .content_section{
                 font-size: 15px;
             }
-            .public_private{
-            }
         }
     }
     @media only screen and (max-width: 650px){
         .reviews-section .content{
-            display: flex;
-            flex-direction: column;
             .content_section{
                 /* font-size: 10px; */
                 margin-right: 5px;
@@ -393,9 +394,9 @@
         }
         .reviews-section li{
             padding-left: 3px;
-            padding-right: 3px;
         }
         .reviews-section .content{
+
             .skill_header{
                 font-size: 16px;
             }
@@ -446,8 +447,6 @@
         font-size: larger;
         color: #08c6ab;
         border: 2px solid #08c6ab;
-        /* padding: 4px; */
-        /* margin: 5px; */
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
@@ -473,8 +472,6 @@
     }
 
     .public_private:hover {
-        /* background-color: #08c6ab !important; */
-        /* color: white !important; */
         border:#1a535c 2px solid !important;
         color: #1a535c !important;
     }
@@ -530,8 +527,7 @@
             <a href="{% url 'main:password_change' %}"><button class="profile-button">Change Password</button></a>
         </div>
     </div>
-      
-    
+
     <div class="reviews-section">
         <h3>Reviews Received:</h3>
         <ul>
@@ -540,90 +536,78 @@
             {% else %}
                 {% for review in processed_rec_reviews %}
                     <li>
-                        {% if review.review.anonymous_from != 'Anonymous' %}
-                            <a href="{% url 'main:user' username=review.review.from_user %}">
-                            <p class="heading">{{ review.review.review_giver }}</p>
-                            </a>
-                        {% else %}
-                            <p class="heading">{{ review.review.review_giver }}</p>
-                        {% endif %}
+                        <div>
+                            {% if review.review.anonymous_from != 'Anonymous' %}
+                                <a href="{% url 'main:user' username=review.review.from_user %}">
+                                <p class="heading">{{ review.review.review_giver }}</p>
+                                </a>
+                            {% else %}
+                                <p class="heading">{{ review.review.review_giver }}</p>
+                            {% endif %}
+                            <form method="post" action="{% url 'main:home' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{review.review.id }}">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
+                                    {% if review.has_upvoted %}
+                                        <button
+                                            id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                            type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
+                                    {% else %}
+                                        <button
+                                            id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                            type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
+                                    {% endif %}
+                                </div>
+    
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
+                                    {% if review.has_downvoted %}
+                                        <button
+                                            id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                            type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
+                                    {% else %}
+                                        <button
+                                            id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                            type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                                    {% endif %}
+                                </div>
+                            </form>
+
+                        </div>
                         
                         <br/>
+                        
+                        <div class="slider">
 
+                        </div>
                         <div class="content">
                             <p class="skill_header">PROBLEM SOLVING</p>
                             <div class="content_section">
-                                <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.problem_solving }}</p>
+                                {% for option in review.review.problem_solving %}
+                                    <span class="selected-option">{{ option }}</span>
+                                {% endfor %}
                             </div>
-                            {% if not review.review.problem_solving_bool %}
-                                <button id="public-button-1-{{ review.review.id }}" class="public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="problem_solving">Make It Public</button>
-                            {% else %}
-                                <button id="public-button-1-{{ review.review.id }}" class="public_private used-public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="problem_solving">Make It Private</button>
-                            {% endif %}
                         </div>
 
                         <div class="content">
                             <p class="skill_header">COMMUNICATION</p>
                             <div class="content_section">
-                                <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.communication }}</p>
+                                {% for option in review.review.communication %}
+                                    <span class="selected-option">{{ option }}</span>
+                                {% endfor %}
                             </div>
-                            {% if not review.review.communication_bool %}
-                                <button id="public-button-2-{{ review.review.id }}" class="public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="communication">Make It Public</button>
-                            {% else %}
-                                <button id="public-button-2-{{ review.review.id }}" class="public_private used-public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="communication">Make It Private</button>
-                            {% endif %}
                         </div>
                     
                         <div class="content">
                             <p class="skill_header">SOCIABILITY</p>
                             <div class="content_section">
-                                <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.sociability }}</p>
+                                {% for option in review.review.sociability %}
+                                    <span class="selected-option">{{ option }}</span>
+                                {% endfor %}
                             </div>
-                            {% if not review.review.sociability_bool %}
-                                <button id="public-button-3-{{ review.review.id }}" class="public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="sociability">Make It Public</button>
-                            {% else %}
-                                <button id="public-button-3-{{ review.review.id }}" class="public_private used-public_private"
-                                    data-review-id="{{ review.review.id }}" data-skill="sociability">Make It Private</button>
-                            {% endif %}
                         </div>
                     
-                        <form method="post" action="{% url 'main:home' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="review_id" value="{{review.review.id }}">
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
-                                {% if review.has_upvoted %}
-                                    <button
-                                        id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                        type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">&#8679;</button>
-                                {% else %}
-                                    <button
-                                        id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                        type="submit" name="action" value="upvote" class="vote-btn">&#8679;</button>
-                                {% endif %}
-                            </div>
-
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
-                                {% if review.has_downvoted %}
-                                    <button
-                                        id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                        type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
-                                {% else %}
-                                    <button
-                                        id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                        type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
-                                {% endif %}
-                            </div>
-                        </form>
                     </li>
             
                     <br/>
@@ -641,83 +625,91 @@
             {% else %}
                 {% for review in processed_giv_reviews %}
                     <li>
-                        <a href="{% url 'main:user' username=review.review.to_user %}"><p class="heading">{{ review.review.review_receiver }}</p></a>
+                        <div>
+                            <a href="{% url 'main:user' username=review.review.to_user %}"><p class="heading">{{ review.review.review_receiver }}</p></a>
+                            <form method="post" action="{% url 'main:home' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="review_id" value="{{review.review.id }}">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
+                                    {% if review.has_upvoted %}
+                                        <button
+                                            id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                            type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">
+                                            &#8679;
+                                        </button>
+                                    {% else %}
+                                        <button
+                                            id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
+                                            type="submit" name="action" value="upvote" class="vote-btn">
+                                            &#8679;
+                                        </button>
+                                    {% endif %}
+                                </div>
+            
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
+                                    {% if review.has_downvoted %}
+                                        <button
+                                            id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                            type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
+                                    {% else %}
+                                        <button
+                                            id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
+                                            type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
+                                    {% endif %}
+                                </div>
+                            </form>
+    
+                            {% if review.review.from_user == request.user.username %}
+                                <div class="editdelete">
+                                    <form method="post" action="{% url 'main:edit' review.review.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="review_id" value="{{ review.review.id }}">
+                                        <button type="submit" style="background: none;" class="button-container">Edit</button>
+                                    </form>
+    
+                                    <form method="post" action="{% url 'main:delete' review.review.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="review_id" value="{{ review.review.id }}">
+                                        <button type="submit" style="background: none;" class="button-container">Delete</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+
+                        </div>
                         
                         <br/>
+                        <div class="slider">
 
-                        <div class="content" >
-                            <p class="skill_header">PROBLEM SOLVING</p>
-                            <div class="content_section">
-                                <p>{{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'name' }} : {{ problem_solving|dict_lookup:review.review.review_rating_1|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.problem_solving }}</p>
+                            <div class="content" >
+                                <p class="skill_header">PROBLEM SOLVING</p>
+                                <div class="content_section">
+                                    {% for option in review.review.problem_solving %}
+                                        <span class="selected-option">{{ option }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+    
+                            <div class="content" >
+                                <p class="skill_header">COMMUNICATION</p>
+                                <div class="content_section">
+                                    {% for option in review.review.communication %}
+                                        <span class="selected-option">{{ option }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+    
+                            <div class="content" >
+                                <p class="skill_header">SOCIABILITY</p>
+                                <div class="content_section">
+                                    {% for option in review.review.sociability %}
+                                        <span class="selected-option">{{ option }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
 
-                        <div class="content" >
-                            <p class="skill_header">COMMUNICATION</p>
-                            <div class="content_section">
-                                <p>{{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'name' }} : {{ communication|dict_lookup:review.review.review_rating_2|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.communication }}</p>
-                            </div>
-                        </div>
-
-                        <div class="content" >
-                            <p class="skill_header">SOCIABILITY</p>
-                            <div class="content_section">
-                                <p>{{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'name' }} : {{ sociability|dict_lookup:review.review.review_rating_3|dict_lookup:'description' }}</p>
-                                <p>{{ review.review.sociability }}</p>
-                            </div>
-                        </div>
-
-                        <form method="post" action="{% url 'main:home' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="review_id" value="{{review.review.id }}">
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <p id="upvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_upvotes_count }}</p>
-                                {% if review.has_upvoted %}
-                                    <button
-                                        id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                        type="submit" name="action" value="upvote" class="vote-btn used-vote-btn">
-                                        &#8679;
-                                    </button>
-                                {% else %}
-                                    <button
-                                        id="upvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="upvote" 
-                                        type="submit" name="action" value="upvote" class="vote-btn">
-                                        &#8679;
-                                    </button>
-                                {% endif %}
-                            </div>
-        
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <p id="downvote-count-{{ review.review.id }}" class="vote-count">{{ review.review.get_downvotes_count }}</p>
-                                {% if review.has_downvoted %}
-                                    <button
-                                        id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                        type="submit" name="action" value="downvote" class="vote-btn used-vote-btn">&#8681;</button>
-                                {% else %}
-                                    <button
-                                        id="downvote-btn-{{ review.review.id }}" data-review-id="{{ review.review.id }}" data-action="downvote"
-                                        type="submit" name="action" value="downvote" class="vote-btn">&#8681;</button>
-                                {% endif %}
-                            </div>
-                        </form>
-
-                        {% if review.review.from_user == request.user.username %}
-                            <div class="editdelete">
-                                <form method="post" action="{% url 'main:edit' review.review.id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="review_id" value="{{ review.review.id }}">
-                                    <button type="submit" style="background: none;" class="button-container">Edit</button>
-                                </form>
-
-                                <form method="post" action="{% url 'main:delete' review.review.id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="review_id" value="{{ review.review.id }}">
-                                    <button type="submit" style="background: none;" class="button-container">Delete</button>
-                                </form>
-                            </div>
-                        {% endif %}
                     </li>
                 
                     <br/>
@@ -726,6 +718,7 @@
             {% endif %}
         </ul>
     </div>
+      
 </div>
 
 <script>

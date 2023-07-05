@@ -3,9 +3,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from . import models
+from django.forms.widgets import CheckboxSelectMultiple
+from multiselectfield.forms.fields import MultiSelectFormField
 from ReviewsElicitation.settings import EMAIL_HOST_USER
 import random
-from django.conf import settings
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
@@ -38,8 +39,8 @@ class CustomUserCreationForm(UserCreationForm):
         request.session['otp'] = otp
 
         send_mail(
-            'OTP Verification - Talent Hunt',
-            f'Your one-time-password for registration is {otp}. Please refrain from sharing it with anyone.',
+            'OTP Verification',
+            f'Your OTP is {otp}',
             EMAIL_HOST_USER,
             [email],
             fail_silently=False,
@@ -97,14 +98,8 @@ class OTPVerificationForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-    if settings.DEBUG:
-        profile_image = forms.ImageField(required=False, widget=forms.FileInput)
-
-    ### deployment changes in media file field ###
-    else:
-        from cloudinary.forms import CloudinaryFileField
-        profile_image = CloudinaryFileField(required=False, widget=forms.FileInput)
-    ### end of deployment changes ###
+    profile_image = forms.ImageField(required=False, widget=forms.FileInput)
+    # remove_photo = forms.BooleanField(required=False)
 
     class Meta:
         model = models.UserProfile
@@ -120,24 +115,15 @@ class ProfileForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
 
-        if settings.DEBUG:
-            if self.cleaned_data.get('remove_photo'):
-                instance.profile_image.delete()
-                instance.profile_image = None
-
-        ### deployment changes to handle media file deletion ###
-        else:
-            from cloudinary import uploader
-            if self.cleaned_data.get('remove_photo'):
-                if instance.profile_image:
-                    uploader.destroy(instance.profile_image.public_id)
-                instance.profile_image = None
-        ### end of deployment changes ###
+        if self.cleaned_data.get('remove_photo'):
+            instance.profile_image.delete()
+            instance.profile_image = None
 
         if commit:
             instance.save()
 
         return instance
+
 
 
 class ProfileDetailsForm(forms.Form):
@@ -212,27 +198,44 @@ class BioForm(forms.Form):
 
 
 class ReviewForm(forms.ModelForm):
-    problem_solving = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'problem_solving-textarea', 'placeholder': 'Write about problem solving skills here...'}))
-    communication = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'communication-textarea', 'placeholder': 'Write about communicational skills here...'}))
-    sociability = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'sociability-textarea', 'placeholder': 'Write about sociability here...'}))
+    RATING_CHOICES1 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+    RATING_CHOICES2 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+    RATING_CHOICES3 = [
+        (1, 'Option 1'),
+        (2, 'Option 2'),
+        (3, 'Option 3'),
+        (4, 'Option 4'),
+        (5, 'Option 5'),
+    ]
+
+    problem_solving = forms.MultipleChoiceField(choices=RATING_CHOICES1, required=False, widget=CheckboxSelectMultiple(attrs={'class': 'problem_solving-checkbox'}))
+    communication = forms.MultipleChoiceField(choices=RATING_CHOICES2, required=False, widget=CheckboxSelectMultiple(attrs={'class': 'communication-checkbox'}))
+    sociability = forms.MultipleChoiceField(choices=RATING_CHOICES3, required=False, widget=CheckboxSelectMultiple(attrs={'class': 'sociability-checkbox'}))
+
 
     class Meta:
         model = models.Review
-        fields = ['review_rating_1', 'review_rating_2', 'review_rating_3','problem_solving','communication','sociability', 'is_anonymous']
+        fields = ['problem_solving','communication','sociability', 'is_anonymous']
 
         widgets = {
-            'review_rating_1': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-1', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
-            'review_rating_2': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-2', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
-            'review_rating_3': forms.NumberInput(attrs={'class': 'slider', 'id': 'review-rating-3', 'class': 'review-rating-input', 'type': 'range', 'min': '0', 'max': '5', 'step': '1'}),
             'is_anonymous': forms.CheckboxInput(attrs={'class': 'is-anonymous-checkbox'}),
         }
         labels = {
             'problem_solving':'',
             'communication':'',
             'sociability':'',
-            'review_rating_1': '',
-            'review_rating_2': '',
-            'review_rating_3': '',
             'is_anonymous': 'Anonymous Review',
         }
 

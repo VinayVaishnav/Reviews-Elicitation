@@ -19,7 +19,7 @@
 <body>
     <h2>Edit Review</h2>
 
-    <form method="post" action="{% url 'main:edit' review_id %}">
+    <!-- <form method="post" action="{% url 'main:edit' review_id %}">
         {% csrf_token %}
         <div >
             <label>Problem Solving</label>
@@ -40,7 +40,7 @@
             <label>Communications</label>
             <div style="display: flex; flex-direction: row;  justify-content: center; margin-bottom: 4px;">
                 <p>Talker</p>{{ form.review_rating_2 }} 
-                {{ form.review_rating_2.errors }}<p>Listener</p>
+                {{ form.review_rating_2.errors }}<p>Listner</p>
             </div>
             {% if review.review_rating_2 %}
                 <p id="rating-value-2" style="margin-left: 10px;">
@@ -151,6 +151,6 @@
                 event.preventDefault(); 
             }
         }
-    </script>
+    </script> -->
 </body>
 </html>
