@@ -23,5 +23,6 @@ urlpatterns = [
     # views for AJAX requests
     path('vote/', views.vote_view, name='vote'),
     path('public_private/', views.public_private_view, name='public_private'),
+    path('poll/<str:username>/', views.poll_view, name='poll'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

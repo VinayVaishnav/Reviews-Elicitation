@@ -637,6 +637,113 @@
     }
 </style>
 
+<style>
+    /* carousel */
+    .poll-button {  
+        font-family: 'Albert Sans' !important;
+        padding: 10px;
+        width: 500px !important;
+        background: none !important;
+        border: 2px solid #08c6ab !important;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        color: #08c6ab !important;
+        font-size: 20px !important;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .poll-button:hover {
+        border: 2px solid #1a535c !important;
+        color: #1a535c !important;
+    }
+
+    .poll-button.active {
+        background-color: #08c6ab !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    .poll-button:focus,
+    .poll-button:active {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .custom-carousel {
+        font-family: 'Albert Sans';
+        width: 80%;
+        margin: 0 auto;
+        border:none;
+        position: relative;
+    }
+
+    .custom-carousel:focus,
+    .custom-carousel:active {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .slick-prev,
+    .slick-next {
+        font-family: 'Raleway';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        color: #333;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+
+    .slick-prev:hover,
+    .slick-next:hover {
+        opacity: 1;
+    }
+
+    .slick-prev {
+        left: 0;
+        margin-left: 20px; 
+    }
+
+    .slick-next {
+        right: 0;
+        margin-right: 20px; 
+    }
+
+    .poll-form {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .poll-form:focus,
+    .poll-form:active {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .poll-questions {
+        display: flex;
+        flex-direction: column;
+    }
+    .poll-questions:focus,
+    .poll-questions:active {
+        outline: none;
+        box-shadow: none;
+    }
+</style>
+
 <div class="container">
     <div class="profile-section">
         <div class="imagesection">
@@ -664,6 +771,58 @@
                 </div>
             {% endif %}
             <h1 class="contact">Contact: {{user.userprofile.contact_number}}</h1>
+        </div>
+
+        <div class="custom-carousel">
+            {% for question_num in question_option_dict %}
+                <div class="carousel-item poll-form">
+                    <h3 style="font-size: 20px;">{{ question_option_dict|dict_lookup:question_num|dict_lookup:"question" }}</h3>
+                    <form method="POST" action="{% url 'main:user' username=username %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="question" value="q{{ question_num }}">
+                        <div class="poll-questions">
+                            {% for option in question_option_dict|dict_lookup:question_num|dict_lookup:"options" %}
+                                {% if has_voted_question|dict_lookup:question_num %}
+                                    {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
+                                    <button id="q{{ question_num }}o{{ option.option_num }}"
+                                        data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                                        type="submit" class="poll-button active">
+                                        <span>{{ option.option_text }}</span>
+                                        <span class="percentage">{{ vote_percentages|dict_lookup:question_num|dict_lookup:option.option_num }}%</span>
+                                    </button>
+                                    {% else %}
+                                    <button id="q{{ question_num }}o{{ option.option_num }}"
+                                        data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                                        type="submit" class="poll-button">
+                                        <span>{{ option.option_text }}</span>
+                                        <span class="percentage">{{ vote_percentages|dict_lookup:question_num|dict_lookup:option.option_num }}%</span>
+                                    </button>
+                                    {% endif %}
+                                {% else %}
+                                    {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
+                                    <button id="q{{ question_num }}o{{ option.option_num }}"
+                                        data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                                        type="submit" class="poll-button active">
+                                        <span>{{ option.option_text }}</span>
+                                        <span class="percentage"></span>
+                                    </button>
+                                    {% else %}
+                                    <button id="q{{ question_num }}o{{ option.option_num }}"
+                                        data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                                        type="submit" class="poll-button">
+                                        <span>{{ option.option_text }}</span>
+                                        <span class="percentage"></span>
+                                    </button>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </form>
+                    <h4 id="q{{ question_num }}-votes" style="font-size: 16px !important;">
+                        Total votes: <span class="total-votes">{{ total_votes|dict_lookup:question_num }}</span>
+                    </h4>
+                </div>
+            {% endfor %}
         </div>
     </div>
     
@@ -940,6 +1099,66 @@
                 error: function(response) {
                     console.log(responseText)
                 }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.custom-carousel').slick({
+            arrows: true,
+            prevArrow: '<button type="button" class="slick-prev"><</button>',
+            nextArrow: '<button type="button" class="slick-next">></button>',
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            adaptiveHeight: true
+        });
+    });
+
+    $(document).ready(function() {
+        $('.poll-button').click(function(e) {
+            e.preventDefault()
+            var question = $(this).data('question');
+            var option = $(this).data('option');
+            $.ajax({
+                url: "{% url 'main:poll' username=username %}",
+                type: "POST",
+                data: {
+                    'question': question,
+                    'option': option,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    // console.log(response);
+                    const has_voted = response['has_voted'];
+                    const question = response['question'];
+                    const ques_vote_percentages = response['ques_vote_percentages'];
+                    const ques_total_votes = response['ques_total_votes'];
+                    const has_voted_question = response['has_voted_question'];
+
+                    for(var question_option in has_voted) {
+                        var optionButton = $('#' + question_option)
+
+                        if(has_voted[question_option]) {
+                            optionButton.addClass('active');
+                        }
+                        else{
+                            optionButton.removeClass('active');
+                        }
+
+                        percentageElement = $('#' + question_option + ' .percentage');
+                        if(has_voted_question[question]) {
+                            percentageElement.text(ques_vote_percentages[question_option]+'%');
+                        }
+                        else{
+                            percentageElement.text('');
+                        }
+
+                        var totalVotes = $('#' + question + '-votes .total-votes');
+                        totalVotes.text(ques_total_votes[question]);
+                    }
+                }, 
             });
         });
     });

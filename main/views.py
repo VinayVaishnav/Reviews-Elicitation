@@ -11,6 +11,7 @@ from django.views.decorators.cache import cache_control
 from . import forms
 from . import models
 from . import review_criteria
+from . import polls
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_view(request):
@@ -81,6 +82,7 @@ def verify_view(request):
 
                 user = User.objects.create_user(**user_data)
                 user_profile = models.UserProfile.objects.create(user=user, contact_number=contact_number)
+                poll = models.Poll.objects.create(username=user.username)
 
                 user.save()
 
@@ -118,6 +120,18 @@ def home_view(request):
             'has_downvoted': review.has_downvoted(user), 
         })
 
+    # poll
+    poll = models.Poll.objects.get(username=user.username)
+    has_voted = { question_num: {option['option_num']: poll.has_voted(f'q{question_num}', f'o{option["option_num"]}', user.username)
+                    for option in polls.question_option_dict[question_num]['options']}
+                    for question_num in polls.question_option_dict.keys() }
+    has_voted_question = { question_num: poll.has_voted_question(f'q{question_num}', user.username) for question_num in polls.question_option_dict.keys() }
+    vote_percentages = { question_num: {option['option_num']: poll.get_percentage(f'q{question_num}', f'o{option["option_num"]}')
+                    for option in polls.question_option_dict[question_num]['options']}
+                    for question_num in polls.question_option_dict.keys() }
+    
+    total_votes = { question_num: poll.get_total_votes(f'q{question_num}') for question_num in polls.question_option_dict.keys() }
+
     return render(request, 'main/home.html',
         {
             'user': user,
@@ -130,6 +144,16 @@ def home_view(request):
             'problem_solving': review_criteria.problem_solving,
             'communication': review_criteria.communication,
             'sociability': review_criteria.sociability,
+
+            'poll': poll,
+            'username': user.username,
+            'questions': polls.question_option_dict.keys(),
+            'question_option_dict': polls.question_option_dict,
+            'poll_dict': polls.poll_dict,
+            'has_voted': has_voted,
+            'has_voted_question': has_voted_question,
+            'vote_percentages': vote_percentages,
+            'total_votes': total_votes,
         }
     )
 
@@ -297,6 +321,18 @@ def user_view(request, username):
         else:
             reviewform = forms.ReviewForm(instance=existing_review)
 
+        # poll
+        poll = models.Poll.objects.get(username=username)
+        has_voted = { question_num: {option['option_num']: poll.has_voted(f'q{question_num}', f'o{option["option_num"]}', request.user.username)
+                        for option in polls.question_option_dict[question_num]['options']}
+                        for question_num in polls.question_option_dict.keys() }
+        has_voted_question = { question_num: poll.has_voted_question(f'q{question_num}', request.user.username) for question_num in polls.question_option_dict.keys() }
+        vote_percentages = { question_num: {option['option_num']: poll.get_percentage(f'q{question_num}', f'o{option["option_num"]}')
+                        for option in polls.question_option_dict[question_num]['options']}
+                        for question_num in polls.question_option_dict.keys() }
+        
+        total_votes = { question_num: poll.get_total_votes(f'q{question_num}') for question_num in polls.question_option_dict.keys() }
+
         return render(request, 'main/user.html',
             {
                 'user':user,
@@ -311,6 +347,16 @@ def user_view(request, username):
                 'problem_solving': review_criteria.problem_solving,
                 'communication': review_criteria.communication,
                 'sociability': review_criteria.sociability,
+
+                'poll': poll,
+                'username': username,
+                'questions': polls.question_option_dict.keys(),
+                'question_option_dict': polls.question_option_dict,
+                'poll_dict': polls.poll_dict,
+                'has_voted': has_voted,
+                'has_voted_question': has_voted_question,
+                'vote_percentages': vote_percentages,
+                'total_votes': total_votes,
             }
         )
 
@@ -446,3 +492,33 @@ def public_private_view(request):
         return JsonResponse({ 'success':True, 'skill':skill, 'review_id':review_id, 'bool_val':bool_val, }, safe=False)
     
     return JsonResponse({ 'success':False, }, safe=False)
+
+@login_required
+def poll_view(request, username):
+    poll = models.Poll.objects.get(username=username)
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        option = request.POST.get('option')
+        user = request.user.username
+
+        if question and option:
+            poll.vote(question, option, user)
+            has_voted = { f'{question}{option}': poll.has_voted(question, option, user) for option in polls.poll_dict[question] }
+            has_voted_question = { f'{question}': poll.has_voted_question(question, user) for question in polls.poll_dict.keys() }
+            ques_vote_percentages = { f'{question}{option}': poll.get_percentage(question, option) for option in polls.poll_dict[question] }
+            ques_total_votes = { f'{question}': poll.get_total_votes(question) for question in polls.poll_dict.keys() }
+
+            data = {
+                'success':True,
+                'question':question,
+                'option':option,
+                'user':user,
+                'has_voted':has_voted,
+                'has_voted_question': has_voted_question,
+                'ques_vote_percentages': ques_vote_percentages,
+                'ques_total_votes': ques_total_votes,
+            }
+
+            return JsonResponse(data, safe=False)
+
+    return JsonResponse({'success': False})
