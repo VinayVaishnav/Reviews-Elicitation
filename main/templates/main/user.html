@@ -503,9 +503,9 @@
         border: solid 1px black;
         border-radius: 30px;
         padding: 12px;
-        margin-bottom: 10px;
         width: 80%;
         margin: 10px;
+        margin-bottom: 40px;
     }
     
     .add-form label {
@@ -548,32 +548,80 @@
         cursor: pointer;
         margin-left: 20px;
     }
-    .checkbox div{
+    .checkbox{
+        margin: 10px;
+        margin-bottom: 15px;
+    }
+
+    .checkbox div {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 0px; 
+        grid-row-gap: 0px;
+        margin-left: 30px;
+    }
+
+    .checkbox div > label {
         display: flex;
         flex-direction: row;
-        width: auto;
+        align-items: center;
+        justify-content: center;
+        background-color: #4CAF50;
+        border: solid black;
         color: white;
-        > label{
-            display: flex;
-            flex-direction: row;
-            background-color: black;
-            border-radius: 10px;
-            font-size: x-large;
-            padding: 5px;
-            margin: 0px;
-        }
-        
-        margin: 10px;
-
+        font-size: 18px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin: 5px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
-    @media only screen and (max-width: 1000px){
+
+    .checkbox div > label.selected {
+        background-color: #2E8B57;
+    }
+
+    .checkbox div > label:hover {
+        background-color: #3c8d40;
+    }
+
+    @media only screen and (max-width: 1500px){
         .checkbox div{
+            grid-template-columns: repeat(4, 1fr);
+            margin-left: 10px;
             >label{
                 font-size: 18px;
             }
         }
     }
+    @media only screen and (max-width: 1000px){
+        .checkbox div{
+            grid-template-columns: repeat(3, 1fr);
+            margin-left: 10px;
+            >label{
+                font-size: 15px;
+            }
+        }
+    }
+    @media only screen and (max-width: 750px){
+        .checkbox div{
+            grid-template-columns: repeat(3, 1fr);
+            margin-left: 10px;
+            >label{
+                font-size: 15px;
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+        }
+    }
     @media only screen and (max-width: 480px) {
+        .checkbox div{
+            margin-left: 10px;
+            >label{
+                font-size: 12px;
+            }
+        }
         .reviews-section button {
             width: 62px;
             padding: 2px;
@@ -887,28 +935,37 @@
                     <br/>
 
                     <div class="slider">
-                        <div class="content" >
-                            <p class="skill_header">PROBLEM SOLVING</p>
+                        <div class="content">
+                            <p class="skill_header">Effective_Communication</p>
                             <div class="content_section">
-                                {% for option in review.review.problem_solving %}
+                                {% for option in review.review.Effective_Communication %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
                             </div>
                         </div>
     
                         <div class="content" >
-                            <p class="skill_header">COMMUNICATION</p>
+                            <p class="skill_header">Thinking_and_Problem_Solving</p>
                             <div class="content_section">
-                                {% for option in review.review.communication %}
+                                {% for option in review.review.Thinking_and_Problem_Solving %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
                             </div>
                         </div>
     
                         <div class="content" >
-                            <p class="skill_header">SOCIABILITY</p>
+                            <p class="skill_header">Responsible_Leadership</p>
                             <div class="content_section">
-                                {% for option in review.review.sociability %}
+                                {% for option in review.review.Responsible_Leadership %}
+                                    <span class="selected-option">{{ option }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="content" >
+                            <p class="skill_header">Ethical_Professionalism</p>
+                            <div class="content_section">
+                                {% for option in review.review.Ethical_Professionalism %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
                             </div>
@@ -972,29 +1029,37 @@
                     <br/>
                     
                     <div class="slider">
-                        <div class="content" >
-                            <p class="skill_header">PROBLEM SOLVING</p>
+                        <div class="content">
+                            <p class="skill_header">Effective_Communication</p>
                             <div class="content_section">
-                                {% for option in review.review.problem_solving %}
+                                {% for option in review.review.Effective_Communication %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
                             </div>
                         </div>
     
                         <div class="content" >
-                            <p class="skill_header">COMMUNICATION</p>
+                            <p class="skill_header">Thinking_and_Problem_Solving</p>
                             <div class="content_section">
-                                {% for option in review.review.communication %}
+                                {% for option in review.review.Thinking_and_Problem_Solving %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
-                                
                             </div>
                         </div>
-                        
+    
                         <div class="content" >
-                            <p class="skill_header">SOCIABILITY</p>
+                            <p class="skill_header">Responsible_Leadership</p>
                             <div class="content_section">
-                                {% for option in review.review.sociability %}
+                                {% for option in review.review.Responsible_Leadership %}
+                                    <span class="selected-option">{{ option }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="content" >
+                            <p class="skill_header">Ethical_Professionalism</p>
+                            <div class="content_section">
+                                {% for option in review.review.Ethical_Professionalism %}
                                     <span class="selected-option">{{ option }}</span>
                                 {% endfor %}
                             </div>
@@ -1016,33 +1081,43 @@
         <form method="post" enctype="multipart/form-data" class="add-form">
             {% csrf_token %}
             <div>
-                <label >Problem Solving</label>
+                <label >Effective Communication and Teamwork</label>
 
                 <p id="rating-value-1" style="margin-left: 10px;"></p>
                 
                 <div class="checkbox">
-                    {{ reviewform.problem_solving }}
-                    {{ reviewform.problem_solving.errors }} 
+                    {{ reviewform.Effective_Communication }}
+                    {{ reviewform.Effective_Communication.errors }} 
                 </div>
             </div>
 
             <div >
-                <label >Communications</label>
+                <label >Innovative Thinking and Problem-Solving</label>
 
                 <p id="rating-value-2" style="margin-left: 10px;"></p>
                 <div class="checkbox">
-                    {{ reviewform.communication }}
-                    {{ reviewform.communication.errors }} 
+                    {{ reviewform.Thinking_and_Problem_Solving }}
+                    {{ reviewform.Thinking_and_Problem_Solving.errors }} 
                 </div>
             </div>
 
             <div>
-                <label >Sociability</label>
+                <label >Responsible Leadership and Self-Management</label>
 
                 <p id="rating-value-3" style="margin-left: 10px;"></p>
                 <div class="checkbox">
-                    {{ reviewform.sociability }}
-                    {{ reviewform.sociability.errors }} 
+                    {{ reviewform.Responsible_Leadership }}
+                    {{ reviewform.Responsible_Leadership.errors }} 
+                </div>
+            </div>
+
+            <div>
+                <label >Ethical Professionalism and Persistence</label>
+
+                <p id="rating-value-4" style="margin-left: 10px;"></p>
+                <div class="checkbox">
+                    {{ reviewform.Ethical_Professionalism }}
+                    {{ reviewform.Ethical_Professionalism.errors }} 
                 </div>
             </div>
 
