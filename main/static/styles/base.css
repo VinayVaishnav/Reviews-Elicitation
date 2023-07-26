@@ -34,7 +34,7 @@ input[type="text"] {
 }
 
 button[type="submit"] {
-  background-color: #56B4BE;
+  background-color:rgb(115, 198, 250);
   color: white;
   border: none;
   border-radius: 4px;
@@ -48,7 +48,7 @@ button[type="submit"] {
 }
 
 .search-button:hover {
-  background-color: #4ecdc4;
+  background-color:rgb(47, 195, 254);
 }
 
 a {
