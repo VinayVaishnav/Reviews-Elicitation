@@ -30,7 +30,7 @@
             width: 700px;
         }
         .imagesection{
-            width: 33%;
+            width: 25%;
         }
         .profile-details{
             width: 40%;
@@ -418,16 +418,16 @@
     }
 
     .vote-btn:hover{
-        background-color: black !important;
+        background-color: #666 !important;
     }
 
     .used-vote-btn {
         font-size: larger !important;
-        background-color: #4ecdc4 !important;
+        background-color: #5494d3 !important;
     }
-    
+
     .used-vote-btn:hover{
-        background-color: #1a535c !important;
+        background-color: #00619c !important;
     }
 
     .vote-count {
@@ -448,15 +448,15 @@
         width: 80px !important;
         font-family: 'Gantari';
         font-size: larger;
-        color: #08c6ab;
-        border: 2px solid #08c6ab;
+        color: #5494d3;
+        border: 2px solid #5494d3;
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
     .editdelete .button-container:hover {
-        background-color: #08c6ab !important;
+        background-color: #5494d3 !important;
         color: white;
     }
     
@@ -505,6 +505,7 @@
         text-align: center;
         font-size: 58px;
         margin-bottom: 10px;
+        font-family: 'Gantari';
     }
 
     .add-form {
@@ -535,7 +536,7 @@
         margin-right: 10px;
         font-weight: bold;
         font-size: 38px;
-        
+        font-family: 'Albert Sans';
     }
 
     #rating-value-1,
@@ -690,10 +691,10 @@
         padding: 10px;
         width: 500px !important;
         background: none !important;
-        border: 2px solid #08c6ab !important;
+        border: 2px solid #5494d3 !important;
         border-radius: 4px;
         margin-bottom: 10px;
-        color: #08c6ab !important;
+        color: #5494d3 !important;
         font-size: 20px !important;
         cursor: pointer;
 
@@ -703,14 +704,14 @@
     }
 
     .poll-button:hover {
-        border: 2px solid #1a535c !important;
-        color: #1a535c !important;
+        border: 2px solid #004a82 !important;
+        color: #004a82 !important;
     }
 
     .poll-button.active {
-        background-color: #08c6ab !important;
+        background-color: #5494d3 !important;
         color: #fff !important;
-        border: none !important;
+        border-color: none !important;
     }
 
     .poll-button:focus,
@@ -1080,8 +1081,7 @@
             {% csrf_token %}
             <div>
                 <label >Effective Communication and Teamwork</label>
-
-                <p id="rating-value-1" style="margin-left: 10px;"></p>
+                <br/>
                 
                 <div class="checkbox">
                     {% for option in reviewform.Effective_Communication %}
@@ -1093,8 +1093,7 @@
 
             <div >
                 <label >Innovative Thinking and Problem-Solving</label>
-
-                <p id="rating-value-2" style="margin-left: 10px;"></p>
+                <br/>
                 <div class="checkbox">
                     {% for option in reviewform.Thinking_and_Problem_Solving %}
                         <span class="option">{{ option }}</span>
@@ -1105,8 +1104,7 @@
 
             <div>
                 <label >Responsible Leadership and Self-Management</label>
-
-                <p id="rating-value-3" style="margin-left: 10px;"></p>
+                <br/>
                 <div class="checkbox">
                     {% for option in reviewform.Responsible_Leadership %}
                         <span class="option">{{ option }}</span>
@@ -1117,8 +1115,7 @@
 
             <div>
                 <label >Ethical Professionalism and Persistence</label>
-
-                <p id="rating-value-4" style="margin-left: 10px;"></p>
+                <br/>
                 <div class="checkbox">
                     {% for option in reviewform.Ethical_Professionalism %}
                         <span class="option">{{ option }}</span>

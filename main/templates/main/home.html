@@ -32,7 +32,7 @@
             width: 600px;
         }
         .imagesection{
-            width: 33%;
+            width: 25%;
             margin-right: 30px;
         }
         .profile-details{
@@ -63,7 +63,7 @@
 
     .profile-name {
         font-family: 'Raleway';
-        font-size: 60px;
+        font-size: 40px;
         font-weight: bold;
         margin-bottom: 30px;
         padding-bottom: 5px;
@@ -85,7 +85,7 @@
         font-family: 'Raleway';
         margin-top: 4px;
         margin-bottom: 12px;
-        font-size: 45px;
+        font-size: 35px;
         margin-right: 20px;
     }
 
@@ -120,7 +120,7 @@
             font-size: 35px;
         }
         .profile-bio{
-            font-size: 40px;
+            font-size: 30px;
         }
     }
 
@@ -427,16 +427,16 @@
     }
 
     .vote-btn:hover{
-        background-color: black !important;
+        background-color: #666 !important;
     }
 
     .used-vote-btn {
         font-size: larger !important;
-        background-color: #4ecdc4 !important;
+        background-color: #5494d3 !important;
     }
 
     .used-vote-btn:hover{
-        background-color: #1a535c !important;
+        background-color: #00619c !important;
     }
 
     .vote-count {
@@ -460,15 +460,15 @@
         width:80px !important;
         font-family: 'Gantari';
         font-size: larger;
-        color: #08c6ab;
-        border: 2px solid #08c6ab;
+        color: #5494d3;
+        border: 2px solid #5494d3;
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
     .editdelete .button-container:hover {
-        background-color: #08c6ab !important;
+        background-color: #5494d3 !important;
         color: white;
     }
 
@@ -503,16 +503,15 @@
 </style>
 
 <style>
-    /* carousel */
     .poll-button {  
         font-family: 'Albert Sans' !important;
         padding: 10px;
         width: 500px !important;
         background: none !important;
-        border: 2px solid #08c6ab !important;
+        border: 2px solid #5494d3 !important;
         border-radius: 4px;
         margin-bottom: 10px;
-        color: #08c6ab !important;
+        color: #5494d3 !important;
         font-size: 20px !important;
         cursor: pointer;
 
@@ -522,14 +521,14 @@
     }
 
     .poll-button:hover {
-        border: 2px solid #1a535c !important;
-        color: #1a535c !important;
+        border: 2px solid #004a82 !important;
+        color: #004a82 !important;
     }
 
     .poll-button.active {
-        background-color: #08c6ab !important;
+        background-color: #5494d3 !important;
         color: #fff !important;
-        border: none !important;
+        border-color: none !important;
     }
 
     .poll-button:focus,
@@ -621,7 +620,6 @@
             {% else %}
                 <img class="profile-image" src="{% static 'profile_images/default.jpg' %}" alt="Default Image" >
             {% endif %}
-            <a href="{% url 'main:update_image' %}"><button class="profile-button">Update Profile Image</button></a>
         </div>
         
         <div class="profile-details">
@@ -632,7 +630,6 @@
                         <h3 class="profile-bio">Bio:</h3>
                         <p class="bio-description">{{ user.userprofile.bio }}</p>
                     </div>
-                    <a href="{% url 'main:update_bio' %}"><button class="profile-button">Add/Edit Bio</button></a>
                 </div>
             {% else %}
                 <div class="bio-section">
@@ -640,13 +637,10 @@
                         <h3 class="profile-bio">Bio:</h3>
                         <p class="bio-description">No bio yet.</p>
                     </div>
-                    <a href="{% url 'main:update_bio' %}"><button class="profile-button">Add/Edit Bio</button></a>
                 </div>
             {% endif %}
             
             <h1 class="contact">Contact: {{user.userprofile.contact_number}}</h1>
-            <a href="{% url 'main:update_details' %}"><button class="profile-button">Update Profile Details</button></a>
-            <a href="{% url 'main:password_change' %}"><button class="profile-button">Change Password</button></a>
         </div>
         
         <div class="custom-carousel">

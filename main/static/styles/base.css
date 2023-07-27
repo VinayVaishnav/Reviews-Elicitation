@@ -34,7 +34,7 @@ input[type="text"] {
 }
 
 button[type="submit"] {
-  background-color:rgb(115, 198, 250);
+  background-color:#71aeef;
   color: white;
   border: none;
   border-radius: 4px;
@@ -48,7 +48,7 @@ button[type="submit"] {
 }
 
 .search-button:hover {
-  background-color:rgb(47, 195, 254);
+  background-color:#337ab7;
 }
 
 a {
@@ -90,6 +90,13 @@ a:hover {
   font-size: 16px;
 }
 
+.button-container .settings-button {
+  /* margin-left: 10px; */
+  font-size: 25px;
+  font-family: inherit;
+  margin: 0;
+}
+
 .button-container .logout-button {
   padding: 12px 24px;
   color: #fff;
@@ -103,6 +110,42 @@ a:hover {
 .button-container .logout-button:hover {
   background-color: #555;
   /* font-size: 14px; */
+}
+
+/* dropdown */
+.dropdown {
+  float: left;
+  overflow: hidden;
+  font-family: 'Albert Sans';
+  /* margin-right: 100px; */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  font-family: 'Albert Sans';
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 15px 20px;
+  text-decoration: none;
+  margin: 0;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* Set max width to screen size */

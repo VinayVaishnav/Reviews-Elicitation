@@ -22,17 +22,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header style="padding: 0px; padding-top: 5px; padding-bottom: 5px;">
         <form action="{% url 'main:search' %}" method="GET">
-          <input type="text" name="q" placeholder="Talent Hunt" value="{{ query }}">
-          <button type="submit" class="search-button">HUNT</button>
+          <input type="text" name="q" placeholder="Who are you looking for?" value="{{ query }}">
+          <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
         </form>
         <div class="button-container">
           <a href="{% url 'main:home' %}"><button>HOME</button></a>
           <button class="about-us-button">ABOUT US</button>
+          
+          <div class="dropdown">
+            <button class="settings-button">&#9881;</button>
+            <div class="dropdown-content">
+              <a href="{% url 'main:update_image' %}">Update Profile Image</a>
+              <a href="{% url 'main:update_bio' %}">Add/Edit Bio</a>
+              <a href="{% url 'main:update_details' %}">Update Profile Details</a>
+              <a href="{% url 'main:password_change' %}">Change Password</a>
+            </div>
+          </div>
+
           <form action="{% url 'main:logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="logout-button">LOGOUT</button>
