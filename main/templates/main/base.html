@@ -27,6 +27,25 @@
 </head>
 <body>
     <header style="padding: 0px; padding-top: 5px; padding-bottom: 5px;">
+        
+        <div id="mySidepanel" class="sidepanel">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="{% url 'main:home' %}">HOME</a>
+          <a href="#">ABOUT US</a>
+          <a href="{% url 'main:update_image' %}">UPDATE PROFILE IMAGE</a>
+          <a href="{% url 'main:update_bio' %}">ADD/EDIT BIO</a>
+          <a href="{% url 'main:update_details' %}">UPDATE PROFILE DETAILS</a>
+          <a href="{% url 'main:password_change' %}">CHANGE PASSWORD</a>
+          
+          <a href="{% url 'main:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            LOGOUT
+          </a>
+          <form id="logout-form" action="{% url 'main:logout' %}" method="post" style="display: none;">
+            {% csrf_token %}
+          </form>
+        </div>
+        <button class="openbtn" onclick="openNav()">&#9776;</button>
+
         <form action="{% url 'main:search' %}" method="GET">
           <input type="text" name="q" placeholder="Who are you looking for?" value="{{ query }}">
           <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
@@ -34,9 +53,9 @@
         <div class="button-container">
           <a href="{% url 'main:home' %}"><button>HOME</button></a>
           <button class="about-us-button">ABOUT US</button>
-          
+
           <div class="dropdown">
-            <button class="settings-button">&#9881;</button>
+            <button class="settings-button">SETTINGS</button>
             <div class="dropdown-content">
               <a href="{% url 'main:update_image' %}">Update Profile Image</a>
               <a href="{% url 'main:update_bio' %}">Add/Edit Bio</a>
@@ -45,14 +64,26 @@
             </div>
           </div>
 
-          <form action="{% url 'main:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="logout-button">LOGOUT</button>
-          </form>
+          <a href="{% url 'main:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <button>LOGOUT</button>
+          </a>
         </div>
     </header>
 
     {% block content %}
     {% endblock %}
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidepanel").style.width = "100%";
+        document.getElementById("mySidepanel").style.height = "100%";
+      }
+
+      /* Set the width of the sidebar to 0 (hide it) */
+      function closeNav() {
+        document.getElementById("mySidepanel").style.width = "0";
+      }
+    </script>
+
 </body>
 </html>

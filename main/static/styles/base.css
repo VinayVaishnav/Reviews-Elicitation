@@ -25,7 +25,7 @@ form {
 
 input[type="text"] {
   font-family: 'Raleway';
-  font-size: large;
+  font-size: 20px;
   padding: 10px;
   width: 80%;
   border: none;
@@ -42,7 +42,7 @@ button[type="submit"] {
   cursor: pointer;
   margin-left: 10px;
   /* font-size: 15px; */
-  font-size: large;
+  font-size: 20px;
   font-family: 'Raleway';
   font-weight: bold;
 }
@@ -92,7 +92,7 @@ a:hover {
 
 .button-container .settings-button {
   /* margin-left: 10px; */
-  font-size: 25px;
+  /* font-size: 25px; */
   font-family: inherit;
   margin: 0;
 }
@@ -114,8 +114,10 @@ a:hover {
 
 /* dropdown */
 .dropdown {
-  float: left;
-  overflow: hidden;
+  /* float: left;
+  overflow: hidden; */
+  position: relative;
+  display: inline-block;
   font-family: 'Albert Sans';
   /* margin-right: 100px; */
 }
@@ -128,6 +130,8 @@ a:hover {
   font-family: 'Albert Sans';
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  right: 0;
+  left: auto;
 }
 
 .dropdown-content a {
@@ -148,12 +152,61 @@ a:hover {
   display: block;
 }
 
+.sidepanel {
+  height: 250px; /* Specify a height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #333;;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Albert Sans';
+  color: #f1f1f1;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
 /* Set max width to screen size */
 @media screen and (max-width: 768px) {
   input[type="text"] {
     width: 70%;
     margin-left: 10px;
     padding-right: 20px;
+    font-size: 14px;
   }
   header {
     width: 100%;
@@ -172,47 +225,58 @@ a:hover {
   }
   input[type="text"] {
     width: 100%;
-    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 12px;
     padding-right: 25px;
-    margin-right: 6px;
+    font-size: 18px;
   }
   .button-container{
     padding: 0px;
     padding-left: 8px;
   }
-  button[type="submit"] {
-    padding: 6px;
-    margin: 0px;
-  }
   .button-container button {
+    font-size: 14px;
     padding: 2px;
     padding-right: 0px;
     margin: 0px;
   }
-  .button-container .about-us-button, .button-container .logout-button{ 
+  .button-container .about-us-button, .button-container .logout-button{
+    font-size: 14px;
     padding: 2px;
     margin-left: 0px;
   }
   .button-container .about-us-button{
+    font-size: 14px;
     padding-left: 0px;
     margin-right: 3px;
   }
 }
 
 @media screen and (max-width: 700px){
-  body{
-    font-size: small;
-  }
   .button-container .about-us-button, .button-container .logout-button{
-    font-size: small;
     padding: 2px;
     margin-left: 0px;
   }
-  .button-container button {
-    font-size: small;
+}
+
+@media screen and (max-width: 650px) {
+  input[type="text"] {
+    font-size: 17px;
   }
   button[type="submit"] {
-    font-size: small;
+    font-size: 19px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .button-container {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .openbtn {
+    display: none;
   }
 }
