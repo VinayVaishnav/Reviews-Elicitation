@@ -410,10 +410,7 @@ def edit_view(request, review_id):
                 form = forms.ReviewForm(instance=review)
                 return render(request, 'main/edit.html',
                     {
-                        'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, 
-                        'problem_solving': review_criteria.problem_solving,
-                        'communication': review_criteria.communication,
-                        'sociability': review_criteria.sociability,
+                        'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user,
                     }
                 )
             
@@ -422,9 +419,6 @@ def edit_view(request, review_id):
             return render(request, 'main/edit.html', 
                 {
                     'form':form, 'review_id':review_id, 'review':review, 'username':review.to_user, 
-                    'problem_solving': review_criteria.problem_solving,
-                    'communication': review_criteria.communication,
-                    'sociability': review_criteria.sociability,
                 }
             )
         

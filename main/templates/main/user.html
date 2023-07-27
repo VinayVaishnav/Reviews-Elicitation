@@ -312,6 +312,7 @@
             font-size: 18px;
             display: block;
             padding: 4px;
+            text-align: center;
             .selected-option {
                 display: inline-block;
                 padding: 5px 10px;
@@ -363,6 +364,11 @@
         font-weight: bold;
         cursor: pointer;
         transition: background-color 0.3s ease;
+    }
+
+    .is-anonymous-checkbox {
+        width: 20px;
+        height: 20px;
     }
 
     .reviews-section button:hover {
@@ -583,11 +589,12 @@
         cursor: pointer;
         margin-left: 20px;
     }
-    .checkbox{
+    .checkbox {
         font-family: 'Gantari';
         font-size: 18px;
         display: block;
         padding: 4px;
+        text-align: center;
         >span {
             display: inline-block;
             padding: 5px 10px;
@@ -601,12 +608,8 @@
         }
     }
 
-    .checkbox div > label.selected {
-        background-color: #2E8B57;
-    }
-
-    .checkbox div > label:hover {
-        background-color: #3c8d40;
+    .checkbox .option:hover {
+        background-color: #004a82;
     }
 
     @media only screen and (max-width: 1500px){
