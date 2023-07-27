@@ -20,16 +20,25 @@
     }
 
     .profile-section {
-        padding: 30px;
-        margin: 10px;
-        margin-right: 10px;
-        margin-left: 10px;
+        padding: 10px;
         display: flex;
-        padding-left: 40px;
-        border-radius: 30px;
-        background-color: #f0f0f0;
-        height: 470px;
+        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
+        background-color: #f0f0f0;
+        border-radius: 30px;
+        margin: 10px;
+        >div{
+            width: 600px;
+        }
+        .imagesection{
+            width: 33%;
+            margin-right: 30px;
+        }
+        .profile-details{
+            width: 40%;
+        }
+        
     }
 
     .imagesection{
@@ -37,13 +46,10 @@
         align-items: center;
         display: flex;
         flex-direction: column;
-        margin-right: 30px;
-        margin-right: 200px;
     }
 
     .profile-image {
-        width: 400px;
-        height: 400px;
+        height: 300px;
         border-radius: 50%;
         margin-bottom: 20px;
     }
@@ -122,6 +128,10 @@
         .imagesection{
             margin-right: 40px;
         }
+        .profile-image{
+            height: 250px;
+            width: 250px;
+        }
         .profile-name{
             font-size: 35px;
         }
@@ -136,6 +146,11 @@
     @media only screen and (max-width: 768px) {
         .profile-section {
             flex-direction: column;
+            >div{
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
             padding: 20px;
             height: auto;
             margin-right: 10px;
@@ -633,10 +648,9 @@
             <a href="{% url 'main:update_details' %}"><button class="profile-button">Update Profile Details</button></a>
             <a href="{% url 'main:password_change' %}"><button class="profile-button">Change Password</button></a>
         </div>
-    </div>
-
-    <div class="custom-carousel">
-        {% for question_num in question_option_dict %}
+        
+        <div class="custom-carousel">
+            {% for question_num in question_option_dict %}
             <div class="carousel-item poll-form">
                 <h3 style="font-size: 20px;">{{ question_option_dict|dict_lookup:question_num|dict_lookup:"question" }}</h3>
                 <form method="POST" action="{% url 'main:home' %}">
@@ -644,39 +658,39 @@
                     <input type="hidden" name="question" value="q{{ question_num }}">
                     <div class="poll-questions">
                         {% for option in question_option_dict|dict_lookup:question_num|dict_lookup:"options" %}
-                            {% if has_voted_question|dict_lookup:question_num %}
-                                {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
-                                <button id="q{{ question_num }}o{{ option.option_num }}"
-                                    data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
-                                    type="submit" class="poll-button active">
-                                    <span>{{ option.option_text }}</span>
-                                    <span class="percentage">{{ vote_percentages|dict_lookup:question_num|dict_lookup:option.option_num }}%</span>
-                                </button>
-                                {% else %}
-                                <button id="q{{ question_num }}o{{ option.option_num }}"
-                                    data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
-                                    type="submit" class="poll-button">
-                                    <span>{{ option.option_text }}</span>
+                        {% if has_voted_question|dict_lookup:question_num %}
+                        {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
+                        <button id="q{{ question_num }}o{{ option.option_num }}"
+                        data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                        type="submit" class="poll-button active">
+                        <span>{{ option.option_text }}</span>
+                        <span class="percentage">{{ vote_percentages|dict_lookup:question_num|dict_lookup:option.option_num }}%</span>
+                    </button>
+                    {% else %}
+                    <button id="q{{ question_num }}o{{ option.option_num }}"
+                    data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                    type="submit" class="poll-button">
+                    <span>{{ option.option_text }}</span>
                                     <span class="percentage">{{ vote_percentages|dict_lookup:question_num|dict_lookup:option.option_num }}%</span>
                                 </button>
                                 {% endif %}
+                                {% else %}
+                                {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
+                                <button id="q{{ question_num }}o{{ option.option_num }}"
+                                data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                                type="submit" class="poll-button active">
+                                <span>{{ option.option_text }}</span>
+                                <span class="percentage"></span>
+                            </button>
                             {% else %}
-                                {% if has_voted|dict_lookup:question_num|dict_lookup:option.option_num %}
-                                <button id="q{{ question_num }}o{{ option.option_num }}"
-                                    data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
-                                    type="submit" class="poll-button active">
-                                    <span>{{ option.option_text }}</span>
-                                    <span class="percentage"></span>
-                                </button>
-                                {% else %}
-                                <button id="q{{ question_num }}o{{ option.option_num }}"
-                                    data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
-                                    type="submit" class="poll-button">
-                                    <span>{{ option.option_text }}</span>
-                                    <span class="percentage"></span>
-                                </button>
-                                {% endif %}
-                            {% endif %}
+                            <button id="q{{ question_num }}o{{ option.option_num }}"
+                            data-question="q{{ question_num }}" data-option="o{{ option.option_num }}"
+                            type="submit" class="poll-button">
+                            <span>{{ option.option_text }}</span>
+                            <span class="percentage"></span>
+                        </button>
+                        {% endif %}
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </form>
@@ -684,7 +698,8 @@
                     Total votes: <span class="total-votes">{{ total_votes|dict_lookup:question_num }}</span>
                 </h4>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
     <div class="reviews-section">
