@@ -270,7 +270,7 @@ a:hover {
     margin-right: 10px;
   }
 
-  .button-container {
+  .button-container.navbarbuttons {
     display: none !important;
   }
 }
