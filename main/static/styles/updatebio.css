@@ -7,7 +7,6 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    padding: 20px;
 }
 
 form {
@@ -15,9 +14,9 @@ form {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    max-width: 400px;
-    width: 100%;
+    padding: 10px;
+    max-width: 600px;
+    width: 80%;
     text-align: center;
 }
 
@@ -57,7 +56,6 @@ form button[type="button"] {
     cursor: pointer;
     background-color: #4ecdc4;
     color: #fff;
-    margin-right: 10px;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
@@ -70,10 +68,10 @@ form button[type="button"]:hover {
 
 a.cancel-link {
     font-family: 'Montserrat';
-    font-size: larger;
+    font-size: 25px;
     text-decoration: none;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 25px;
     color: #333;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -86,10 +84,11 @@ a.cancel-link:hover {
 
 .bio-textarea {
     font-family: 'Montserrat';
-    width: 100%;
+    width: 90%;
     height: 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    resize: vertical;
 }

@@ -12,18 +12,19 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-    contact_number = forms.CharField(min_length=10, max_length=10, required=True, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
+    # contact_number = forms.CharField(min_length=10, max_length=10, required=True, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'contact_number', 'password1', 'password2']
+        # fields = ['first_name', 'last_name', 'email', 'contact_number', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].label = ''
         self.fields['last_name'].label = ''
         self.fields['email'].label = ''
-        self.fields['contact_number'].label = ''
+        # self.fields['contact_number'].label = ''
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''
 
@@ -56,13 +57,13 @@ class CustomUserCreationForm(UserCreationForm):
             return email
         raise forms.ValidationError("This email id is already registered.")
     
-    def clean_contact_number(self):
-        contact_number = self.cleaned_data.get('contact_number')
-        try:
-            user_profile = models.UserProfile.objects.get(contact_number=contact_number)
-        except models.UserProfile.DoesNotExist:
-            return contact_number
-        raise forms.ValidationError("This contact number is already registered.")
+    # def clean_contact_number(self):
+    #     contact_number = self.cleaned_data.get('contact_number')
+    #     try:
+    #         user_profile = models.UserProfile.objects.get(contact_number=contact_number)
+    #     except models.UserProfile.DoesNotExist:
+    #         return contact_number
+    #     raise forms.ValidationError("This contact number is already registered.")
     
 
 class CustomAuthenticationForm(forms.Form):
@@ -136,7 +137,7 @@ class ProfileDetailsForm(forms.Form):
 
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    contact_number = forms.CharField(min_length=10, max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
+    # contact_number = forms.CharField(required=False, min_length=10, max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}))
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
 
     def __init__(self, *args, **kwargs):
@@ -146,7 +147,7 @@ class ProfileDetailsForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].label = 'First Name'
         self.fields['last_name'].label = 'Last Name'
-        self.fields['contact_number'].label = 'Contact Number'
+        # self.fields['contact_number'].label = 'Contact Number'
         self.fields['gender'].label = 'Gender'
 
         if user:
@@ -154,19 +155,19 @@ class ProfileDetailsForm(forms.Form):
             self.fields['last_name'].initial = user.last_name
 
             profile = models.UserProfile.objects.get(user=user)
-            self.fields['contact_number'].initial = profile.contact_number
+            # self.fields['contact_number'].initial = profile.contact_number
             self.fields['gender'].initial = profile.gender
 
-    def clean_contact_number(self):
-        contact_number = self.cleaned_data['contact_number']
-        if len(contact_number) != 10:
-            raise forms.ValidationError("Contact number should be a 10-digit number.")
+    # def clean_contact_number(self):
+    #     contact_number = self.cleaned_data['contact_number']
+    #     if len(contact_number) != 10:
+    #         raise forms.ValidationError("Contact number should be a 10-digit number.")
         
-        user = self.user
+    #     user = self.user
 
-        if models.UserProfile.objects.exclude(user=user).filter(contact_number=contact_number).exists():
-            raise forms.ValidationError("This contact number is already taken.")
-        return contact_number
+    #     if models.UserProfile.objects.exclude(user=user).filter(contact_number=contact_number).exists():
+    #         raise forms.ValidationError("This contact number is already taken.")
+    #     return contact_number
     
     def save(self, user):
         user.first_name = self.cleaned_data['first_name']
@@ -175,7 +176,7 @@ class ProfileDetailsForm(forms.Form):
 
         profile = models.UserProfile.objects.get(user=user)
 
-        profile.contact_number = self.cleaned_data['contact_number']
+        # profile.contact_number = self.cleaned_data['contact_number']
         profile.gender = self.cleaned_data['gender']
         profile.save()
 

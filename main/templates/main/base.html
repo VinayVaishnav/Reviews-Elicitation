@@ -31,7 +31,7 @@
         <div id="mySidepanel" class="sidepanel">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a href="{% url 'main:home' %}">HOME</a>
-          <a href="#">ABOUT US</a>
+          <a href="https://docs.google.com/presentation/d/1f1VXa8w3FtW9c5975jYvC--gmMzVSdWXD41UjtL9GXc/edit?usp=sharing">ABOUT US</a>
           <a href="{% url 'main:update_image' %}">UPDATE PROFILE IMAGE</a>
           <a href="{% url 'main:update_bio' %}">ADD/EDIT BIO</a>
           <a href="{% url 'main:update_details' %}">UPDATE PROFILE DETAILS</a>
@@ -51,8 +51,10 @@
           <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
         </form>
         <div class="button-container navbarbuttons">
-          <a href="{% url 'main:home' %}"><button>HOME</button></a>
-          <button class="about-us-button">ABOUT US</button>
+          <a href="{% url 'main:home' %}"><button style="font-family: Albert Sans;">HOME</button></a>
+          <a href="https://docs.google.com/presentation/d/1f1VXa8w3FtW9c5975jYvC--gmMzVSdWXD41UjtL9GXc/edit?usp=sharing">
+            <button class="about-us-button" style="font-family: Albert Sans;">ABOUT US</button>
+          </a>
 
           <div class="dropdown">
             <button class="settings-button">SETTINGS</button>
@@ -65,7 +67,7 @@
           </div>
 
           <a href="{% url 'main:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <button>LOGOUT</button>
+            <button style="font-family: Albert Sans;">LOGOUT</button>
           </a>
         </div>
     </header>

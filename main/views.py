@@ -46,7 +46,7 @@ def signup_view(request):
                 'first_name': form.cleaned_data['first_name'],
                 'last_name': form.cleaned_data['last_name'],
                 'email': form.cleaned_data['email'],
-                'contact_number': form.cleaned_data['contact_number'],
+                # 'contact_number': form.cleaned_data['contact_number'],
                 'password1': form.cleaned_data['password1'],
                 'password2': form.cleaned_data['password2'],
             }
@@ -72,16 +72,17 @@ def verify_view(request):
         if form.is_valid():
             otp = form.cleaned_data['otp']
             if str(request.session.get('otp')) == str(otp):
-                contact_number = user_data['contact_number']
+                # contact_number = user_data['contact_number']
 
                 user_data['password'] = user_data['password1']
                 user_data['username']=str(user_data['first_name']+'-'+user_data['last_name']+'-'+timezone.now().strftime('%Y%m%d%H%M%S')).lower()
                 del user_data['password1']
                 del user_data['password2']
-                del user_data['contact_number']
+                # del user_data['contact_number']
 
                 user = User.objects.create_user(**user_data)
-                user_profile = models.UserProfile.objects.create(user=user, contact_number=contact_number)
+                # user_profile = models.UserProfile.objects.create(user=user, contact_number=contact_number)
+                user_profile = models.UserProfile.objects.create(user=user)
                 poll = models.Poll.objects.create(username=user.username)
 
                 user.save()
