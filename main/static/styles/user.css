@@ -27,7 +27,7 @@ form {
     margin: 10px;
 }
 
-.profile-section div{
+.profile-section div {
     width: 600px;
 }
 
@@ -810,8 +810,10 @@ form {
 }
 
 .poll-questions {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .poll-questions:focus,
