@@ -725,7 +725,6 @@ form {
     color: #5494d3 !important;
     font-size: 20px !important;
     cursor: pointer;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -822,8 +821,12 @@ form {
     box-shadow: none;
 }
 
-.poll-button{
+.poll-button {
     margin: 5px !important;
     padding: 10px !important;
-    width: 100% !important;
+    width: 80% !important;
+}
+
+.poll-button h3 {
+    text-align: center;
 }

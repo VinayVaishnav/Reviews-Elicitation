@@ -620,6 +620,7 @@ form {
     flex-direction: column;
     align-items: center;
 }
+
 .poll-questions:focus,
 .poll-questions:active {
     outline: none;
