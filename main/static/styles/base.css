@@ -15,7 +15,7 @@ header {
   width: 100%;
 }
 
-form {
+form.base-form{
   margin-right: 10px;
   display: flex;
   align-items: center;
@@ -211,7 +211,7 @@ a:hover {
   header {
     width: 100%;
   }
-  form {
+  form.base-form {
     margin-right: 5px;
   }
 }
@@ -220,7 +220,7 @@ a:hover {
   header {
     padding: 10px;
   }
-  form {
+  form.base-form{
     margin-right: 5px;
   }
   input[type="text"] {

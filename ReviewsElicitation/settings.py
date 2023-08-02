@@ -78,9 +78,9 @@ else:
     import cloudinary.api
 
     INSTALLED_APPS.append('cloudinary')
+    INSTALLED_APPS.append('whitenoise.runserver_nostatic')
 
     MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
-    MIDDLEWARE.append('django.middleware.security.SecurityMiddleware')
 
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
