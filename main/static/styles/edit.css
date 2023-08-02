@@ -43,6 +43,7 @@ form .category-heading {
 form div{
     margin-bottom: 30px;
 }
+
 form label {
     display: block;
     color: #fff;
@@ -105,23 +106,22 @@ a.cancel-link:hover {
     font-size: 18px;
     display: block;
     padding: 4px;
-    >span {
-        display: inline-block;
-        padding: 5px 10px;
-        margin: 5px;
-        background-color: #337ab7;
-        border-radius: 5px;
-        >label{
-            font-size: 20px;
-        }
-    }
+}
+
+.checkbox span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #337ab7;
+    border-radius: 5px;
+}
+.checkbox span label {
+    font-size: 20px;
 }
 
 .checkbox .option:hover {
     background-color: #004a82;
 }
-
-
 
 @media only screen and (max-width:700px){
     form .category-heading {
@@ -132,7 +132,7 @@ a.cancel-link:hover {
         font-size: 18px;
     }
 
-    .checkbox > span > label {
+    .checkbox span label {
         font-size: 15px;
     }
 

@@ -43,13 +43,13 @@
           <a href="{% url 'main:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             LOGOUT
           </a>
-          <form id="logout-form" action="{% url 'main:logout' %}" method="post" style="display: none;">
+          <form id="logout-form" action="{% url 'main:logout' %}" method="post" style="display: none;" class="base-form">
             {% csrf_token %}
           </form>
         </div>
         <button class="openbtn" onclick="openNav()">&#9776;</button>
 
-        <form action="{% url 'main:search' %}" method="GET">
+        <form action="{% url 'main:search' %}" method="GET" class="base-form">
           <input type="text" name="q" placeholder="Who are you looking for?" value="{{ query }}">
           <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
         </form>
