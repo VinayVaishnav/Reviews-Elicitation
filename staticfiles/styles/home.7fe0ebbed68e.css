@@ -3,6 +3,11 @@ body {
     padding: 0;
 }
 
+form {
+    display: flex;
+    flex: 1;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -22,17 +27,19 @@ body {
     background-color: #f0f0f0;
     border-radius: 30px;
     margin: 10px;
-    >div{
-        width: 600px;
-    }
-    .imagesection{
+}
+
+.profile-section div{
+    width: 600px;
+}
+
+.profile-section .imagesection{
         width: 25%;
         margin-right: 30px;
-    }
-    .profile-details{
-        width: 40%;
-    }
-    
+}
+
+.profile-section .profile-details{
+    width: 40%;
 }
 
 .imagesection{
@@ -145,13 +152,13 @@ body {
 @media only screen and (max-width: 768px) {
     .profile-section {
         flex-direction: column;
-        >div{
-            width: 100%;
-        }
         padding: 20px;
         height: auto;
         margin-right: 10px;
         margin-left: 10px;
+    }
+    .profile-section div{
+        width: 100%;
     }
     .imagesection {
         margin-right: 0;
@@ -165,21 +172,19 @@ body {
         width: 100%!important;
         margin-left: 0;
         margin-bottom: 0;
-        >div{
-            >div{
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                gap: 20px;
-                >p{
-                    margin: 0px;
-                    margin-top: 3px;
-                }
-                >h3{
-                    margin: 0px;
-                }
-            }
-        }
+    }
+    .profile-details div div{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    .profile-details div p{
+        margin: 0px;
+        margin-top: 3px;
+    }
+    .profile-details div h3{
+        margin: 0px;
     }
     .profile-name {
         width: 100%;
@@ -252,15 +257,17 @@ body {
     color: black;
 }
 
-.reviews-section .heading:hover{
+.reviews-section .heading:hover {
     color: rgb(97, 97, 97);
 }
-.reviews-section .slider{
+
+.reviews-section .slider {
     overflow: hidden;
     width: 100%;
     margin-right: 20px;
 }
-.reviews-section .content{
+
+.reviews-section .content {
     background-color: #dddddd82;
     align-items: center;
     width:100%;
@@ -271,31 +278,35 @@ body {
     flex-direction: column;
     border: none;
     border-radius: 10px;
+}
 
-    .skill_header{
-        font-family: 'Albert Sans';
-        font-weight: bold;
-        font-size: 20px;
-        flex-basis: 35%;
-    }
-    .content_section{
-        font-family: 'Gantari';
-        font-size: 18px;
-        align-items: flex-start;
-        padding: 4px;
-        flex-basis: 65%;
-        .selected-option {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 5px;
-            background-color: #337ab7;
-            color: #fff;
-            border-radius: 5px;
-        }
-    }
-    .public_private{
-        flex-basis: 10%;
-    }
+.reviews-section .skill_header {
+    font-family: 'Albert Sans';
+    font-weight: bold;
+    font-size: 20px;
+    flex-basis: 35%;
+}
+
+.reviews-section .content_section {
+    font-family: 'Gantari';
+    font-size: 18px;
+    /* align-items: flex-start; */
+    padding: 4px;
+    flex-basis: 65%;
+    text-align: center;
+}
+
+.reviews-section .content_section .selected-option {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.reviews-section .public_private{
+    flex-basis: 10%;
 }
 
 
@@ -389,22 +400,18 @@ body {
         margin: 3px;
         font-size: 12px;
     }
-    .reviews-section .content{
-
-        .skill_header{
-            font-size: 17px;
-        }
-        .content_section{
-            font-size: 15px;
-        }
+    .reviews-section .content .skill_header{
+        font-size: 17px;
+    }
+    .reviews-section .content .content_section{
+        font-size: 15px;
     }
 }
+
 @media only screen and (max-width: 650px){
-    .reviews-section .content{
-        .content_section{
-            /* font-size: 10px; */
-            margin-right: 5px;
-        }
+    .reviews-section .content .content_section{
+        /* font-size: 10px; */
+        margin-right: 5px;
     }
     .reviews-section li{
         flex-direction: column;
@@ -420,14 +427,11 @@ body {
     .reviews-section li{
         padding-left: 3px;
     }
-    .reviews-section .content{
-
-        .skill_header{
-            font-size: 16px;
-        }
-        .content_section{
-            font-size: 14px;
-        }
+    .reviews-section .content .skill_header{
+        font-size: 16px;
+    }
+    .reviews-section .content .content_section{
+        font-size: 14px;
     }
 }
 
@@ -518,14 +522,13 @@ body {
     color: #5494d3 !important;
     font-size: 20px !important;
     cursor: pointer;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
 
-    > span {
-        text-align: start;
-    }
+.poll-button span {
+    text-align: start;
 }
 
 .poll-button:hover {
@@ -599,10 +602,10 @@ body {
     justify-content: center;
     margin-top: 20px;
     width: 100%;
+}
 
-    > h3 {
-        text-align: center;
-    }
+.poll-form h3 {
+    text-align: center;
 }
 
 .poll-form:focus,
