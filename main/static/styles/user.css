@@ -105,7 +105,6 @@ form {
     font-weight: bold;
 }
 
-/* Responsive adjustments */
 @media only screen and (max-width:1320px) {
     .imagesection{
         margin-right: 40px;
@@ -829,4 +828,8 @@ form {
 
 .poll-button h3 {
     text-align: center;
+}
+
+.poll-button span {
+    text-align: start;
 }
